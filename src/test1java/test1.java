@@ -24,4 +24,17 @@ public class test1 {
 			  System.out.println(i);
 			}
 	  }
+	  
+	  public static void test_if() {
+		  int x = 1;
+		  if(x== 1) {
+			  System.out.println("One.");
+		  }else if(x == 2) {
+			  System.out.println("Two.");
+		  }else if(x == 3) {
+			  System.out.println("Three.");
+		  }else {
+			  System.out.println("I dunno.");
+		  }
+	  }
 }
