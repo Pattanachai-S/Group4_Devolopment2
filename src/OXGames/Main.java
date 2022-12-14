@@ -11,8 +11,6 @@ public class Main {
 	    Main main = new Main();
 	    create_table();
 	    show_table();
-	    action(7,1);
-	    action(8,2);
 	    show_table();
 	    main_loop();
 	  }
@@ -65,13 +63,10 @@ public class Main {
 		n = n-1;
 		if (n/3 >=2 ) {
 			check_action(0,n%3, player);
-			change_turn();
 		}else if (n/3 >=1 ) {
 			check_action(1,n%3, player);
-			change_turn();
 		}else if (n/3 >=0 ) {
 			check_action(2,n%3, player);
-			change_turn();
 		}else {
 			System.out.print("Try agian.");
 		}
@@ -82,6 +77,7 @@ public class Main {
 		int n = table[x][y];
 		if (n == 0) {
 			table[x][y] = a;
+			change_turn();
 		}else {
 			System.out.print("You can not action this cell.");
 		}
