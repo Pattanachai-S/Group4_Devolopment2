@@ -1,5 +1,6 @@
 package OXGames;
 import java.util.Scanner;  // For input
+import OXGames.GUI;
 
 public class Main {
 	
@@ -11,10 +12,15 @@ public class Main {
 	static int winner;
 	static int turn_count = 1;
 	
+	Main(){
+		create_table();
+	}
+	
+	
 	public static void main(String[] args) {
-	    create_table();
-	    main_loop();
-	  }
+//		 main_loop();  // loop for command line play
+		 GUI game = new GUI(3);  // test
+	}
 	
 	public static void main_loop() {
 		while(!game_end) {
