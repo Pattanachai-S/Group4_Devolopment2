@@ -11,7 +11,6 @@ public class Main {
 	static int turn_count = 1;
 	
 	public static void main(String[] args) {
-	    Main main = new Main();
 	    create_table();
 	    main_loop();
 	  }
@@ -83,7 +82,7 @@ public class Main {
 		}else {
 			System.out.print("Try agian.");
 		}
-			
+
 	}
 	
 	static void check_action(int x,int y,int a) {
@@ -107,7 +106,8 @@ public class Main {
 	}
 	
 	static void check_win() {
-		int d =0; // diagonal_win counter
+		int d1 =0; // diagonal_win ULtoDR counter
+		int d2 =0; // diagonal_win URtoDL counter
 		for(int i=0;i<3;i++) {
 			int h =0; // horizon_win counter
 			int v =0; // vertical_win counter			
@@ -121,10 +121,12 @@ public class Main {
 				game_end = true;
 				winner = player;
 				show_winner();
-			}if(table[i][i] == player) {  // diagonal_win 
-				d++;
+			}if(table[i][i] == player) {  // diagonal_win ULtoDR
+				d1++;
+			}if(table[i][2-i] == player) {  // diagonal_win URtoDL
+				d2++;
 			}
-		}if(d == 3) { // If someone win the game on diagonal
+		}if(d1 == 3 || d2 == 3) { // If someone win the game on diagonal
 			game_end = true;
 			winner = player;
 			show_winner();
