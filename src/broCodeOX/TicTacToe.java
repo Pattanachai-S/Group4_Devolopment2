@@ -18,38 +18,44 @@ public class TicTacToe implements ActionListener{
 
 	TicTacToe(){
 		
+		// Frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(800,800);
+		frame.setSize(400,400);
 		frame.getContentPane().setBackground(new Color(50,50,50));
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
 		
+		// Head Label
 		textfield.setBackground(new Color(25,25,25));
 		textfield.setForeground(new Color(25,255,0));
 		textfield.setFont(new Font("Ink Free",Font.BOLD,75));
 		textfield.setHorizontalAlignment(JLabel.CENTER);
 		textfield.setText("Tic-Tac-Toe");
 		textfield.setOpaque(true);
-		
+		// panel of head 
 		title_panel.setLayout(new BorderLayout());
 		title_panel.setBounds(0,0,800,100);
+		title_panel.add(textfield);  // Add text to head panel
 		
+		// Table
 		button_panel.setLayout(new GridLayout(3,3));
-		button_panel.setBackground(new Color(150,150,150));
-		
+		button_panel.setBackground(new Color(150,150,150));	
+		// Create button for table
 		for(int i=0;i<9;i++) {
 			buttons[i] = new JButton();
 			button_panel.add(buttons[i]);
-			buttons[i].setFont(new Font("MV Boli",Font.BOLD,120));
-			buttons[i].setFocusable(false);
+			buttons[i].setFont(new Font("MV Boli",Font.BOLD,100));
+			buttons[i].setFocusable(false);  // It's text pointer
 			buttons[i].addActionListener(this);
 		}
 		
-		title_panel.add(textfield);
-		frame.add(title_panel,BorderLayout.NORTH);
-		frame.add(button_panel);
 		
-		firstTurn();
+		// Add label to frame
+		frame.add(title_panel,BorderLayout.NORTH);  // Add title_panel to frame on top screen
+		frame.add(button_panel);  // Add table to frame
+		
+		// Start 1st turn
+		firstTurn();  
 	}
 
 	@Override
