@@ -3,8 +3,9 @@ import java.util.Scanner;  // For input
 
 public class Main {
 	
-	static int[][] table = new int[3][3]; 
-	static int player = 1;
+	static int table_size = 5;
+	static int[][] table = new int[table_size][table_size]; 
+	static int player_turn = 1;
 	static Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 	static boolean game_end = false; 
 	static int winner;
@@ -23,34 +24,38 @@ public class Main {
 	}
 	
 	public static void wait_action() {
-		System.out.print("Turn player "+String.valueOf(player) +": ");
+		System.out.print("Turn player "+String.valueOf(player_turn) +": ");
 		String c = myObj.nextLine();
 		if (c == "e") {
 			game_end = true;
 		}
-		int a;
 		try {
-			a = Integer.valueOf(c);  // Convert string to int
+			// Convert string to int 
+			String[] a = c.split(" ");
+			int[] n = {Integer.valueOf(a[0]),Integer.valueOf(a[1])};
+			action(n[0],n[1]);
+			
+			// Convert string to int for num-pad
+//			int a = Integer.valueOf(c);  
+//			action_numpad(a);
 			}
-			catch(Exception e) {
-			a = 99; // to wrong number and said "try again."
-			}
-		
-		action(a, player);
+		catch(Exception e) {
+			System.out.print("Try agian.");
+		}	
 	}
 	
 	static void create_table() {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
+		for (int i = 0; i < table_size; i++) {
+			for (int j = 0; j < table_size; j++) {
 				table[i][j] = 0;
 			}
 		}
 	}
 	
 	static void show_table() {
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < table_size; i++) {
 			System.out.print("\n");    // new line
-			for (int j = 0; j < 3; j++) {
+			for (int j = 0; j < table_size; j++) {
 				show_sym(table[i][j]);    // show symbol
 				System.out.print(" ");    // space
 			}
@@ -69,73 +74,81 @@ public class Main {
 		}
 	}
 	
-	static void action(int n,int player) {
+	static void action_numpad(int n) {
 		n = n-1;
 		if (n/3 >=3 || n/3 < 0 ) {   // Have no cell
 			System.out.print("Try agian.");
 		}else if (n/3 >=2 ) {    // cell 7 8 9
-			check_action(0,n%3, player);
+			check_action(0,n%3);
 		}else if (n/3 >=1 ) {    // cell 4 5 6
-			check_action(1,n%3, player);
+			check_action(1,n%3);
 		}else if (n/3 >=0 ) {    // cell 1 2 3
-			check_action(2,n%3, player);
+			check_action(2,n%3);
 		}else {
 			System.out.print("Try agian.");
 		}
-
 	}
 	
-	static void check_action(int x,int y,int a) {
-		int n = table[x][y];
+	static void action(int x, int y) {
+		
+		check_action(x-1, y-1);
+	}
+	
+	
+	
+	static void check_action(int x,int y) {
+		int n = table[y][x];
 		if (n == 0) {
-			table[x][y] = a;
+			table[y][x] = player_turn;
 			check_win();
 			check_draw();
 			change_turn();
+
 		}else {
 			System.out.print("You can not action this cell.");
 		}
 	}
 	
 	static void change_turn() {
-		if (player == 1) {
-			player = 2;
-		}else if(player == 2) {
-			player = 1;
+		if (player_turn == 1) {
+			player_turn = 2;
+		}else if(player_turn == 2) {
+			player_turn = 1;
 		}turn_count++;
 	}
 	
 	static void check_win() {
 		int d1 =0; // diagonal_win ULtoDR counter
 		int d2 =0; // diagonal_win URtoDL counter
-		for(int i=0;i<3;i++) {
+		for(int i=0;i<table_size;i++) {
 			int h =0; // horizon_win counter
 			int v =0; // vertical_win counter			
-			for(int j=0;j<3;j++) {
-				if(table[i][j] == player) {  // horizon_win
+			for(int j=0;j<table_size;j++) {
+				if(table[i][j] == player_turn) {  // horizon_win
 					h++;
-				}if(table[j][i] == player) { // vertical_win 
+				}if(table[j][i] == player_turn) { // vertical_win 
 					v++;
 				}
-			}if(h == 3 || v == 3) { // If someone win the game on horizon or vertical
+			}if(h == table_size || v == table_size) { // If someone win the game on horizon or vertical
 				game_end = true;
-				winner = player;
+				winner = player_turn;
 				show_winner();
-			}if(table[i][i] == player) {  // diagonal_win ULtoDR
+			}if(table[i][i] == player_turn) {  // diagonal_win ULtoDR
 				d1++;
-			}if(table[i][2-i] == player) {  // diagonal_win URtoDL
+			}if(table[i][table_size-1-i] == player_turn) {  // diagonal_win URtoDL
 				d2++;
 			}
-		}if(d1 == 3 || d2 == 3) { // If someone win the game on diagonal
+		}if(d1 == table_size || d2 == table_size) { // If someone win the game on diagonal
 			game_end = true;
-			winner = player;
+			winner = player_turn;
 			show_winner();
 		}
 		
 	}
 	
 	static void check_draw() {
-		if (turn_count == 9) {
+		int n = table_size*table_size;
+		if (turn_count == n) {
 			game_end = true;
 			show_draw();
 		}
