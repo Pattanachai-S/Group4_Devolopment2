@@ -215,7 +215,7 @@ public class Main {
 			String save = "";
 			for (int i = 0; i < table_size; i++) {
 					for (int j = 0; j < table_size; j++) {
-						save += get_data(i , j);    // what in table
+						save += get_data(j , i);    // what in table  swap i,j cuz it (y,x)
 						save += " ";    // space for table
 					}save += "\n";    // new line for table
 			}
@@ -235,13 +235,17 @@ public class Main {
 		      Scanner myReader = new Scanner(save);
 		      String line = myReader.nextLine();
 		      System.out.println(line);
+		      // Find size of table
 		      String[] l = line.split(" ");  // row
 		      int length = l.length;  // find size of table
 		      int[][] load = new int[length][length];  // declare array 2D for table
 	    	  int line_counter = 0;
+	    	  
+	    	  // add 1st row
 	    	  for(int i=0;i<length;i++) {
 	    		  load[line_counter][i] = Integer.valueOf(l[i]);  // cell
-	    	  }line_counter++;	    	
+	    	  }line_counter++;	 
+	    	  // add other row 
 		      while (line_counter < length-1) {
 		    	  	line = myReader.nextLine();
 		    	  	System.out.println(line);
@@ -251,13 +255,25 @@ public class Main {
 			    	}
 			    	line_counter++;
 		      }
-		      myReader.close();
+		      myReader.close();  // close file
+		      System.out.println();
+		      
+		      // load to table 
+		      int turn = 0;  // finding who next action
 		      for(int i=0;i<length;i++) {
 		    	  for(int j=0;j<length;j++) {
 		    		  table[j][i] = load[i][j];  // coz in table it is (y,x)
+		    		  if(load[i][j] != 0) {    		  
+		    			  turn++;	
+		    			  
+		    		  }
 		    	  }
 		      }
-		      
+		      if(turn%2 == 0) {
+		    	  player_turn = 1;  
+		      }else player_turn = 2;
+		      game_end = false;
+		      turn_count = 0;
 		      UI.update();
 		} 
 		catch (FileNotFoundException e) {
@@ -269,7 +285,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 //		main_loop();  // loop for command line play
-		int size = 3;
+		int size = 5;
 		Main table = new Main();
 		table.change_table_size(size);
 		GUI gui = new GUI(size, table);  // test

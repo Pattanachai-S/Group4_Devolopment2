@@ -54,7 +54,7 @@ public class GUI implements ActionListener{
 			for(int j=0;j<table_size;j++) {
 				buttons[i][j] = new JButton();
 				button_panel.add(buttons[i][j]);
-				buttons[i][j].setFont(new Font("MV Boli",Font.BOLD,100));
+				buttons[i][j].setFont(new Font("MV Boli",Font.BOLD,90));
 				buttons[i][j].setFocusable(false);  // It's text pointer
 				buttons[i][j].addActionListener(this);
 			}
@@ -64,7 +64,7 @@ public class GUI implements ActionListener{
 		// set buttons
 		button_reset.setText("Reset");
 		button_reset.setFocusable(false);
-		button_reset.addActionListener(new ActionListener() {
+		button_reset.addActionListener(new ActionListener() {  // action for button
 			public void actionPerformed(ActionEvent e) {
 				data.create_table();
 				update();	
@@ -72,8 +72,20 @@ public class GUI implements ActionListener{
 		});
 		button_save.setText("save");
 		button_save.setFocusable(false);
+		button_save.addActionListener(new ActionListener() {  // action for button
+			public void actionPerformed(ActionEvent e) {
+				data.save_file();
+				update();	
+			}
+		});
 		button_load.setText("load");
 		button_load.setFocusable(false);
+		button_load.addActionListener(new ActionListener() {  // action for button
+			public void actionPerformed(ActionEvent e) {
+				data.load_file();
+				update();	
+			}
+		});
 		// add to panel
 		right_panel.setLayout(new GridLayout(5,0));
 		right_panel.add(button_reset);
@@ -153,11 +165,11 @@ public class GUI implements ActionListener{
 	public void firstTurn() {
 		
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		textfield.setText("O turn");
+		update();
 	}
 	
 	public static void main(String[] args) {
