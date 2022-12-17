@@ -4,8 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-
-import broCodeOX.TicTacToe;
+import OXGames.Main;
 
 public class GUI implements ActionListener{
 
@@ -17,12 +16,14 @@ public class GUI implements ActionListener{
 	boolean player1_turn;
 	
 	int table_size;  // number of table length
+	Main data;  // data of table
 	
 	
 
-	GUI(int game_size){
+	GUI(int game_size,Main data){
 		
 		this.table_size = game_size;
+		this.data = data;
 		buttons = new JButton[table_size][table_size]; 
 		
 		// Frame
@@ -73,26 +74,45 @@ public class GUI implements ActionListener{
 		for(int i=0;i<table_size;i++) {
 			for(int j=0;j<table_size;j++) {
 				if(e.getSource()==buttons[i][j]) {
-					if(player1_turn) {
-						if(buttons[i][j].getText()=="") {
-							buttons[i][j].setForeground(new Color(255,0,0));
-							buttons[i][j].setText("X");
-							player1_turn=false;
-							textfield.setText("O turn");
-	
-						}
-					}
-					else {
-						if(buttons[i][j].getText()=="") {
-							buttons[i][j].setForeground(new Color(0,0,255));
-							buttons[i][j].setText("O");
-							player1_turn=true;
-							textfield.setText("X turn");
-						}
-					}
+					this.data.action(i, j);
 				}
-			}			
+			}
 		}
+		update_buttons();
+	}
+		
+
+	
+	public void update_buttons() {
+		for(int i=0;i<table_size;i++) {
+			for(int j=0;j<table_size;j++) {
+				if(data.get_data(i, j) ==  0) {
+					draw_no(i,j);
+				}else if(data.get_data(i, j) ==  1) {
+					draw_O(i,j);
+				}else if(data.get_data(i, j) ==  2) {
+					draw_X(i,j);
+				}
+			}
+		}
+	}
+	
+	void draw_X(int y, int x){
+		buttons[x][y].setForeground(new Color(255,0,0));
+		buttons[x][y].setText("X");
+	}
+	
+	void draw_O(int y, int x){
+		buttons[x][y].setForeground(new Color(0,0,255));
+		buttons[x][y].setText("O");
+	}
+	
+	void draw_no(int y, int x){
+		buttons[x][y].setText("");
+	}
+	
+	void draw_win() {
+		
 	}
 	
 	public void firstTurn() {
@@ -106,7 +126,10 @@ public class GUI implements ActionListener{
 	}
 	
 	public static void main(String[] args) {
-		 GUI game = new GUI(5);  // test
+		int size = 3;
+		Main table = new Main();
+		table.change_table_size(size);
+		GUI game = new GUI(size, table);  // test
 		
 	}
 }

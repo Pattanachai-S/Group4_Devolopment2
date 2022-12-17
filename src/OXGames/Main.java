@@ -4,7 +4,7 @@ import OXGames.GUI;
 
 public class Main {
 	
-	static int table_size = 5;
+	static int table_size = 3;
 	static int[][] table = new int[table_size][table_size]; 
 	static int player_turn = 1;
 	static Scanner input = new Scanner(System.in);  // Create a Scanner object
@@ -17,8 +17,8 @@ public class Main {
 	}
 	
 	public static void main_loop() {
+		show_table();
 		while(!game_end) {
-			 show_table();
 			 wait_action();
 		}
 	}
@@ -30,7 +30,7 @@ public class Main {
 			// Convert string to int 
 			String[] a = s.split(" ");
 			int[] n = {Integer.valueOf(a[0]),Integer.valueOf(a[1])};
-			action(n[0],n[1]);
+			action(n[1]-1,n[0]-1);  // swap index because on table it's a (y,x)
 			
 			// Convert string to int for num-pad
 //			int a = Integer.valueOf(c);  
@@ -41,7 +41,7 @@ public class Main {
 				game_end = true;
 				System.out.print("Exit.");
 			}else
-			System.out.print("Try agian.");
+			System.out.println("Try agian.");
 		}	
 	}
 	
@@ -62,7 +62,7 @@ public class Main {
 		for (int i = 0; i < table_size; i++) {
 			System.out.print("\n");    // new line
 			for (int j = 0; j < table_size; j++) {
-				show_sym(table[i][j]);    // show symbol
+				show_sym(table[j][i]);    // show symbol
 				System.out.print(" ");    // space
 			}
 		}
@@ -95,24 +95,30 @@ public class Main {
 		}
 	}
 	
-	static void action(int x, int y) {
+	public static void action(int x, int y) {
 		
-		check_action(x-1, y-1);
+		check_action(x, y);
 	}
 	
 	
 	
 	static void check_action(int x,int y) {
 		int n = table[y][x];
-		if (n == 0) {
-			table[y][x] = player_turn;
-			check_win();
-			check_draw();
-			change_turn();
-
-		}else {
-			System.out.print("You can not action this cell.");
+		if (!game_end) {
+			if (n == 0) {
+				table[y][x] = player_turn;
+				check_win();
+				check_draw();
+				change_turn();
+	
+			}else {
+				System.out.println("You can not action this cell.");
+			}
+			show_table();
+		}else {  // If game is ended
+			System.out.println("Game are Ended.");
 		}
+	
 	}
 	
 	static void change_turn() {
@@ -156,6 +162,7 @@ public class Main {
 		int n = table_size*table_size;
 		if (turn_count == n) {
 			game_end = true;
+			winner = 0;  // It is a tie.
 			show_draw();
 		}
 	}
@@ -170,9 +177,30 @@ public class Main {
 		System.out.println("Player " + String.valueOf(winner) + " Win!");
 	}
 	
+	void change_table_size(int n) {
+		table_size = n;
+		table = new int[table_size][table_size]; 
+		turn_count = 1;
+		player_turn = 1;
+		create_table();
+		show_table();
+	}
+	
+	int get_data(int x, int y) {
+		return table[x][y];
+	}
+	
+	int get_turn() {
+		return player_turn;
+	}
+	
 	public static void main(String[] args) {
-		 main_loop();  // loop for command line play
-//		 GUI game = new GUI(3);  // test
+//		main_loop();  // loop for command line play
+		int size = 3;
+		Main table = new Main();
+		table.change_table_size(size);
+		GUI game = new GUI(size, table);  // test
+		 
 	}
 	
 		
