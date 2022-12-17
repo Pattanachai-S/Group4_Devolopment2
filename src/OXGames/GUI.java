@@ -66,10 +66,7 @@ public class GUI implements ActionListener{
 		//firstTurn();  	
 	}
 	
-	public static void main(String[] args) {
-		 GUI game = new GUI(5);  // test
-		
-	}
+
 	
 	public void actionPerformed(ActionEvent e) {
 		
@@ -108,5 +105,9 @@ public class GUI implements ActionListener{
 		textfield.setText("O turn");
 	}
 	
+	public static void main(String[] args) {
+		 GUI game = new GUI(5);  // test
+		
+	}
 }
 

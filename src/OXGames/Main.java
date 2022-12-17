@@ -7,19 +7,13 @@ public class Main {
 	static int table_size = 5;
 	static int[][] table = new int[table_size][table_size]; 
 	static int player_turn = 1;
-	static Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+	static Scanner input = new Scanner(System.in);  // Create a Scanner object
 	static boolean game_end = false; 
 	static int winner;
 	static int turn_count = 1;
 	
 	Main(){
 		create_table();
-	}
-	
-	
-	public static void main(String[] args) {
-//		 main_loop();  // loop for command line play
-		 GUI game = new GUI(3);  // test
 	}
 	
 	public static void main_loop() {
@@ -31,13 +25,10 @@ public class Main {
 	
 	public static void wait_action() {
 		System.out.print("Turn player "+String.valueOf(player_turn) +": ");
-		String c = myObj.nextLine();
-		if (c == "e") {
-			game_end = true;
-		}
+		String s = input.nextLine();
 		try {
 			// Convert string to int 
-			String[] a = c.split(" ");
+			String[] a = s.split(" ");
 			int[] n = {Integer.valueOf(a[0]),Integer.valueOf(a[1])};
 			action(n[0],n[1]);
 			
@@ -46,10 +37,19 @@ public class Main {
 //			action_numpad(a);
 			}
 		catch(Exception e) {
+			if (s.equals("e")) {  // If input is e, game will end
+				game_end = true;
+				System.out.print("Exit.");
+			}else
 			System.out.print("Try agian.");
 		}	
 	}
 	
+	private static char[] type(String s) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	static void create_table() {
 		for (int i = 0; i < table_size; i++) {
 			for (int j = 0; j < table_size; j++) {
@@ -169,6 +169,11 @@ public class Main {
 	    show_table();
 		System.out.println("Player " + String.valueOf(winner) + " Win!");
 	}
-		
+	
+	public static void main(String[] args) {
+		 main_loop();  // loop for command line play
+//		 GUI game = new GUI(3);  // test
+	}
+	
 		
 }
