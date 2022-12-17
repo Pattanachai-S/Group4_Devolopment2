@@ -12,6 +12,8 @@ public class Main {
 	static int winner;
 	static int turn_count = 1;
 	
+	GUI UI;
+	
 	Main(){
 		create_table();
 	}
@@ -162,7 +164,7 @@ public class Main {
 		int n = table_size*table_size;
 		if (turn_count == n) {
 			game_end = true;
-			winner = 0;  // It is a tie.
+			winner = 3;  // It is a tie.
 			show_draw();
 		}
 	}
@@ -194,12 +196,17 @@ public class Main {
 		return player_turn;
 	}
 	
+	int get_winner() {
+		return winner;
+	}
+	
 	public static void main(String[] args) {
 //		main_loop();  // loop for command line play
-		int size = 3;
+		int size = 5;
 		Main table = new Main();
 		table.change_table_size(size);
-		GUI game = new GUI(size, table);  // test
+		GUI gui = new GUI(size, table);  // test
+		table.UI = gui;
 		 
 	}
 	

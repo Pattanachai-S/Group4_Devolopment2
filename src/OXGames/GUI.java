@@ -95,6 +95,7 @@ public class GUI implements ActionListener{
 				}
 			}
 		}
+		draw_win();
 	}
 	
 	void draw_X(int y, int x){
@@ -112,8 +113,17 @@ public class GUI implements ActionListener{
 	}
 	
 	void draw_win() {
-		
+		int winner = data.get_winner();
+		if (winner == 1) {
+			textfield.setText("O is Winner!");
+		}else if (winner == 2) {
+			textfield.setText("X is Winner!");
+		}else if (winner == 3) {
+			textfield.setText("Draw!!");
+		}
 	}
+	
+	
 	
 	public void firstTurn() {
 		
