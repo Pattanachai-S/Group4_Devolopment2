@@ -4,7 +4,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.JEditorPane;
+import javax.swing.AbstractAction;
+import java.awt.Font;
+import java.awt.Point;
 import OXGames.Main;
+
+
+
 
 public class GUI implements ActionListener{
 
@@ -17,6 +24,7 @@ public class GUI implements ActionListener{
 	JButton button_reset = new JButton();
 	JButton button_save = new JButton();
 	JButton button_load = new JButton();
+	JEditorPane editorPane = new JEditorPane();
 	
 	int table_size;  // number of table length
 	Main data;  // data of table
@@ -54,7 +62,7 @@ public class GUI implements ActionListener{
 			for(int j=0;j<table_size;j++) {
 				buttons[i][j] = new JButton();
 				button_panel.add(buttons[i][j]);
-				buttons[i][j].setFont(new Font("MV Boli",Font.BOLD,90));
+				buttons[i][j].setFont(new Font("MV Boli",Font.BOLD,75));
 				buttons[i][j].setFocusable(false);  // It's text pointer
 				buttons[i][j].addActionListener(this);
 			}
@@ -62,6 +70,7 @@ public class GUI implements ActionListener{
 		
 		// Right panel
 		// set buttons
+		editorPane.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		button_reset.setText("Reset");
 		button_reset.setFocusable(false);
 		button_reset.addActionListener(new ActionListener() {  // action for button
@@ -88,6 +97,8 @@ public class GUI implements ActionListener{
 		});
 		// add to panel
 		right_panel.setLayout(new GridLayout(5,0));
+		right_panel.setBackground(new Color(25,25,25));
+//		right_panel.add(editorPane);
 		right_panel.add(button_reset);
 		right_panel.add(button_save);
 		right_panel.add(button_load);
@@ -173,11 +184,11 @@ public class GUI implements ActionListener{
 	}
 	
 	public static void main(String[] args) {
-		int size = 3;
+		int size = 5;
 		Main table = new Main();
 		table.change_table_size(size);
-		GUI game = new GUI(size, table);  // test
-		table.UI = game;
+		GUI gui = new GUI(size, table);  // test
+		table.UI = gui;
 		
 	}
 }

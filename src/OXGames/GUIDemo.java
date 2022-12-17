@@ -1,30 +1,27 @@
-package broCodeOX;
+package OXGames;
 // Ref: https://www.youtube.com/watch?v=ffUi4E1KeTA&ab_channel=TECHINSPEC
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.BoxLayout;
-import java.awt.BorderLayout;
+
 import javax.swing.JButton;
-import javax.swing.SpringLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.GridLayout;
 import java.awt.FlowLayout;
-import javax.swing.SwingConstants;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.ActionListener;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.JEditorPane;
+import java.awt.Font;
+import java.awt.Point;
 
 public class GUIDemo {
 
 	private JFrame frame;
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -82,6 +79,24 @@ public class GUIDemo {
 		});
 		btnNewButton_4.setAction(action);
 		frame.getContentPane().add(btnNewButton_4);
+		
+		JTextPane textPane_1 = new JTextPane();
+
+		frame.getContentPane().add(textPane_1);
+		
+		JEditorPane editorPane = new JEditorPane();
+		editorPane.setText("123");
+		editorPane.setLocation(new Point(123124, 0));
+		editorPane.setFont(new Font("Tahoma", Font.PLAIN, 25));
+
+		frame.getContentPane().add(editorPane);
+		
+		textField = new JTextField();
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JTextPane textPane = new JTextPane();
+		frame.getContentPane().add(textPane);
 	}
 
 	private class SwingAction extends AbstractAction {
