@@ -1,5 +1,10 @@
 package OXGames;
 import java.util.Scanner;  // For input
+import java.io.FileWriter;   // Import the FileWriter class
+import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+
 import OXGames.GUI;
 
 public class Main {
@@ -200,6 +205,64 @@ public class Main {
 		return winner;
 	}
 	
+	public void save_file() {
+		try {
+			FileWriter myWriter = new FileWriter("save.txt");
+			String save = "";
+			for (int i = 0; i < table_size; i++) {
+					for (int j = 0; j < table_size; j++) {
+						save += get_data(i , j);    // what in table
+						save += " ";    // space for table
+					}save += "\n";    // new line for table
+			}
+		myWriter.write(save);
+		myWriter.close();
+		System.out.println("Successfully wrote to the file.");
+	    }catch (IOException e) {
+	    System.out.println("An error occurred.");
+	    e.printStackTrace();
+	    }
+	}
+	
+	public void load_file() {
+		
+		try {
+		      File save = new File("save.txt");
+		      Scanner myReader = new Scanner(save);
+		      String line = myReader.nextLine();
+		      System.out.println(line);
+		      String[] l = line.split(" ");  // row
+		      int length = l.length;  // find size of table
+		      int[][] load = new int[length][length];  // declare array 2D for table
+	    	  int line_counter = 0;
+	    	  for(int i=0;i<length;i++) {
+	    		  load[line_counter][i] = Integer.valueOf(l[i]);  // cell
+	    	  }line_counter++;	    	
+		      while (line_counter < length-1) {
+		    	  	line = myReader.nextLine();
+		    	  	System.out.println(line);
+		    	  	l = line.split(" ");  // row
+			    	for(int i=0;i<length;i++) {
+			    		load[line_counter][i] = Integer.valueOf(l[i]);  // 
+			    	}
+			    	line_counter++;
+		      }
+		      myReader.close();
+		      for(int i=0;i<length;i++) {
+		    	  for(int j=0;j<length;j++) {
+		    		  table[j][i] = load[i][j];  // coz in table it is (y,x)
+		    	  }
+		      }
+		      
+		      UI.update_buttons();
+		} 
+		catch (FileNotFoundException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+	    }
+		
+	}
+	
 	public static void main(String[] args) {
 //		main_loop();  // loop for command line play
 		int size = 5;
@@ -207,6 +270,10 @@ public class Main {
 		table.change_table_size(size);
 		GUI gui = new GUI(size, table);  // test
 		table.UI = gui;
+		
+//		table.save_file();
+		table.load_file();
+		table.show_table();
 		 
 	}
 	
