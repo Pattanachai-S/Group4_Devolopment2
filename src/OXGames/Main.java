@@ -10,12 +10,12 @@ import OXGames.GUI;
 public class Main {
 	
 	static int table_size = 3;
-	static int[][] table = new int[table_size][table_size]; 
-	static int player_turn = 1;
+	static int[][] table = new int[table_size][table_size]; 	
 	static Scanner input = new Scanner(System.in);  // Create a Scanner object
 	static boolean game_end = false; 
 	static int winner;
 	static int turn_count = 1;
+	static int player_turn = 1;
 	
 	GUI UI;
 	
@@ -57,12 +57,16 @@ public class Main {
 		return null;
 	}
 
-	static void create_table() {
+	void create_table() {
 		for (int i = 0; i < table_size; i++) {
 			for (int j = 0; j < table_size; j++) {
 				table[i][j] = 0;
 			}
 		}
+		turn_count = 1;
+		player_turn = 1;
+		game_end = false;
+		winner = 0;
 	}
 	
 	static void show_table() {
@@ -254,7 +258,7 @@ public class Main {
 		    	  }
 		      }
 		      
-		      UI.update_buttons();
+		      UI.update();
 		} 
 		catch (FileNotFoundException e) {
 		      System.out.println("An error occurred.");
@@ -265,15 +269,15 @@ public class Main {
 	
 	public static void main(String[] args) {
 //		main_loop();  // loop for command line play
-		int size = 5;
+		int size = 3;
 		Main table = new Main();
 		table.change_table_size(size);
 		GUI gui = new GUI(size, table);  // test
 		table.UI = gui;
 		
 //		table.save_file();
-		table.load_file();
-		table.show_table();
+//		table.load_file();
+//		table.show_table();
 		 
 	}
 	

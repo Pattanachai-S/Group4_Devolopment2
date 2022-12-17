@@ -13,10 +13,18 @@ import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import javax.swing.Action;
+import java.awt.event.ActionListener;
 
 public class GUIDemo {
 
 	private JFrame frame;
+	private final Action action = new SwingAction();
+	private final Action action_1 = new SwingAction_1();
 
 	/**
 	 * Launch the application.
@@ -56,11 +64,40 @@ public class GUIDemo {
 		JButton btnNewButton_2 = new JButton("New button");
 		
 		JButton btnNewButton_3 = new JButton("New button");
-		frame.getContentPane().setLayout(new GridLayout(0, 2, 0, 0));
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_3.setAction(action_1);
+		frame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		frame.getContentPane().add(btnNewButton);
 		frame.getContentPane().add(btnNewButton_1);
 		frame.getContentPane().add(btnNewButton_2);
 		frame.getContentPane().add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("New button");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_4.setAction(action);
+		frame.getContentPane().add(btnNewButton_4);
 	}
 
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
+	private class SwingAction_1 extends AbstractAction {
+		public SwingAction_1() {
+			putValue(NAME, "SwingAction_1");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
 }

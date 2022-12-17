@@ -12,13 +12,14 @@ public class GUI implements ActionListener{
 	JPanel title_panel = new JPanel();
 	JLabel textfield = new JLabel();
 	JPanel button_panel = new JPanel();
+	JPanel right_panel = new JPanel();
 	JButton[][] buttons;
-	boolean player1_turn;
+	JButton button_reset = new JButton();
+	JButton button_save = new JButton();
+	JButton button_load = new JButton();
 	
 	int table_size;  // number of table length
 	Main data;  // data of table
-	
-	
 
 	GUI(int game_size,Main data){
 		
@@ -59,9 +60,31 @@ public class GUI implements ActionListener{
 			}
 		}
 		
+		// Right panel
+		// set buttons
+		button_reset.setText("Reset");
+		button_reset.setFocusable(false);
+		button_reset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				data.create_table();
+				update();	
+			}
+		});
+		button_save.setText("save");
+		button_save.setFocusable(false);
+		button_load.setText("load");
+		button_load.setFocusable(false);
+		// add to panel
+		right_panel.setLayout(new GridLayout(5,0));
+		right_panel.add(button_reset);
+		right_panel.add(button_save);
+		right_panel.add(button_load);
+
+		
 		// Add label to frame
 		frame.add(title_panel,BorderLayout.NORTH);  // Add title_panel to frame on top screen
 		frame.add(button_panel);  // Add table to frame
+		frame.add(right_panel,BorderLayout.EAST);  // Add right_panel to frame
 		
 		// Start 1st turn
 		//firstTurn();  	
@@ -78,12 +101,12 @@ public class GUI implements ActionListener{
 				}
 			}
 		}
-		update_buttons();
+		update();
 	}
 		
 
 	
-	public void update_buttons() {
+	public void update() {
 		for(int i=0;i<table_size;i++) {
 			for(int j=0;j<table_size;j++) {
 				if(data.get_data(i, j) ==  0) {
@@ -114,7 +137,9 @@ public class GUI implements ActionListener{
 	
 	void draw_win() {
 		int winner = data.get_winner();
-		if (winner == 1) {
+		if (winner == 0) {
+			textfield.setText("Turn player "+ data.get_turn());
+		}else if (winner == 1) {
 			textfield.setText("O is Winner!");
 		}else if (winner == 2) {
 			textfield.setText("X is Winner!");
@@ -140,6 +165,7 @@ public class GUI implements ActionListener{
 		Main table = new Main();
 		table.change_table_size(size);
 		GUI game = new GUI(size, table);  // test
+		table.UI = game;
 		
 	}
 }
