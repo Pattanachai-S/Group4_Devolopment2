@@ -130,6 +130,7 @@ public class GUI implements ActionListener{
 
 	
 	public void update() {
+		// Draw on table
 		for(int i=0;i<table_size;i++) {
 			for(int j=0;j<table_size;j++) {
 				if(data.get_data(i, j) ==  0) {
@@ -141,7 +142,8 @@ public class GUI implements ActionListener{
 				}
 			}
 		}
-		draw_win();
+		// Panel title
+		draw_win();  // Result of game or Show current turn
 	}
 	
 	void draw_X(int y, int x){

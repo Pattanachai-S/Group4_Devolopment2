@@ -11,11 +11,11 @@ public class Main {
 	
 	static int table_size = 3;
 	static int[][] table = new int[table_size][table_size]; 	
-	static Scanner input = new Scanner(System.in);  // Create a Scanner object
 	static boolean game_end = false; 
 	static int winner;
 	static int turn_count = 1;
 	static int player_turn = 1;
+	static Scanner input = new Scanner(System.in);  // Create a Scanner object
 	
 	GUI UI;
 	
@@ -217,7 +217,7 @@ public class Main {
 					for (int j = 0; j < table_size; j++) {
 						save += get_data(j , i);    // what in table  swap i,j cuz it (y,x)
 						save += " ";    // space for table
-					}save += "\n";    // new line for table
+					}if (i != table_size -1)save += "\n";    // new line for table but do not on last row
 			}
 		myWriter.write(save);
 		myWriter.close();
@@ -246,7 +246,7 @@ public class Main {
 	    		  load[line_counter][i] = Integer.valueOf(l[i]);  // cell
 	    	  }line_counter++;	 
 	    	  // add other row 
-		      while (line_counter < length-1) {
+		      while (line_counter < length ) {
 		    	  	line = myReader.nextLine();
 		    	  	System.out.println(line);
 		    	  	l = line.split(" ");  // row
@@ -262,6 +262,8 @@ public class Main {
 		      int turn = 0;  // finding who next action
 		      for(int i=0;i<length;i++) {
 		    	  for(int j=0;j<length;j++) {
+//		    		  change_table_size(length);
+//		    		  UI = new GUI(length,this);
 		    		  table[j][i] = load[i][j];  // coz in table it is (y,x)
 		    		  if(load[i][j] != 0) {    		  
 		    			  turn++;	
@@ -274,6 +276,7 @@ public class Main {
 		      }else player_turn = 2;
 		      game_end = false;
 		      turn_count = 0;
+		      winner = 0;
 		      UI.update();
 		} 
 		catch (FileNotFoundException e) {
