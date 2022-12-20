@@ -68,33 +68,40 @@ public class GUI implements ActionListener{
 			}
 		}
 		
-		// Right panel
-		// set buttons
+		////// Right panel //////
+		//// setting buttons ////
+		// a reset button
 		editorPane.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		button_reset.setText("Reset");
 		button_reset.setFocusable(false);
-		button_reset.addActionListener(new ActionListener() {  // action for button
+		button_reset.addActionListener(new ActionListener() {  
+			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-				data.create_table();
+				data.reset_table();
 				update();	
 			}
 		});
+		// a save button
 		button_save.setText("save");
 		button_save.setFocusable(false);
-		button_save.addActionListener(new ActionListener() {  // action for button
+		button_save.addActionListener(new ActionListener() {  
+			// when action to the button
 			public void actionPerformed(ActionEvent e) {
 				data.save_file();
 				update();	
 			}
 		});
+		// a load button
 		button_load.setText("load");
 		button_load.setFocusable(false);
-		button_load.addActionListener(new ActionListener() {  // action for button
+		button_load.addActionListener(new ActionListener() {  
+			// when action to the button
 			public void actionPerformed(ActionEvent e) {
 				data.load_file();
 				update();	
 			}
 		});
+		//// setting buttons End ////
 		// add to panel
 		right_panel.setLayout(new GridLayout(5,0));
 		right_panel.setBackground(new Color(25,25,25));
@@ -102,35 +109,36 @@ public class GUI implements ActionListener{
 		right_panel.add(button_reset);
 		right_panel.add(button_save);
 		right_panel.add(button_load);
+		
+		////// Right panel End //////
 
 		
 		// Add label to frame
 		frame.add(title_panel,BorderLayout.NORTH);  // Add title_panel to frame on top screen
-		frame.add(button_panel);  // Add table to frame
-		frame.add(right_panel,BorderLayout.EAST);  // Add right_panel to frame
+		frame.add(button_panel);  // Add table to frame on the middle
+		frame.add(right_panel,BorderLayout.EAST);  // Add right_panel to frame on right screen
 		
-		// Start 1st turn
-		//firstTurn();  	
 	}
 	
 
 	
-	public void actionPerformed(ActionEvent e) {
-		
+	public void actionPerformed(ActionEvent e) {   // This run when having any event in-game  
+		//  loop for checking all buttons in the table
 		for(int i=0;i<table_size;i++) {
 			for(int j=0;j<table_size;j++) {
-				if(e.getSource()==buttons[i][j]) {
-					this.data.action(i, j);
+				if(e.getSource()==buttons[i][j]) {  
+					// If having an event on this button
+					this.data.action(i, j);  // run action(x,y) on this button
 				}
 			}
 		}
-		update();
+		update();  // Update everything to GUI
 	}
 		
 
 	
 	public void update() {
-		// Draw on table
+		// Update everything to GUI
 		for(int i=0;i<table_size;i++) {
 			for(int j=0;j<table_size;j++) {
 				if(data.get_data(i, j) ==  0) {
@@ -161,6 +169,7 @@ public class GUI implements ActionListener{
 	}
 	
 	void draw_win() {
+		// Result of game or Show current turn
 		int winner = data.get_winner();
 		if (winner == 0) {
 			textfield.setText("Turn player "+ data.get_turn());
@@ -171,18 +180,6 @@ public class GUI implements ActionListener{
 		}else if (winner == 3) {
 			textfield.setText("Draw!!");
 		}
-	}
-	
-	
-	
-	public void firstTurn() {
-		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		update();
 	}
 	
 	public static void main(String[] args) {

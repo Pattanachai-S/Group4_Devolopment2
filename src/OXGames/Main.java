@@ -20,36 +20,7 @@ public class Main {
 	GUI UI;
 	
 	Main(){
-		create_table();
-	}
-	
-	public static void main_loop() {
-		show_table();
-		while(!game_end) {
-			 wait_action();
-		}
-	}
-	
-	public static void wait_action() {
-		System.out.print("Turn player "+String.valueOf(player_turn) +": ");
-		String s = input.nextLine();
-		try {
-			// Convert string to int 
-			String[] a = s.split(" ");
-			int[] n = {Integer.valueOf(a[0]),Integer.valueOf(a[1])};
-			action(n[1]-1,n[0]-1);  // swap index because on table it's a (y,x)
-			
-			// Convert string to int for num-pad
-//			int a = Integer.valueOf(c);  
-//			action_numpad(a);
-			}
-		catch(Exception e) {
-			if (s.equals("e")) {  // If input is e, game will end
-				game_end = true;
-				System.out.print("Exit.");
-			}else
-			System.out.println("Try agian.");
-		}	
+		reset_table();
 	}
 	
 	private static char[] type(String s) {
@@ -57,7 +28,8 @@ public class Main {
 		return null;
 	}
 
-	void create_table() {
+	void reset_table() {
+		// Reset game data
 		for (int i = 0; i < table_size; i++) {
 			for (int j = 0; j < table_size; j++) {
 				table[i][j] = 0;
@@ -70,6 +42,7 @@ public class Main {
 	}
 	
 	static void show_table() {
+		// print the table
 		for (int i = 0; i < table_size; i++) {
 			System.out.print("\n");    // new line
 			for (int j = 0; j < table_size; j++) {
@@ -91,35 +64,20 @@ public class Main {
 		}
 	}
 	
-	static void action_numpad(int n) {
-		n = n-1;
-		if (n/3 >=3 || n/3 < 0 ) {   // Have no cell
-			System.out.print("Try agian.");
-		}else if (n/3 >=2 ) {    // cell 7 8 9
-			check_action(0,n%3);
-		}else if (n/3 >=1 ) {    // cell 4 5 6
-			check_action(1,n%3);
-		}else if (n/3 >=0 ) {    // cell 1 2 3
-			check_action(2,n%3);
-		}else {
-			System.out.print("Try agian.");
-		}
-	}
-	
-	public static void action(int x, int y) {
-		
+	public static void action(int x, int y) {	
 		check_action(x, y);
 	}
-	
-	
-	
+
 	static void check_action(int x,int y) {
+		// checking this action can do or not
 		int n = table[y][x];
 		if (!game_end) {
 			if (n == 0) {
 				table[y][x] = player_turn;
+				// check win,tie
 				check_win();
 				check_draw();
+				// change turn and add turn counter
 				change_turn();
 	
 			}else {
@@ -193,7 +151,7 @@ public class Main {
 		table = new int[table_size][table_size]; 
 		turn_count = 1;
 		player_turn = 1;
-		create_table();
+		reset_table();
 		show_table();
 	}
 	
@@ -210,74 +168,87 @@ public class Main {
 	}
 	
 	public void save_file() {
-		try {
-			FileWriter myWriter = new FileWriter("save.txt");
-			String save = "";
+		// Convert data in the table to String then save to file
+		try {  
+			// try to run the code (It's trying if have any errors will skip to catch())
+			FileWriter myWriter = new FileWriter("save.txt");  // open file
+			String save = "";  // declare String save
 			for (int i = 0; i < table_size; i++) {
 					for (int j = 0; j < table_size; j++) {
 						save += get_data(j , i);    // what in table  swap i,j cuz it (y,x)
-						save += " ";    // space for table
-					}if (i != table_size -1)save += "\n";    // new line for table but do not on last row
+						save += " ";    // space for ez to read on text file
+					}if (i != table_size -1) {
+						save += "\n";    // new line for table but do not on last row
+					}
 			}
-		myWriter.write(save);
-		myWriter.close();
+		myWriter.write(save);  // add every thing in String save to file
+		myWriter.close();  // close file
 		System.out.println("Successfully wrote to the file.");
-	    }catch (IOException e) {
+	    }
+		catch (IOException e) {
+	    // If can not run every code in try, run code below
 	    System.out.println("An error occurred.");
 	    e.printStackTrace();
 	    }
 	}
 	
 	public void load_file() {
-		
+		// Convert data in the file to the table
 		try {
-		      File save = new File("save.txt");
-		      Scanner myReader = new Scanner(save);
-		      String line = myReader.nextLine();
+		      File save = new File("save.txt");  // open file
+		      Scanner myReader = new Scanner(save);  // declare file reader 
+		      String line = myReader.nextLine();  // load 1st line or next line
 		      System.out.println(line);
 		      // Find size of table
-		      String[] l = line.split(" ");  // row
+		      String[] l = line.split(" ");  // Split line with " " then add to array
 		      int length = l.length;  // find size of table
 		      int[][] load = new int[length][length];  // declare array 2D for table
-	    	  int line_counter = 0;
+	    	  int line_counter = 0;  // it's counter how many line
 	    	  
 	    	  // add 1st row
 	    	  for(int i=0;i<length;i++) {
-	    		  load[line_counter][i] = Integer.valueOf(l[i]);  // cell
+	    		  load[line_counter][i] = Integer.valueOf(l[i]);  // load cell to table
 	    	  }line_counter++;	 
+	    	  
 	    	  // add other row 
 		      while (line_counter < length ) {
 		    	  	line = myReader.nextLine();
 		    	  	System.out.println(line);
-		    	  	l = line.split(" ");  // row
+		    	  	l = line.split(" ");  // Split line for each row
 			    	for(int i=0;i<length;i++) {
-			    		load[line_counter][i] = Integer.valueOf(l[i]);  // 
+			    		load[line_counter][i] = Integer.valueOf(l[i]);  // load cell to table
 			    	}
 			    	line_counter++;
 		      }
 		      myReader.close();  // close file
 		      System.out.println();
 		      
-		      // load to table 
-		      int turn = 0;  // finding who next action
+		      // convert to String[][] table  
+		      int turn = 0;  // counter for finding who next action
 		      for(int i=0;i<length;i++) {
 		    	  for(int j=0;j<length;j++) {
+		    		  // this comment for change size table if "save.txt" have another size
+		    		  // But now it's having some errors, Don't focus it.
 //		    		  change_table_size(length);
 //		    		  UI = new GUI(length,this);
-		    		  table[j][i] = load[i][j];  // coz in table it is (y,x)
-		    		  if(load[i][j] != 0) {    		  
+		    		  table[j][i] = load[i][j];  // swap(x,y) coz in table it is (y,x)
+		    		  if(load[i][j] != 0) {  
+		    			  // checking how many turn pass
 		    			  turn++;	
 		    			  
 		    		  }
 		    	  }
 		      }
+		      // Up date other data
 		      if(turn%2 == 0) {
-		    	  player_turn = 1;  
+		    	  // find who next
+		    	  player_turn = 1; 
 		      }else player_turn = 2;
+		      // Setting other data
 		      game_end = false;
 		      turn_count = 0;
 		      winner = 0;
-		      UI.update();
+		      UI.update(); // Update GUI
 		} 
 		catch (FileNotFoundException e) {
 		      System.out.println("An error occurred.");
