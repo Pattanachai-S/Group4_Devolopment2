@@ -167,6 +167,8 @@ public class Main {
 		return winner;
 	}
 	
+	
+	
 	public void save_file() {
 		// Convert data in the table to String then save to file
 		try {  
@@ -223,7 +225,7 @@ public class Main {
 		      myReader.close();  // close file
 		      System.out.println();
 		      
-		      // convert to String[][] table  
+		      // convert to table  
 		      int turn = 0;  // counter for finding who next action
 		      for(int i=0;i<length;i++) {
 		    	  for(int j=0;j<length;j++) {
@@ -245,6 +247,109 @@ public class Main {
 		    	  player_turn = 1; 
 		      }else player_turn = 2;
 		      // Setting other data
+		      game_end = false;
+		      turn_count = turn+1;
+		      winner = 0;
+		      UI.update(); // Update GUI
+		} 
+		catch (FileNotFoundException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+	    }
+		
+	}
+	
+	private String change_to_form(int d) {
+		if (d == 0) {
+			return "n";
+		}else if(d == 1) {
+			return "o";
+		}else if(d == 2) {
+			return "x";
+		}
+		return null;  // return null if wrong arg
+	}
+	
+	private int change_form_to_data(char c) {
+		if (c == 'n') {
+			return 0;
+		}else if(c == 'o') {
+			return 1;
+		}else if(c == 'x') {
+			return 2;
+		}
+		return 0;  // return 0 if wrong arg
+	}
+	
+	public void save_file_on_form() {
+		// Convert data in the table to String then save to file
+		try {  
+			// try to run the code (It's trying if have any errors will skip to catch())
+			FileWriter myWriter = new FileWriter("save.txt");  // open file
+			String save = "";  // Find what in data
+			for (int i = 0; i < table_size; i++) {
+					for (int j = 0; j < table_size; j++) {
+						save += change_to_form(get_data(j , i));    // what in table  swap i,j cuz it (y,x)
+					}
+			}
+			
+			// Write save of game
+			String save_game = "" ;  							// declare String for save
+			save_game += Integer.toString(table_size) + "\n";  	// add table size
+			save_game += save + "\n";							// save table
+			save_game += change_to_form(player_turn) + "\n";		// save player turn
+			save_game += Integer.toString(turn_count-1);		// save turn_counter (-1 coz it start with 0)
+					
+		myWriter.write(save_game);  // add every thing in String save to file
+		myWriter.close();  // close file
+		System.out.println("Successfully wrote to the file.");
+	    }
+		catch (IOException e) {
+	    // If can not run every code in try, run code below
+	    System.out.println("An error occurred.");
+	    e.printStackTrace();
+	    }
+	}
+	
+	public void load_file_on_form() {
+		// Convert data in the file to the table
+		try {
+		      File save = new File("save.txt");  		// open file
+		      Scanner myReader = new Scanner(save); 	// declare file reader 
+		      String line = myReader.nextLine();  		// load 1st line or next line
+		      int size = Integer.valueOf(line);			// covert to int
+		      System.out.println(size);
+		      int[][] load = new int[size][size];  		// declare array 2D for table
+		      
+		      line = myReader.nextLine();				// load next line
+		      int pointer = 0;
+		      for(int i=0;i<size;i++) {
+			    	for(int j=0;j<size;j++) {
+			    			load[i][j] = change_form_to_data(line.charAt(pointer));  // load what in table
+			    			pointer++;
+			    		}	
+			    	}
+		      
+		      line = myReader.nextLine();								// load next line
+		      player_turn = change_form_to_data(line.charAt(0)) ;		// turn of player 
+		      System.out.println(player_turn);
+	      
+		      line = myReader.nextLine();								// load next line
+		      turn_count = change_form_to_data(line.charAt(0)) + 1;		// +1 cuz data start with 1
+		      System.out.println(turn_count);
+		      
+		      myReader.close();  // close file
+			      
+		      // convert to table  	     
+		      for(int i=0;i<size;i++) {
+		    	  for(int j=0;j<size;j++) {
+		    		  table[j][i] = load[i][j];  // swap(x,y) coz in table it is (y,x)
+		    		  System.out.println(load[i][j]);
+		    	  }
+		      }
+		      show_table();
+		      
+		      // Up date other data
 		      game_end = false;
 		      turn_count = 0;
 		      winner = 0;

@@ -87,7 +87,8 @@ public class GUI implements ActionListener{
 		button_save.addActionListener(new ActionListener() {  
 			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-				data.save_file();
+//				data.save_file();
+				data.save_file_on_form();
 				update();	
 			}
 		});
@@ -97,7 +98,8 @@ public class GUI implements ActionListener{
 		button_load.addActionListener(new ActionListener() {  
 			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-				data.load_file();
+//				data.load_file();
+				data.load_file_on_form();
 				update();	
 			}
 		});
