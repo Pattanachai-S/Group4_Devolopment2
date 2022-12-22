@@ -209,7 +209,7 @@ public class Main {
 	    	  
 	    	  // add 1st row
 	    	  for(int i=0;i<length;i++) {
-	    		  load[line_counter][i] = Integer.valueOf(l[i]);  // load cell to table
+	    		  load[line_counter][i] = Integer.parseInt(l[i]);  // load cell to table
 	    	  }line_counter++;	 
 	    	  
 	    	  // add other row 
@@ -218,7 +218,7 @@ public class Main {
 		    	  	System.out.println(line);
 		    	  	l = line.split(" ");  // Split line for each row
 			    	for(int i=0;i<length;i++) {
-			    		load[line_counter][i] = Integer.valueOf(l[i]);  // load cell to table
+			    		load[line_counter][i] = Integer.parseInt(l[i]);  // load cell to table
 			    	}
 			    	line_counter++;
 		      }
@@ -317,7 +317,7 @@ public class Main {
 		      File save = new File("save.txt");  		// open file
 		      Scanner myReader = new Scanner(save); 	// declare file reader 
 		      String line = myReader.nextLine();  		// load 1st line or next line
-		      int size = Integer.valueOf(line);			// covert to int
+		      int size = Integer.parseInt(line);			// covert to int
 		      System.out.println(size);
 		      int[][] load = new int[size][size];  		// declare array 2D for table
 		      
@@ -335,7 +335,7 @@ public class Main {
 		      System.out.println(player_turn);
 	      
 		      line = myReader.nextLine();								// load next line
-		      turn_count = change_form_to_data(line.charAt(0)) + 1;		// +1 cuz data start with 1
+		      turn_count = Integer.parseInt(Character.toString(line.charAt(0))) + 1;		// +1 cuz data start with 1
 		      System.out.println(turn_count);
 		      
 		      myReader.close();  // close file
@@ -351,7 +351,6 @@ public class Main {
 		      
 		      // Up date other data
 		      game_end = false;
-		      turn_count = 0;
 		      winner = 0;
 		      UI.update(); // Update GUI
 		} 
@@ -364,7 +363,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 //		main_loop();  // loop for command line play
-		int size = 5;
+		int size = 4;
 		Main table = new Main();
 		table.change_table_size(size);
 		GUI gui = new GUI(size, table);  // test
