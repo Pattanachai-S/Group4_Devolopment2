@@ -13,7 +13,7 @@ import OXGames.Main;
 
 
 
-public class GUI implements ActionListener{
+public class View implements ActionListener{
 
 	JFrame frame = new JFrame();
 	JPanel title_panel = new JPanel();
@@ -29,7 +29,7 @@ public class GUI implements ActionListener{
 	int table_size;  // number of table length
 	Main data;  // data of table
 
-	GUI(int game_size,Main data){
+	View(int game_size,Main data){
 		
 		this.table_size = game_size;
 		this.data = data;
@@ -188,7 +188,7 @@ public class GUI implements ActionListener{
 		int size = 5;
 		Main table = new Main();
 		table.change_table_size(size);
-		GUI gui = new GUI(size, table);  // test
+		View gui = new View(size, table);  // test
 		table.UI = gui;
 		
 	}

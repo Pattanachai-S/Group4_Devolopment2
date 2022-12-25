@@ -1,13 +1,11 @@
-package OXGames;
+package OX_but_MVC;
 import java.util.Scanner;  // For input
 import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;  // Import the IOException class to handle errors
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 
-import OXGames.View;
-
-public class Main {
+public class Model {
 	
 	static int table_size = 3;
 	static int[][] table = new int[table_size][table_size]; 	
@@ -19,7 +17,7 @@ public class Main {
 	
 	View UI;
 	
-	Main(){
+	Model(){
 		reset_table();
 	}
 	
@@ -364,7 +362,7 @@ public class Main {
 	public static void main(String[] args) {
 //		main_loop();  // loop for command line play
 		int size = 4;
-		Main table = new Main();
+		Model table = new Model();
 		table.change_table_size(size);
 		View gui = new View(size, table);  // test
 		table.UI = gui;
