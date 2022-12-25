@@ -360,17 +360,7 @@ public class Model {
 	}
 	
 	public static void main(String[] args) {
-//		main_loop();  // loop for command line play
-		int size = 4;
-		Model table = new Model();
-		table.change_table_size(size);
-		View gui = new View(size, table);  // test
-		table.UI = gui;
-		
-//		table.save_file();
-//		table.load_file();
-//		table.show_table();
-		 
+
 	}
 	
 		

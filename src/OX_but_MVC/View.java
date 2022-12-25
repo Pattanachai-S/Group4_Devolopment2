@@ -13,7 +13,7 @@ import OXGames.Main;
 
 
 
-public class View implements ActionListener{
+public class View{
 
 	JFrame frame = new JFrame();
 	JPanel title_panel = new JPanel();
@@ -123,20 +123,6 @@ public class View implements ActionListener{
 	}
 	
 
-	
-	public void actionPerformed(ActionEvent e) {   // This run when having any event in-game  
-		//  loop for checking all buttons in the table
-		for(int i=0;i<table_size;i++) {
-			for(int j=0;j<table_size;j++) {
-				if(e.getSource()==buttons[i][j]) {  
-					// If having an event on this button
-					this.data.action(i, j);  // run action(x,y) on this button
-				}
-			}
-		}
-		update();  // Update everything to GUI
-	}
-		
 
 	
 	public void update() {
