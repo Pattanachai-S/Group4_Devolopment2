@@ -29,7 +29,7 @@ public class View{
 	int table_size;  // number of table length
 	Model data;  // data of table
 
-	View(int game_size,Model table){
+	View(int game_size,Model table,Controller Control){
 		
 		this.table_size = game_size;
 		this.data = table;
@@ -64,7 +64,7 @@ public class View{
 				button_panel.add(buttons[i][j]);
 				buttons[i][j].setFont(new Font("MV Boli",Font.BOLD,75));
 				buttons[i][j].setFocusable(false);  // It's text pointer
-				buttons[i][j].addActionListener(this);
+				buttons[i][j].addActionListener(Control);
 			}
 		}
 		
