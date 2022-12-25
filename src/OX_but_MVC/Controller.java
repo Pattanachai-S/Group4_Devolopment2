@@ -32,6 +32,25 @@ public class Controller implements ActionListener{
 		GUI.update();  // Update everything to GUI
 	}
 	
+	// Even for reset button
+	public void even_reset(ActionEvent e) {
+		table.reset_table();
+		GUI.update();	
+	}
+	
+	// Even for save button
+	public void even_save(ActionEvent e) {
+		table.save_file_on_form();
+		GUI.update();
+	}
+	
+	// Even for load button
+	public void even_load(ActionEvent e) {
+		table.load_file_on_form();
+		GUI.update();
+	}
+	
+	
 	public static void main(String[] args) {
 		int size = 4;
 		Controller control = new Controller(size);

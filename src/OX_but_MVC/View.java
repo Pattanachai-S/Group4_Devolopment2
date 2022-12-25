@@ -28,9 +28,11 @@ public class View{
 	
 	int table_size;  // number of table length
 	Model data;  // data of table
+	Controller Control;
 
 	View(int game_size,Model table,Controller Control){
 		
+		this.Control = Control;
 		this.table_size = game_size;
 		this.data = table;
 		buttons = new JButton[table_size][table_size]; 
@@ -77,30 +79,27 @@ public class View{
 		button_reset.addActionListener(new ActionListener() {  
 			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-				table.reset_table();
-				update();	
+				Control.even_reset(e);
 			}
 		});
+		
 		// a save button
 		button_save.setText("save");
 		button_save.setFocusable(false);
 		button_save.addActionListener(new ActionListener() {  
 			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-//				data.save_file();
-				table.save_file_on_form();
-				update();	
+				Control.even_save(e);
 			}
 		});
+
 		// a load button
 		button_load.setText("load");
 		button_load.setFocusable(false);
 		button_load.addActionListener(new ActionListener() {  
 			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-//				data.load_file();
-				table.load_file_on_form();
-				update();	
+				Control.even_load(e);
 			}
 		});
 		//// setting buttons End ////
