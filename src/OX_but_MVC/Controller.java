@@ -33,19 +33,19 @@ public class Controller implements ActionListener{
 	}
 	
 	/* Even for reset button */
-	public void even_reset(ActionEvent e) {
+	public void event_reset(ActionEvent e) {
 		table.reset_table();
 		GUI.update();	
 	}
 	
 	/* Even for save button */
-	public void even_save(ActionEvent e) {
+	public void event_save(ActionEvent e) {
 		table.save_file_on_form();
 		GUI.update();
 	}
 	
 	/** Even for load button */
-	public void even_load(ActionEvent e) {
+	public void event_load(ActionEvent e) {
 		table.load_file_on_form();
 		GUI.update();
 	}

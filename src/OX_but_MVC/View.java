@@ -84,7 +84,7 @@ public class View{
 		button_reset.addActionListener(new ActionListener() {  
 			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-				Control.even_reset(e);
+				Control.event_reset(e);
 			}
 		});
 		
@@ -94,7 +94,7 @@ public class View{
 		button_save.addActionListener(new ActionListener() {  
 			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-				Control.even_save(e);
+				Control.event_save(e);
 			}
 		});
 
@@ -104,7 +104,7 @@ public class View{
 		button_load.addActionListener(new ActionListener() {  
 			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-				Control.even_load(e);
+				Control.event_load(e);
 			}
 		});
 		//// setting buttons End ////
