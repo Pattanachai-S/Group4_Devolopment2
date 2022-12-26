@@ -56,25 +56,12 @@ public class View{
 		// Table
 		button_panel.setLayout(new GridLayout(table_size,table_size));
 		button_panel.setBackground(new Color(150,150,150));	
-		// Create button for table
-		for(int i=0;i<table_size;i++) {
-			for(int j=0;j<table_size;j++) {
-				buttons[i][j] = new JButton();
-				button_panel.add(buttons[i][j]);
-				buttons[i][j].setFont(new Font("MV Boli",Font.BOLD,75));
-				buttons[i][j].setFocusable(false);  // It's text pointer
-				buttons[i][j].addActionListener(Control);
-			}
-		}
+		button_panel.addMouseListener(Control.mouse_listener);		
+//		create_buttons(); // Create button for table
 		
-		graphics_panel = new JPanel(){
-		    public void paintComponent(Graphics g) {
-		    	g = g1;
-		        g.drawOval(10, 10, 100, 2100);
-		    }
-		};
-		graphics_panel.paint(g1);
 		
+		
+				
 		////// Right panel //////
 		//// setting buttons ////
 		// a reset button
@@ -125,9 +112,30 @@ public class View{
 		frame.add(right_panel,BorderLayout.EAST);  // Add right_panel to frame on right screen
 //		frame.add(graphics_panel);  // Add graphics_panel for draw something
 		frame.setVisible(true);  // update to JFrame
+		
+		/** For test draw OX*/
+		graphics_panel = new JPanel(){
+		    public void paintComponent(Graphics g) {
+		    	g = g1;
+		        g.drawOval(10, 10, 100, 2100);
+		    }
+		};
+		graphics_panel.paint(g1);
 	}
 	
-
+	
+	/** Create table of buttons*/
+	private void create_buttons() {
+		for(int i=0;i<table_size;i++) {
+			for(int j=0;j<table_size;j++) {
+				buttons[i][j] = new JButton();
+				button_panel.add(buttons[i][j]);
+				buttons[i][j].setFont(new Font("MV Boli",Font.BOLD,75));
+				buttons[i][j].setFocusable(false);  // It's text pointer
+				buttons[i][j].addActionListener(Control);
+			}
+		}
+	}	
 
 	
 	public void update() {
@@ -239,6 +247,7 @@ public class View{
 	
 	
 	public static void main(String[] args) {
+		/** for testing*/
 		JFrame frame = new JFrame() ;
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(600,600);
