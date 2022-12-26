@@ -1,4 +1,16 @@
 4
+<<<<<<< HEAD
 nnnnnnnnnxonnnnn
 o
 2
+=======
+<<<<<<< Updated upstream
+xnnonnnxnnnnnonn
+o
+4
+=======
+nnnnnnnnnnnnnnnn
+o
+0
+>>>>>>> Stashed changes
+>>>>>>> non-branch

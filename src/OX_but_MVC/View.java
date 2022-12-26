@@ -4,10 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.JEditorPane;
-import javax.swing.AbstractAction;
-import java.awt.Font;
-import java.awt.Point;
+import java.awt.geom.Line2D;
+
 import OXGames.Main;
 
 
@@ -19,13 +17,14 @@ public class View{
 	JPanel title_panel = new JPanel();
 	JLabel textfield = new JLabel();
 	JPanel button_panel = new JPanel();
+	JPanel graphics_panel = new JPanel();
 	JPanel right_panel = new JPanel();
 	JButton[][] buttons;
 	JButton button_reset = new JButton();
 	JButton button_save = new JButton();
 	JButton button_load = new JButton();
 	JEditorPane editorPane = new JEditorPane();
-	
+	Graphics g1;
 	int table_size;  // number of table length
 	Controller control;
 
@@ -67,6 +66,14 @@ public class View{
 				buttons[i][j].addActionListener(Control);
 			}
 		}
+		
+		graphics_panel = new JPanel(){
+		    public void paintComponent(Graphics g) {
+		    	g = g1;
+		        g.drawOval(10, 10, 100, 2100);
+		    }
+		};
+		graphics_panel.paint(g1);
 		
 		////// Right panel //////
 		//// setting buttons ////
@@ -116,7 +123,8 @@ public class View{
 		frame.add(title_panel,BorderLayout.NORTH);  // Add title_panel to frame on top screen
 		frame.add(button_panel);  // Add table to frame on the middle
 		frame.add(right_panel,BorderLayout.EAST);  // Add right_panel to frame on right screen
-		
+//		frame.add(graphics_panel);  // Add graphics_panel for draw something
+		frame.setVisible(true);  // update to JFrame
 	}
 	
 
@@ -137,6 +145,7 @@ public class View{
 		}
 		// Panel title
 		draw_win();  // Result of game or Show current turn
+		frame.setVisible(true);  // update to JFrame
 	}
 	
 	void draw_X(int y, int x){
@@ -153,6 +162,10 @@ public class View{
 		buttons[x][y].setText("");
 	}
 	
+	void paint_O() {
+		Graphics g;
+	}
+	
 	void draw_win() {
 		// Result of game or Show current turn
 		int winner = control.get_model().get_winner();
@@ -167,8 +180,84 @@ public class View{
 		}
 	}
 	
+	public void paint(Graphics g) {
+		g.setColor(Color.green);
+		g.drawOval(100,100,50,150);
+	}
+	
+	void test_draw() {
+		JFrame frame = new JFrame() ;
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(600,600);
+		frame.setLayout(new BorderLayout());
+		frame.setVisible(true);
+		
+		JPanel jp = new JPanel() {
+		    public void paintComponent(Graphics g) {
+		        g.drawOval(10, 10, 100, 2100);
+		    }
+		};
+		
+		frame.add(jp);
+		frame.setVisible(true);
+	}
+	
+	/** Draw O*/
+	public static void paint1(Graphics g,int x,int y, int r) {
+		g.setColor(Color.blue);
+		g.fillOval(x - r/2, y - r/2, r, r);  // circle to out ring
+		g.setColor(Color.white);
+		int s = 10;  // size of ring
+		r = r-s;
+		g.fillOval(x - r/2, y - r/2, r, r);  // circle to in ring
+		
+		Graphics2D g2 = (Graphics2D) g;
+		g.setColor(Color.blue);
+		g2.drawRoundRect(x-r/2, y-r/2, r, r, r, r);  // x, y, height, width, round edges, round edges
+	}
+	
+	/** Draw X*/
+	public static void paint2(Graphics g,int x,int y, int r) {
+		g.setColor(Color.RED);
+		Graphics2D g2 = (Graphics2D) g;
+		int s = 10;  // size
+		g2.setStroke(new BasicStroke(s));
+		g2.drawLine(x-r/2, y-r/2, x+r/2, y+r/2);	// it is ULtoDR
+		g2.drawLine(x+r/2, y-r/2, x-r/2, y+r/2);	// it is URtoDL
+
+	}
+	
+	/** Draw O*/
+	public static void paint3(Graphics g,int x,int y, int r) {
+		g.setColor(Color.blue);
+		Graphics2D g2 = (Graphics2D) g;
+		g.setColor(Color.blue);
+		int s = 5;  // size
+		g2.setStroke(new BasicStroke(s));
+		g2.drawRoundRect(x-r/2, y-r/2, r, r, r, r);  // x, y, height, width, round edges, round edges
+	}
+	
+	
 	public static void main(String[] args) {
-			
+		JFrame frame = new JFrame() ;
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(600,600);
+		frame.setLayout(new BorderLayout());
+		frame.setVisible(true);
+		
+		JPanel jp = new JPanel() {
+		    public void paintComponent(Graphics g) {
+		    	g.setColor(Color.blue);
+//		        g.drawOval(300, 300, 100, 100);
+		        paint1(g,200,200,50);
+		        paint2(g,300,300,50);
+		        paint3(g,300,200,50);
+		    }
+		};
+		
+		frame.add(jp);
+		frame.setVisible(true);
+	
 	}
 }
 
