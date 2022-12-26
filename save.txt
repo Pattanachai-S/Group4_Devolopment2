@@ -1,4 +1,10 @@
 4
+<<<<<<< Updated upstream
 xnnonnnxnnnnnonn
 o
 4
+=======
+nnnnnnnnnnnnnnnn
+o
+0
+>>>>>>> Stashed changes

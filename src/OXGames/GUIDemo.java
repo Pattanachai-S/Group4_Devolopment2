@@ -1,4 +1,5 @@
 package OXGames;
+import java.awt.Color;
 // Ref: https://www.youtube.com/watch?v=ffUi4E1KeTA&ab_channel=TECHINSPEC
 import java.awt.EventQueue;
 
@@ -14,14 +15,18 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JEditorPane;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 
-public class GUIDemo {
+public class GUIDemo extends JFrame{
 
 	private JFrame frame;
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 	private JTextField textField;
+	public Graphics GClass;
+    public Graphics2D G2D;
 
 	/**
 	 * Launch the application.
@@ -97,8 +102,21 @@ public class GUIDemo {
 		
 		JTextPane textPane = new JTextPane();
 		frame.getContentPane().add(textPane);
+//		this.drawCenteredCircle(null);
+		
 	}
+	
+	public void drawCenteredCircle(Graphics g) {
 
+		int x = 1;
+		int y = 1;
+		int r = 100;
+		  x = x-(r/2);
+		  y = y-(r/2);
+		  g.setColor(Color.GREEN);
+		  g.fillOval(x,y,r,r);   
+	    }
+	
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			putValue(NAME, "SwingAction");
