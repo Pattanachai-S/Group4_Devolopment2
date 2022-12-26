@@ -204,6 +204,7 @@ public class View{
 		frame.setVisible(true);
 	}
 	
+	/** Draw O*/
 	public static void paint1(Graphics g,int x,int y, int r) {
 		g.setColor(Color.blue);
 		g.fillOval(x - r/2, y - r/2, r, r);  // circle to out ring
@@ -211,8 +212,13 @@ public class View{
 		int s = 10;  // size of ring
 		r = r-s;
 		g.fillOval(x - r/2, y - r/2, r, r);  // circle to in ring
+		
+		Graphics2D g2 = (Graphics2D) g;
+		g.setColor(Color.blue);
+		g2.drawRoundRect(x-r/2, y-r/2, r, r, r, r);  // x, y, height, width, round edges, round edges
 	}
 	
+	/** Draw X*/
 	public static void paint2(Graphics g,int x,int y, int r) {
 		g.setColor(Color.RED);
 		Graphics2D g2 = (Graphics2D) g;
@@ -220,6 +226,17 @@ public class View{
 		g2.setStroke(new BasicStroke(s));
 		g2.drawLine(x-r/2, y-r/2, x+r/2, y+r/2);	// it is ULtoDR
 		g2.drawLine(x+r/2, y-r/2, x-r/2, y+r/2);	// it is URtoDL
+
+	}
+	
+	/** Draw O*/
+	public static void paint3(Graphics g,int x,int y, int r) {
+		g.setColor(Color.blue);
+		Graphics2D g2 = (Graphics2D) g;
+		g.setColor(Color.blue);
+		int s = 5;  // size
+		g2.setStroke(new BasicStroke(s));
+		g2.drawRoundRect(x-r/2, y-r/2, r, r, r, r);  // x, y, height, width, round edges, round edges
 	}
 	
 	
@@ -235,7 +252,8 @@ public class View{
 		    	g.setColor(Color.blue);
 //		        g.drawOval(300, 300, 100, 100);
 		        paint1(g,200,200,50);
-		        paint2(g,300,400,50);
+		        paint2(g,300,300,50);
+		        paint3(g,300,200,50);
 		    }
 		};
 		
