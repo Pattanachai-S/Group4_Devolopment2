@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
+import java.awt.geom.Line2D;
 
 import OXGames.Main;
 
@@ -205,10 +206,20 @@ public class View{
 	
 	public static void paint1(Graphics g,int x,int y, int r) {
 		g.setColor(Color.blue);
-		g.fillOval(x - r/2, y - r/2, r, r);
+		g.fillOval(x - r/2, y - r/2, r, r);  // circle to out ring
 		g.setColor(Color.white);
-		r = r-10;
-		g.fillOval(x - r/2, y - r/2, r, r);
+		int s = 10;  // size of ring
+		r = r-s;
+		g.fillOval(x - r/2, y - r/2, r, r);  // circle to in ring
+	}
+	
+	public static void paint2(Graphics g,int x,int y, int r) {
+		g.setColor(Color.RED);
+		Graphics2D g2 = (Graphics2D) g;
+		int s = 10;  // size
+		g2.setStroke(new BasicStroke(s));
+		g2.drawLine(x-r/2, y-r/2, x+r/2, y+r/2);	// it is ULtoDR
+		g2.drawLine(x+r/2, y-r/2, x-r/2, y+r/2);	// it is URtoDL
 	}
 	
 	
@@ -222,8 +233,9 @@ public class View{
 		JPanel jp = new JPanel() {
 		    public void paintComponent(Graphics g) {
 		    	g.setColor(Color.blue);
-		        g.drawOval(300, 300, 100, 100);
-		        paint1(g,200,200,60);
+//		        g.drawOval(300, 300, 100, 100);
+		        paint1(g,200,200,50);
+		        paint2(g,300,400,50);
 		    }
 		};
 		
