@@ -7,13 +7,12 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 
 public class Model {
 	
-	static int table_size = 3;
-	static int[][] table = new int[table_size][table_size]; 	
-	static boolean game_end = false; 
-	static int winner;
-	static int turn_count = 1;
-	static int player_turn = 1;
-	static Scanner input = new Scanner(System.in);  // Create a Scanner object
+	int table_size = 3;
+	int[][] table = new int[table_size][table_size]; 	
+	boolean game_end = false; 
+	int winner;
+	int turn_count = 1;
+	int player_turn = 1;
 	
 	View UI;
 	
@@ -39,7 +38,7 @@ public class Model {
 		winner = 0;
 	}
 	
-	static void show_table() {
+	void show_table() {
 		// print the table
 		for (int i = 0; i < table_size; i++) {
 			System.out.print("\n");    // new line
@@ -52,7 +51,7 @@ public class Model {
 		System.out.print("\n");    // Space
 	}
 	
-	static void show_sym(int x) {
+	void show_sym(int x) {
 		if (x == 0){
 			System.out.print("_");
 		}else if(x == 1) {
@@ -62,11 +61,11 @@ public class Model {
 		}
 	}
 	
-	public static void action(int x, int y) {	
-		check_action(x, y);
+	public void action(int x, int y) {	
+		this.check_action(x, y);
 	}
 
-	static void check_action(int x,int y) {
+	void check_action(int x,int y) {
 		// checking this action can do or not
 		int n = table[y][x];
 		if (!game_end) {
@@ -88,7 +87,7 @@ public class Model {
 	
 	}
 	
-	static void change_turn() {
+	void change_turn() {
 		if (player_turn == 1) {
 			player_turn = 2;
 		}else if(player_turn == 2) {
@@ -96,7 +95,7 @@ public class Model {
 		}turn_count++;
 	}
 	
-	static void check_win() {
+	void check_win() {
 		int d1 =0; // diagonal_win ULtoDR counter
 		int d2 =0; // diagonal_win URtoDL counter
 		for(int i=0;i<table_size;i++) {
@@ -125,7 +124,7 @@ public class Model {
 		
 	}
 	
-	static void check_draw() {
+	void check_draw() {
 		int n = table_size*table_size;
 		if (turn_count == n) {
 			game_end = true;
@@ -134,12 +133,12 @@ public class Model {
 		}
 	}
 	
-	private static void show_draw() {
+	private void show_draw() {
 		show_table();
 		System.out.println("Draw!");
 	}
 
-	static void show_winner() {
+	void show_winner() {
 	    show_table();
 		System.out.println("Player " + String.valueOf(winner) + " Win!");
 	}
