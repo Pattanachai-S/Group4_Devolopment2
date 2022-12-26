@@ -1,9 +1,9 @@
-package GUI;
+package OXGames;
 
 import java.awt.*;
 import javax.swing.*;
 
-public class Main extends JFrame {
+public class GUII extends JFrame {
     
     
     public static void main(String[] args){
@@ -122,33 +122,33 @@ public class Main extends JFrame {
 
         
         
-        //int table_size = 50;
-        //JPanel gameGrid = new JPanel(new GridLayout(table_size, table_size, 2, 2));
-        //gameGrid.setBackground(new Color(47, 93, 98));
-        //gridBagConstraints = new GridBagConstraints();
-        //gridBagConstraints.gridx = 0;
-        //gridBagConstraints.gridy = 2;
-        //gridBagConstraints.fill = GridBagConstraints.BOTH;
-        //gridBagConstraints.insets = new Insets(10,10,10,10);
-        //gridBagConstraints.gridwidth = 3;
-        //gridBagConstraints.gridheight = 3;
-        //gridBagConstraints.weightx = 4.0;
-        //gridBagConstraints.weighty = 3.0;
-        //content.add(gameGrid, gridBagConstraints);
-
-        //for (int i = 0; i < table_size; i++) {
-
-            //for (int j = 0; j < table_size; j++) {
-                //JPanel cellpanel = new JPanel();
-                //cellpanel.setBackground(new Color(233,238,234));
-                //cellpanel.setPreferredSize(gameGrid.getSize());
-                //String name = String.format("[%d, %d]", i, j);
-                //cellpanel.setName(name);
-               // gameGrid.add(cellpanel);
-            //}
-        //}
+//        int table_size = 20;
+//        JPanel gameGrid = new JPanel(new GridLayout(table_size, table_size, 2, 2));
+//        gameGrid.setBackground(new Color(47, 93, 98));
+//        gridBagConstraints = new GridBagConstraints();
+//        gridBagConstraints.gridx = 0;
+//        gridBagConstraints.gridy = 2;
+//        gridBagConstraints.fill = GridBagConstraints.BOTH;
+//        gridBagConstraints.insets = new Insets(10,10,10,10);
+//        gridBagConstraints.gridwidth = 3;
+//        gridBagConstraints.gridheight = 3;
+//        gridBagConstraints.weightx = 4.0;
+//        gridBagConstraints.weighty = 3.0;
+//        content.add(gameGrid, gridBagConstraints);
+//
+//        for (int i = 0; i < table_size; i++) {
+//
+//            for (int j = 0; j < table_size; j++) {
+//                JPanel cellpanel = new JPanel();
+//                cellpanel.setBackground(new Color(233,238,234));
+//                cellpanel.setPreferredSize(gameGrid.getSize());
+//                String name = String.format("[%d, %d]", i, j);
+//                cellpanel.setName(name);
+//                gameGrid.add(cellpanel);
+//            }
+//        }
         
-
+        frame.setVisible(true);
     }
     
 
