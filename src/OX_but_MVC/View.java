@@ -203,6 +203,14 @@ public class View{
 		frame.setVisible(true);
 	}
 	
+	public static void paint1(Graphics g,int x,int y, int r) {
+		g.setColor(Color.blue);
+		g.fillOval(x - r/2, y - r/2, r, r);
+		g.setColor(Color.white);
+		r = r-10;
+		g.fillOval(x - r/2, y - r/2, r, r);
+	}
+	
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame() ;
@@ -215,6 +223,7 @@ public class View{
 		    public void paintComponent(Graphics g) {
 		    	g.setColor(Color.blue);
 		        g.drawOval(300, 300, 100, 100);
+		        paint1(g,200,200,60);
 		    }
 		};
 		
