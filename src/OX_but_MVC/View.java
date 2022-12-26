@@ -27,14 +27,12 @@ public class View{
 	JEditorPane editorPane = new JEditorPane();
 	
 	int table_size;  // number of table length
-	Model data;  // data of table
-	Controller Control;
+	Controller control;
 
-	View(int game_size,Model table,Controller Control){
+	View(int game_size,Controller Control){
 		
-		this.Control = Control;
+		this.control = Control;
 		this.table_size = game_size;
-		this.data = table;
 		buttons = new JButton[table_size][table_size]; 
 		
 		// Frame
@@ -128,11 +126,11 @@ public class View{
 		// Update everything to GUI
 		for(int i=0;i<table_size;i++) {
 			for(int j=0;j<table_size;j++) {
-				if(data.get_data(i, j) ==  0) {
+				if(control.get_model().get_data(i, j) ==  0) {
 					draw_no(i,j);
-				}else if(data.get_data(i, j) ==  1) {
+				}else if(control.get_model().get_data(i, j) ==  1) {
 					draw_O(i,j);
-				}else if(data.get_data(i, j) ==  2) {
+				}else if(control.get_model().get_data(i, j) ==  2) {
 					draw_X(i,j);
 				}
 			}
@@ -157,9 +155,9 @@ public class View{
 	
 	void draw_win() {
 		// Result of game or Show current turn
-		int winner = data.get_winner();
+		int winner = control.get_model().get_winner();
 		if (winner == 0) {
-			textfield.setText("Turn player "+ data.get_turn());
+			textfield.setText("Turn player "+ control.get_model().get_turn());
 		}else if (winner == 1) {
 			textfield.setText("O is Winner!");
 		}else if (winner == 2) {
