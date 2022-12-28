@@ -152,15 +152,15 @@ public class Model {
 		show_table();
 	}
 	
-	int get_data(int x, int y) {
+	public int get_data(int x, int y) {
 		return table[x][y];
 	}
 	
-	int get_turn() {
+	public int get_turn() {
 		return player_turn;
 	}
 	
-	int get_winner() {
+	public int get_winner() {
 		return winner;
 	}
 	

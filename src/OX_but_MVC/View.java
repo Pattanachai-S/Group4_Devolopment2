@@ -17,6 +17,7 @@ public class View{
 	JPanel title_panel = new JPanel();
 	JLabel textfield = new JLabel();
 	JPanel button_panel = new JPanel();
+	JPanel table_panel = new JPanel();
 	JPanel graphics_panel = new JPanel();
 	JPanel right_panel = new JPanel();
 	JButton[][] buttons;
@@ -57,8 +58,11 @@ public class View{
 		button_panel.setLayout(new GridLayout(table_size,table_size));
 		button_panel.setBackground(new Color(150,150,150));	
 		button_panel.addMouseListener(Control.mouse_listener);		
-//		create_buttons(); // Create button for table
-		
+		create_buttons(); // Create button for table
+		// Table but no buttons
+		table_panel.setLayout(new GridLayout(table_size,table_size));
+		table_panel.setBackground(new Color(150,150,150));	
+		table_panel.addMouseListener(Control.mouse_listener);		
 		
 		
 				
@@ -109,6 +113,7 @@ public class View{
 		// Add label to frame
 		frame.add(title_panel,BorderLayout.NORTH);  // Add title_panel to frame on top screen
 		frame.add(button_panel);  // Add table to frame on the middle
+		frame.add(table_panel);  // Add table to frame on the middle (it will remove button panel)
 		frame.add(right_panel,BorderLayout.EAST);  // Add right_panel to frame on right screen
 //		frame.add(graphics_panel);  // Add graphics_panel for draw something
 		frame.setVisible(true);  // update to JFrame
@@ -132,7 +137,7 @@ public class View{
 				button_panel.add(buttons[i][j]);
 				buttons[i][j].setFont(new Font("MV Boli",Font.BOLD,75));
 				buttons[i][j].setFocusable(false);  // It's text pointer
-				buttons[i][j].addActionListener(Control);
+				buttons[i][j].addActionListener(control);
 			}
 		}
 	}	

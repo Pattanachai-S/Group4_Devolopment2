@@ -15,13 +15,13 @@ public class Controller implements ActionListener{
 		table = new Model();
 		table.change_table_size(size);
 		// Create GUI
-		GUI = new View(size, table,this);  // test
+		GUI = new View(size, this);  // test
 		table.UI = GUI;
 
 		
 	}
 	
-	// for all event
+	/* for all event */
 	public void actionPerformed(ActionEvent e) {   // This run when having any event in-game  
 		//  loop for checking all buttons in the table
 		for(int i=0;i<table.table_size;i++) {
@@ -57,22 +57,28 @@ public class Controller implements ActionListener{
 
     }
 	
-	// Event for reset button
-	public void even_reset(ActionEvent e) {
+	/* Even for reset button */
+	public void event_reset(ActionEvent e) {
 		table.reset_table();
 		GUI.update();	
 	}
 	
-	// Event for save button
-	public void even_save(ActionEvent e) {
+	/* Even for save button */
+	public void event_save(ActionEvent e) {
 		table.save_file_on_form();
 		GUI.update();
 	}
 	
-	// Event for load button
-	public void even_load(ActionEvent e) {
+	/** Even for load button */
+	public void event_load(ActionEvent e) {
 		table.load_file_on_form();
 		GUI.update();
+	}
+	
+	/** Return Model. */
+	public Model get_model() {
+		
+		return table;
 	}
 	
 	
