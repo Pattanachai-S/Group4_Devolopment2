@@ -36,34 +36,34 @@ public class Controller implements ActionListener{
 	} */
 	
 	
-	/* Even for reset button */
+	/* Event for reset button */
 	public void event_reset(ActionEvent e) {
 		table.reset_table();
 		GUI.update();	
 		System.out.println("Reset.");
 	}
 	
-	/* Even for save button */
+	/* Event for save button */
 	public void event_save(ActionEvent e) {
 		table.save_file_on_form();
 		GUI.update();
 		System.out.println("Save.");
 	}
 	
-	/** Even for load button */
+	/** Event for load button */
 	public void event_load(ActionEvent e) {
 		table.load_file_on_form();
 		GUI.update();
 		System.out.println("Load.");
 	}
 	
-	/** Even for show winner */
+	/** Event for show winner */
 	public void event_winner(ActionEvent e) {
 		String winner = table.get_winner_on_text();
 		GUI.show_popUp(winner + " is Winner!");
 	}
 	
-	/** Even for show winner */
+	/** Event for show winner */
 	public void event_draw(ActionEvent e) {
 		GUI.show_popUp("The game is tied!");
 	}
