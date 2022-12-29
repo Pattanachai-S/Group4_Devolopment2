@@ -3,14 +3,10 @@ package OX_but_MVC;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.List;
+
 import javax.swing.*;
 import java.awt.geom.Line2D;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.geom.Line2D;
 import javax.swing.JOptionPane;
 
@@ -24,7 +20,7 @@ import javax.swing.JTextField;
 //import testGUI.View;
 
 class Grid extends JPanel{
-
+	
     float tableSize = 4;
     float width = 570;
     float height = 570;
@@ -35,10 +31,20 @@ class Grid extends JPanel{
     Grid(int size,View view) {
     	tableSize = size;
     	this.myview = view;
+    	change_size();
     }
+    
+    void change_size(){
+    	width = 570;
+        height = 570;
+        rowHt = height / (tableSize);
+        rowWid = width / (tableSize);
+    }
+
     void drawGrid(Graphics g){
       Graphics2D g2d = (Graphics2D) g;
-      
+      g.setColor(Color.black);
+      g2d.setStroke(new BasicStroke(2));  // size of line
       // draw the rows
       for (int i = 0; i < tableSize+1; i++){
         g2d.draw(new Line2D.Float(0, i * rowHt, width, i * rowHt));
@@ -48,18 +54,23 @@ class Grid extends JPanel{
       for (int i = 0; i < tableSize+1; i++){
         g2d.draw(new Line2D.Float(i * rowWid, 0, i * rowWid, height));
       }
-    }
 
-    @Override
+    }
+    
+    
+    
     public void paintComponent(Graphics g) {
+    	paintO(g,282,282,142);
     	super.paintComponent(g);  // Call the paintComponent method of the superclass
         drawGrid(g);  // Draw the grid
         myview.draw(g);  // Call the draw method of the View class
+        myview.update(g);
+        repaint();
         
-        paintX(g,140,282,142);
-        paintO(g,282,282,142);
         
     }
+    
+
     
 
     /** Draw X*/
@@ -71,7 +82,7 @@ class Grid extends JPanel{
 		r = (int) (r*0.7);  // reduse size
 		g2.drawLine(x-r/2, y-r/2, x+r/2, y+r/2);	// it is ULtoDR
 		g2.drawLine(x+r/2, y-r/2, x-r/2, y+r/2);	// it is URtoDL
-		System.out.println(g+" "+x+" "+y+" "+r);
+		
 	}
 	
 	/** Draw O*/ 
@@ -83,11 +94,12 @@ class Grid extends JPanel{
 		g2.setStroke(new BasicStroke(s));
 		r = (int) (r*0.7);// reduse size
 		g2.drawRoundRect(x-r/2, y-r/2, r, r, r, r);  // x, y, height, width, round edges, round edges
+		
 	}
     
     
     public void update(){
-    	repaint();
+    	
     }
 
     
@@ -197,14 +209,24 @@ public class View extends JFrame{
     
     public void draw(Graphics g) {
 		graphics = g;	
-		g.drawString(".",0,0);
+		for(int i=0;i<control.get_model().get_table_size();i++) {
+			for(int j=0;j<control.get_model().get_table_size();j++) {
+				if(control.get_model().get_data(i, j) ==  0) {
+					// do nothing
+				}else if(control.get_model().get_data(i, j) ==  1) {
+					paint_grid(i,j,1);
+				}else if(control.get_model().get_data(i, j) ==  2) {
+					paint_grid(i,j,2);
+				}
+			}
+		}
+		
 		
 	}
 	public void paint_grid(int x, int y,int player) {
-		System.out.println(x+" "+y+" "+player);
     	int table_size = control.get_model().get_table_size();
-    	int pointerX = ((get_sizeX_grid()/table_size)*x)-table_size/2;
-    	int pointerY = ((get_sizeX_grid()/table_size)*y)-table_size/2;
+    	int pointerX = (int) (((get_sizeX_grid()/table_size)*(x+0.5)));
+    	int pointerY = (int) (((get_sizeX_grid()/table_size)*(y+0.5)));
     	int size_paint = get_sizeX_grid()/table_size;
     	if (player == 1) {
     		grid.paintO(graphics,pointerX,pointerY,size_paint);
@@ -217,14 +239,10 @@ public class View extends JFrame{
 
     public void update() {
     	// may do something
-    	/*
-    	grid.repaint();
-    	repaint();*/
-
+    	System.out.println("updated");
     }
     
     public int get_sizeY_grid() {
-    	System.out.println(grid.getHeight());
     	return grid.getHeight();
     }
     

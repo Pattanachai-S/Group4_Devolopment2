@@ -130,7 +130,7 @@ public class Model {
 	
 	void check_draw() {
 		int n = table_size*table_size;
-		if (turn_count == n) {
+		if ((turn_count == n) && (game_end == false)) {
 			game_end = true;
 			winner = 3;  // It is a tie.
 			show_draw();

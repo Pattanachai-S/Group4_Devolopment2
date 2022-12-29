@@ -102,17 +102,11 @@ public class Controller implements ActionListener{
         return result;
 	}
 	
-	public static void main(String[] args) {
-		int size = 4;
-		Controller control = new Controller(size);
-
-		
-	}
-	
 	private class MouseListener extends MouseAdapter 
 	{
 		PointerInfo info;
 		Point location ;
+		
 	    public void mouseClicked(MouseEvent e) 
 	    {
 	        // Finds the location of the mouse
@@ -125,7 +119,15 @@ public class Controller implements ActionListener{
 	    	int y = (int) e.getY();
 	        System.out.println("Mouse : " + x+","+ y);
 	        control.action_from_mouse(x,y);
-	        
 	    }
 	}
+	
+	
+	
+	
+	public static void main(String[] args) {		
+		int size = 4;  // Change table size here
+		Controller control = new Controller(size);		
+	}
+	
 }
