@@ -7,12 +7,20 @@ import java.awt.event.*;
 public class RowNCol {
 
     JFrame wind = new JFrame();
+    JPanel pann = new JPanel();
 
     RowNCol(){
         wind.setSize(570,570);
         wind.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        wind.setBackground(Color.pink);
+        wind.getContentPane().setLayout(null);
         wind.setVisible(true);
-        wind.addMouseListener(new MouseListener() {
+        wind.add(pann);
+
+        //pann.setSize(570, 570);
+        pann.setBounds(10,10,570,570);
+        pann.setBackground(Color.YELLOW);
+        pann.addMouseListener(new MouseListener() {
             public void mousePressed(MouseEvent me) { }
             public void mouseReleased(MouseEvent me) { }
             public void mouseEntered(MouseEvent me) { }
