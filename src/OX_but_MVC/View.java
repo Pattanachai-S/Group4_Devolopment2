@@ -59,14 +59,17 @@ class Grid extends JPanel{
     
     
     
-    public void paintComponent(Graphics g) {
-    	paintO(g,282,282,142);
+    public void paint(Graphics g) {
     	super.paintComponent(g);  // Call the paintComponent method of the superclass
         drawGrid(g);  // Draw the grid
         myview.draw(g);  // Call the draw method of the View class
         myview.update(g);
-        repaint();
-        
+        repaint();  // repeat this method all time
+        /*  // for see console is running.
+        System.out.println("1");
+        System.out.println("111");
+        System.out.println("11111");
+        */
         
     }
     
@@ -239,7 +242,7 @@ public class View extends JFrame{
 
     public void update() {
     	// may do something
-    	System.out.println("updated");
+    	//System.out.println("updated");
     }
     
     public int get_sizeY_grid() {
