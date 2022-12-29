@@ -62,16 +62,19 @@ public class Model {
 		}
 	}
 	
-	public void action(int x, int y) {	
-		this.check_action(x, y);
+	public boolean action(int x, int y) {	
+		return this.check_action(x, y);
+
 	}
 
-	void check_action(int x,int y) {
+	boolean check_action(int x,int y) {
 		// checking this action can do or not
+		boolean ac = false;
 		int n = table[y][x];
 		if (!game_end) {
 			if (n == 0) {
 				table[y][x] = player_turn;
+				ac = true;
 				// check win,tie
 				check_win();
 				check_draw();
@@ -85,7 +88,7 @@ public class Model {
 		}else {  // If game is ended
 			System.out.println("Game are Ended.");
 		}
-	
+		return ac;
 	}
 	
 	void change_turn() {

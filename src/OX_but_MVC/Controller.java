@@ -78,8 +78,13 @@ public class Controller implements ActionListener{
 	
 	public void action_from_mouse(int x,int y) {
 		int[] pos = getRowandCol(x,y);
-        table.action(pos[1],pos[0]);  // switch x-y couz model table
-        GUI.update();
+		int pos0 = pos[0];
+		int pos1 = pos[1];
+        if(table.action(pos1,pos0)) {  // switch x-y couz model table
+        	GUI.paint_grid(pos0,pos1,table.get_turn());
+            GUI.update();
+        }
+        
 	}
 	
 	public int[] getRowandCol(int xPosition, int yPosition){

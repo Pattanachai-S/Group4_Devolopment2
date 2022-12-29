@@ -30,10 +30,11 @@ class Grid extends JPanel{
     float height = 570;
     float rowHt = height / (tableSize);
     float rowWid = width / (tableSize);
-
+    private View view;
     
-    Grid(int size) {
+    Grid(int size,View view) {
     	tableSize = size;
+    	this.view = view;
     }
     void drawGrid(Graphics g){
       Graphics2D g2d = (Graphics2D) g;
@@ -52,8 +53,33 @@ class Grid extends JPanel{
     public void paint(Graphics g) {
         super.paint(g);
         drawGrid(g);
+        
+        view.draw(g);
     
     }
+    
+
+    /** Draw X*/
+	public static void paintX(Graphics g,int x,int y, int r) {
+		g.setColor(Color.RED);
+		Graphics2D g2 = (Graphics2D) g;
+		int s = 10;  // size
+		g2.setStroke(new BasicStroke(s));
+		g2.drawLine(x-r/2, y-r/2, x+r/2, y+r/2);	// it is ULtoDR
+		g2.drawLine(x+r/2, y-r/2, x-r/2, y+r/2);	// it is URtoDL
+
+	}
+	
+	/** Draw O*/ 
+	public static void paintO(Graphics g,int x,int y, int r) {
+		g.setColor(Color.blue);
+		Graphics2D g2 = (Graphics2D) g;
+		g.setColor(Color.blue);
+		int s = 5;  // size
+		g2.setStroke(new BasicStroke(s));
+		g2.drawRoundRect(x-r/2, y-r/2, r, r, r, r);  // x, y, height, width, round edges, round edges
+	}
+    
     
     public void update(){
     	
@@ -73,7 +99,7 @@ public class View extends JFrame{
     JButton resetbutoon = new JButton();
     JButton savebutton = new JButton();
     JButton loadbutton = new JButton();
-    
+    Graphics graphics;
     Controller control;
 
 
@@ -81,8 +107,8 @@ public class View extends JFrame{
     	
     	control = c;
     	float tableSize = size;
-    	grid = new Grid(size);
-    	
+    	grid = new Grid(size,this);
+  	
         frame.setSize(605, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(new Color(47, 93, 98));
@@ -156,20 +182,33 @@ public class View extends JFrame{
         grid.setBounds(10,185,570,570);
         grid.addMouseListener(control.mouse_listener);	
         
-        
         frame.setVisible(true);
-
-
         //board.setBounds(10,185,570,570);
         //frame.add(board);
 
-        
 
     }
+    public void draw(Graphics g) {
+		this.graphics = g;	
+		
+	}
+	public void paint_grid(int x, int y,int player) {
+    	int table_size = control.get_model().get_table_size();
+    	int pointerX = ((get_sizeX_grid()/table_size)*x)-table_size/2;
+    	int pointerY = ((get_sizeX_grid()/table_size)*y)-table_size/2;
+    	int size_paint = get_sizeX_grid()/table_size;
+    	if (player == 0) {
+    		grid.paintO(graphics,pointerX,pointerY,size_paint);
+    	}else if (player == 1) {
+    		grid.paintX(graphics,pointerX,pointerY,size_paint);
+    	}
+    	
+    }
     
+
     public void update() {
     	// may do something
-    	grid.repaint();
+    	//grid.repaint();
     }
     
     public int get_sizeY_grid() {
