@@ -1,4 +1,4 @@
-package GUI;
+package asdasd;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -124,4 +124,3 @@ class Grid extends JPanel{
     
     
 }
-
