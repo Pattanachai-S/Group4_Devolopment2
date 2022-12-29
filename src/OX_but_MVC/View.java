@@ -5,14 +5,185 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import java.awt.geom.Line2D;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.geom.Line2D;
 
-import OXGames.Main;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+//import testGUI.Grid;
+//import testGUI.View;
+
+class Grid extends JPanel{
+
+    float tableSize = 4;
+    float width = 570;
+    float height = 570;
+    float rowHt = height / (tableSize);
+    float rowWid = width / (tableSize);
+
+    
+    Grid(int size) {
+    	tableSize = size;
+    }
+    void drawGrid(Graphics g){
+      Graphics2D g2d = (Graphics2D) g;
+      
+      // draw the rows
+      for (int i = 0; i < tableSize+1; i++){
+        g2d.draw(new Line2D.Float(0, i * rowHt, width, i * rowHt));
+      }
+        
+      // draw the columns
+      for (int i = 0; i < tableSize+1; i++){
+        g2d.draw(new Line2D.Float(i * rowWid, 0, i * rowWid, height));
+      }
+    }
+
+    public void paint(Graphics g) {
+        super.paint(g);
+        drawGrid(g);
+    
+    }
+    
+    public void update(){
+    	
+    }
+
+    
+    
+}
+
+public class View extends JFrame{
+
+    JFrame frame = new JFrame();
+    JTextField textfield = new JTextField();
+    JPanel title_panel = new JPanel(new BorderLayout());;
+    JPanel buttontPanel = new JPanel(new GridLayout(1,3));
+    Grid grid;
+    JButton resetbutoon = new JButton();
+    JButton savebutton = new JButton();
+    JButton loadbutton = new JButton();
+    
+    Controller control;
+
+
+    public View(int size, Controller Control){
+    	
+    	float tableSize = size;
+    	grid = new Grid(size);
+    	
+        frame.setSize(605, 800);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setBackground(new Color(47, 93, 98));
+        frame.setResizable(false);
+        frame.getContentPane().setLayout(null);
+        frame.setVisible(true);
+
+
+        title_panel.setBackground(Color.BLUE);
+        title_panel.setBounds(10, 10, 570, 125);
+        
+        buttontPanel.setBackground(Color.ORANGE);
+        buttontPanel.setBounds(10, 135, 570, 50);
+
+        //boardPanel.setBackground(Color.PINK);
+        //boardPanel.setBounds(10, 185, 570, 570);
+
+        frame.add(title_panel);
+        frame.add(buttontPanel);
+        frame.add(grid);
+        //frame.add(boardPanel);
+
+        textfield.setBackground(new Color(223, 238, 234));
+			textfield.setForeground(new Color(0,0,0));
+        	textfield.setFont(new Font("Tahoma",Font.BOLD,50));
+		textfield.setHorizontalAlignment(JLabel.CENTER);
+		    textfield.setText("Tic-Tac-Toe");
+
+        title_panel.add(textfield);
+        
+        // a reset button
+        resetbutoon.setText("Reset");
+        resetbutoon.setFont(new Font("TimesRoman",Font.BOLD,15));
+        resetbutoon.setBackground(new Color(167, 196, 188));
+        resetbutoon.setFocusable(false);
+        resetbutoon.addActionListener(new ActionListener() {  
+			// when action to the button
+			public void actionPerformed(ActionEvent e) {
+				Control.event_reset(e);
+			}
+		});
+        
+        // a save button
+        savebutton.setText("Save");
+        savebutton.setFont(new Font("TimesRoman",Font.BOLD,15));
+        savebutton.setBackground(new Color(167, 196, 188));
+        savebutton.setFocusable(false);
+        savebutton.addActionListener(new ActionListener() {  
+			// when action to the button
+			public void actionPerformed(ActionEvent e) {
+				Control.event_save(e);
+			}
+		});
+
+        // a load button
+        loadbutton.setText("Load");
+        loadbutton.setFont(new Font("TimesRoman",Font.BOLD,15));
+        loadbutton.setBackground(new Color(167, 196, 188));
+        loadbutton.setFocusable(false);
+        loadbutton.addActionListener(new ActionListener() {  
+			// when action to the button
+			public void actionPerformed(ActionEvent e) {
+				Control.event_load(e);
+			}
+		});
+
+        buttontPanel.add(savebutton);
+        buttontPanel.add(resetbutoon);
+        buttontPanel.add(loadbutton);
+
+        grid.setBounds(10,185,570,570);
+        grid.addMouseListener(Control.mouse_listener);	
+        
+        
+        frame.setVisible(true);
+
+
+        //board.setBounds(10,185,570,570);
+        //frame.add(board);
+
+       
+
+    }
+    
+    public void update() {
+    	// may do something
+    }
+
+    public static void main(String[] args){
+    	int size = 4;
+    	Controller con = new Controller(size); // test
+      }
+
+}
 
 
 
 
+/****
 public class View{
-
+	
+	
+	/**** old class
 	JFrame frame = new JFrame();
 	JPanel title_panel = new JPanel();
 	JLabel textfield = new JLabel();
@@ -118,7 +289,7 @@ public class View{
 //		frame.add(graphics_panel);  // Add graphics_panel for draw something
 		frame.setVisible(true);  // update to JFrame
 		
-		/** For test draw OX*/
+		/** For test draw OX */ /*
 		graphics_panel = new JPanel(){
 		    public void paintComponent(Graphics g) {
 		    	g = g1;
@@ -129,7 +300,7 @@ public class View{
 	}
 	
 	
-	/** Create table of buttons*/
+	/** Create table of buttons*/ /*
 	private void create_buttons() {
 		for(int i=0;i<table_size;i++) {
 			for(int j=0;j<table_size;j++) {
@@ -215,7 +386,7 @@ public class View{
 		frame.setVisible(true);
 	}
 	
-	/** Draw O*/
+	/** Draw O*/ /*
 	public static void paint1(Graphics g,int x,int y, int r) {
 		g.setColor(Color.blue);
 		g.fillOval(x - r/2, y - r/2, r, r);  // circle to out ring
@@ -229,7 +400,7 @@ public class View{
 		g2.drawRoundRect(x-r/2, y-r/2, r, r, r, r);  // x, y, height, width, round edges, round edges
 	}
 	
-	/** Draw X*/
+	/** Draw X*/ /*
 	public static void paint2(Graphics g,int x,int y, int r) {
 		g.setColor(Color.RED);
 		Graphics2D g2 = (Graphics2D) g;
@@ -240,7 +411,7 @@ public class View{
 
 	}
 	
-	/** Draw O*/
+	/** Draw O*/ /*
 	public static void paint3(Graphics g,int x,int y, int r) {
 		g.setColor(Color.blue);
 		Graphics2D g2 = (Graphics2D) g;
@@ -252,7 +423,7 @@ public class View{
 	
 	
 	public static void main(String[] args) {
-		/** for testing*/
+		/** for testing*/ /*
 		JFrame frame = new JFrame() ;
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(600,600);
@@ -274,4 +445,6 @@ public class View{
 	
 	}
 }
+
+*/
 

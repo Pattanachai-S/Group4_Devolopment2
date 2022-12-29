@@ -21,7 +21,7 @@ public class Controller implements ActionListener{
 		
 	}
 	
-	/* for all event */
+	/* for all event 
 	public void actionPerformed(ActionEvent e) {   // This run when having any event in-game  
 		//  loop for checking all buttons in the table
 		for(int i=0;i<table.table_size;i++) {
@@ -33,7 +33,7 @@ public class Controller implements ActionListener{
 			}
 		}
 		GUI.update();  // Update everything to GUI
-	}
+	} */
 	
 	/** event when mouse clicked*/
 	public void mouseClicked(MouseEvent e) 
