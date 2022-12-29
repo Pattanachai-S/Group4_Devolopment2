@@ -25,7 +25,7 @@ public class View extends JFrame{
     JButton resetbutoon = new JButton();
     JButton savebutton = new JButton();
     JButton loadbutton = new JButton();
-    int size =  5;
+    
 
     public View(){
 
