@@ -60,7 +60,7 @@ public class Controller implements ActionListener{
 	/** Even for show winner */
 	public void event_winner(ActionEvent e) {
 		String winner = table.get_winner_on_text();
-		GUI.show_popUp(winner + " is Win!");
+		GUI.show_popUp(winner + " is Winner!");
 	}
 	
 	/** Even for show winner */
@@ -78,16 +78,17 @@ public class Controller implements ActionListener{
 	
 	public void action_from_mouse(int x,int y) {
 		int[] pos = getRowandCol(x,y);
-        table.action(pos[0],pos[1]);  // switch x-y couz model table
+        table.action(pos[1],pos[0]);  // switch x-y couz model table
         GUI.update();
 	}
 	
 	public int[] getRowandCol(int xPosition, int yPosition){
         float size_x = GUI.get_sizeX_grid();
-        float size_Y = GUI.get_sizeY_grid();
-        //float cellSz = size_x/table.get_table_size();
-        int CellRow = (int) (xPosition/size_x);
-        int CellCol = (int) (yPosition/size_Y);
+        float size_y = GUI.get_sizeY_grid();
+        float cellSzX = size_x/table.get_table_size();
+        float cellSzY = size_y/table.get_table_size();
+        int CellRow = (int) (xPosition/cellSzX);
+        int CellCol = (int) (yPosition/cellSzY);
         int[] result = new int[2];
         result[0] = CellRow;
         result[1] = CellCol;
@@ -109,10 +110,13 @@ public class Controller implements ActionListener{
 	    public void mouseClicked(MouseEvent e) 
 	    {
 	        // Finds the location of the mouse
+	    	
 	    	info = MouseInfo.getPointerInfo();
 	    	location = info.getLocation();
-	        int x = (int) location.getX();
-	        int y = (int) location.getY();
+//	        int x = (int) location.getX();
+//	        int y = (int) location.getY();
+	    	int x = (int) e.getX();
+	    	int y = (int) e.getY();
 	        System.out.println("Mouse : " + x+","+ y);
 	        control.action_from_mouse(x,y);
 	        

@@ -169,6 +169,7 @@ public class View extends JFrame{
     
     public void update() {
     	// may do something
+    	grid.repaint();
     }
     
     public int get_sizeY_grid() {
@@ -177,7 +178,6 @@ public class View extends JFrame{
     }
     
     public int get_sizeX_grid() {
-    	System.out.println(grid.getWidth());
     	return grid.getWidth();
     }
     public void show_popUp(String text) {
