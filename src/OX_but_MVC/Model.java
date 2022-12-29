@@ -137,7 +137,7 @@ public class Model {
 	private void show_draw() {
 		show_table();
 		System.out.println("Draw!");
-		control.event_winner(null);
+		control.event_draw(null);
 	}
 
 	void show_winner() {
@@ -165,6 +165,16 @@ public class Model {
 	
 	public int get_winner() {
 		return winner;
+	}
+	
+	public String get_winner_on_text() {
+		if (winner == 1) {
+			return "O";
+		}else if (winner == 2) {
+			return "X";
+		}else {
+			return "";
+		}
 	}
 	
 	

@@ -77,12 +77,16 @@ public class Controller implements ActionListener{
 		System.out.println("Load.");
 	}
 	
-	/** Even for load button */
+	/** Even for show winner */
 	public void event_winner(ActionEvent e) {
-		
-		GUI.show_popUp("game finish");
+		String winner = table.get_winner_on_text();
+		GUI.show_popUp(winner + " is Win!");
 	}
 	
+	/** Even for show winner */
+	public void event_draw(ActionEvent e) {
+		GUI.show_popUp("The game is tied!");
+	}
 	public void GUI_update() {
 		GUI.update();
 	}
