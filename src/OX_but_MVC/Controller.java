@@ -67,6 +67,7 @@ public class Controller implements ActionListener{
 	public void event_draw(ActionEvent e) {
 		GUI.show_popUp("The game is tied!");
 	}
+	
 	public void GUI_update() {
 		GUI.update();
 	}

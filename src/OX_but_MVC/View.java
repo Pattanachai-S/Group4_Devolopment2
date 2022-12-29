@@ -30,11 +30,11 @@ class Grid extends JPanel{
     float height = 570;
     float rowHt = height / (tableSize);
     float rowWid = width / (tableSize);
-    private View view;
+    private View myview;
     
     Grid(int size,View view) {
     	tableSize = size;
-    	this.view = view;
+    	this.myview = view;
     }
     void drawGrid(Graphics g){
       Graphics2D g2d = (Graphics2D) g;
@@ -50,12 +50,15 @@ class Grid extends JPanel{
       }
     }
 
-    public void paint(Graphics g) {
-        super.paint(g);
-        drawGrid(g);
+    @Override
+    public void paintComponent(Graphics g) {
+    	super.paintComponent(g);  // Call the paintComponent method of the superclass
+        drawGrid(g);  // Draw the grid
+        myview.draw(g);  // Call the draw method of the View class
         
-        view.draw(g);
-    
+        paintX(g,140,282,142);
+        paintO(g,282,282,142);
+        
     }
     
 
@@ -63,11 +66,12 @@ class Grid extends JPanel{
 	public static void paintX(Graphics g,int x,int y, int r) {
 		g.setColor(Color.RED);
 		Graphics2D g2 = (Graphics2D) g;
-		int s = 10;  // size
+		int s = (int) (r*0.1);  // size
 		g2.setStroke(new BasicStroke(s));
+		r = (int) (r*0.7);  // reduse size
 		g2.drawLine(x-r/2, y-r/2, x+r/2, y+r/2);	// it is ULtoDR
 		g2.drawLine(x+r/2, y-r/2, x-r/2, y+r/2);	// it is URtoDL
-
+		System.out.println(g+" "+x+" "+y+" "+r);
 	}
 	
 	/** Draw O*/ 
@@ -75,14 +79,15 @@ class Grid extends JPanel{
 		g.setColor(Color.blue);
 		Graphics2D g2 = (Graphics2D) g;
 		g.setColor(Color.blue);
-		int s = 5;  // size
+		int s = (int) (r*0.1);  // size
 		g2.setStroke(new BasicStroke(s));
+		r = (int) (r*0.7);// reduse size
 		g2.drawRoundRect(x-r/2, y-r/2, r, r, r, r);  // x, y, height, width, round edges, round edges
 	}
     
     
     public void update(){
-    	
+    	repaint();
     }
 
     
@@ -99,7 +104,7 @@ public class View extends JFrame{
     JButton resetbutoon = new JButton();
     JButton savebutton = new JButton();
     JButton loadbutton = new JButton();
-    Graphics graphics;
+    static Graphics graphics;
     Controller control;
 
 
@@ -185,21 +190,25 @@ public class View extends JFrame{
         frame.setVisible(true);
         //board.setBounds(10,185,570,570);
         //frame.add(board);
+       // paint_grid(100, 100, 1);
 
 
     }
+    
     public void draw(Graphics g) {
-		this.graphics = g;	
+		graphics = g;	
+		g.drawString(".",0,0);
 		
 	}
 	public void paint_grid(int x, int y,int player) {
+		System.out.println(x+" "+y+" "+player);
     	int table_size = control.get_model().get_table_size();
     	int pointerX = ((get_sizeX_grid()/table_size)*x)-table_size/2;
     	int pointerY = ((get_sizeX_grid()/table_size)*y)-table_size/2;
     	int size_paint = get_sizeX_grid()/table_size;
-    	if (player == 0) {
+    	if (player == 1) {
     		grid.paintO(graphics,pointerX,pointerY,size_paint);
-    	}else if (player == 1) {
+    	}else if (player == 2) {
     		grid.paintX(graphics,pointerX,pointerY,size_paint);
     	}
     	
@@ -208,7 +217,10 @@ public class View extends JFrame{
 
     public void update() {
     	// may do something
-    	//grid.repaint();
+    	/*
+    	grid.repaint();
+    	repaint();*/
+
     }
     
     public int get_sizeY_grid() {
