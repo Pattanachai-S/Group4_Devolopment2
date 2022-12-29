@@ -7,16 +7,17 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 
 public class Model {
 	
-	int table_size = 3;
+	int table_size = 4;
 	int[][] table = new int[table_size][table_size]; 	
 	boolean game_end = false; 
 	int winner;
 	int turn_count = 1;
 	int player_turn = 1;
 	
-	View UI;
+	Controller control;
 	
-	Model(){
+	Model(Controller c){
+		control = c;
 		reset_table();
 	}
 	
@@ -136,11 +137,13 @@ public class Model {
 	private void show_draw() {
 		show_table();
 		System.out.println("Draw!");
+		control.event_winner(null);
 	}
 
 	void show_winner() {
 	    show_table();
 		System.out.println("Player " + String.valueOf(winner) + " Win!");
+		control.event_winner(null);
 	}
 	
 	void change_table_size(int n) {
@@ -247,7 +250,7 @@ public class Model {
 		      game_end = false;
 		      turn_count = turn+1;
 		      winner = 0;
-		      UI.update(); // Update GUI
+		      control.GUI_update(); // Update GUI
 		} 
 		catch (FileNotFoundException e) {
 		      System.out.println("An error occurred.");
@@ -349,7 +352,7 @@ public class Model {
 		      // Up date other data
 		      game_end = false;
 		      winner = 0;
-		      UI.update(); // Update GUI
+		      control.GUI_update(); // Update GUI
 		} 
 		catch (FileNotFoundException e) {
 		      System.out.println("An error occurred.");

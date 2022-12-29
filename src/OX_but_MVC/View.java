@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.geom.Line2D;
+import javax.swing.JOptionPane;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -76,8 +77,9 @@ public class View extends JFrame{
     Controller control;
 
 
-    public View(int size, Controller Control){
+    public View(int size, Controller c){
     	
+    	control = c;
     	float tableSize = size;
     	grid = new Grid(size);
     	
@@ -119,7 +121,7 @@ public class View extends JFrame{
         resetbutoon.addActionListener(new ActionListener() {  
 			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-				Control.event_reset(e);
+				control.event_reset(e);
 			}
 		});
         
@@ -131,7 +133,7 @@ public class View extends JFrame{
         savebutton.addActionListener(new ActionListener() {  
 			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-				Control.event_save(e);
+				control.event_save(e);
 			}
 		});
 
@@ -143,7 +145,7 @@ public class View extends JFrame{
         loadbutton.addActionListener(new ActionListener() {  
 			// when action to the button
 			public void actionPerformed(ActionEvent e) {
-				Control.event_load(e);
+				control.event_load(e);
 			}
 		});
 
@@ -152,7 +154,7 @@ public class View extends JFrame{
         buttontPanel.add(loadbutton);
 
         grid.setBounds(10,185,570,570);
-        grid.addMouseListener(Control.mouse_listener);	
+        grid.addMouseListener(control.mouse_listener);	
         
         
         frame.setVisible(true);
@@ -167,6 +169,10 @@ public class View extends JFrame{
     
     public void update() {
     	// may do something
+    }
+    
+    public void show_popUp(String text) {
+    	JOptionPane.showMessageDialog(null, text);
     }
 
     public static void main(String[] args){

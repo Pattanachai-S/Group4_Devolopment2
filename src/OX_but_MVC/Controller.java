@@ -12,11 +12,10 @@ public class Controller implements ActionListener{
 	
 	Controller(int size){
 		// Create Model
-		table = new Model();
+		table = new Model(this);
 		table.change_table_size(size);
 		// Create GUI
 		GUI = new View(size, this);  // test
-		table.UI = GUI;
 
 		
 	}
@@ -61,17 +60,30 @@ public class Controller implements ActionListener{
 	public void event_reset(ActionEvent e) {
 		table.reset_table();
 		GUI.update();	
+		System.out.println("Reset.");
 	}
 	
 	/* Even for save button */
 	public void event_save(ActionEvent e) {
 		table.save_file_on_form();
 		GUI.update();
+		System.out.println("Save.");
 	}
 	
 	/** Even for load button */
 	public void event_load(ActionEvent e) {
 		table.load_file_on_form();
+		GUI.update();
+		System.out.println("Load.");
+	}
+	
+	/** Even for load button */
+	public void event_winner(ActionEvent e) {
+		
+		GUI.show_popUp("game finish");
+	}
+	
+	public void GUI_update() {
 		GUI.update();
 	}
 	
