@@ -159,6 +159,10 @@ public class Model {
 		return table[x][y];
 	}
 	
+	public int get_table_size() {
+		return table_size;
+	}
+	
 	public int get_turn() {
 		return player_turn;
 	}

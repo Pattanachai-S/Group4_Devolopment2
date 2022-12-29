@@ -1,4 +1,4 @@
-package XO_MVC;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +41,7 @@ public class RowNCol {
         int CellRow = (int) (xPosition/cellSz);
         int CellCol = (int) (yPosition/cellSz);
 
-        //System.out.println("(row,col):" + "(" + CellRow + "," + CellCol + ")"); //test
+        System.out.println("(row,col):" + "(" + CellRow + "," + CellCol + ")"); //test
     }
     
 }

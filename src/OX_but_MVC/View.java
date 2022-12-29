@@ -163,7 +163,7 @@ public class View extends JFrame{
         //board.setBounds(10,185,570,570);
         //frame.add(board);
 
-       
+        
 
     }
     
@@ -171,6 +171,15 @@ public class View extends JFrame{
     	// may do something
     }
     
+    public int get_sizeY_grid() {
+    	System.out.println(grid.getHeight());
+    	return grid.getHeight();
+    }
+    
+    public int get_sizeX_grid() {
+    	System.out.println(grid.getWidth());
+    	return grid.getWidth();
+    }
     public void show_popUp(String text) {
     	JOptionPane.showMessageDialog(null, text);
     }

@@ -9,6 +9,7 @@ public class Controller implements ActionListener{
 	MouseListener mouse_listener = new MouseListener();
 	Model table;
 	View GUI;
+	Controller control = this;
 	
 	Controller(int size){
 		// Create Model
@@ -34,27 +35,6 @@ public class Controller implements ActionListener{
 		GUI.update();  // Update everything to GUI
 	} */
 	
-	/** event when mouse clicked*/
-	public void mouseClicked(MouseEvent e) 
-    {
-        // Finds the location of the mouse
-        PointerInfo a = MouseInfo.getPointerInfo();
-        Point b = a.getLocation();
-
-        // Gets the x -> and y co-ordinates
-        int x = (int) b.getX();
-        int y = (int) b.getY();
-        System.out.println("Mouse x: " + x);
-        System.out.println("Mouse y: " + y);
-
-//        // Determines which tile the click occured on
-//        int xTile = x/tileSize;
-//        int yTile = y/tileSize;
-//
-//        System.out.println("X Tile: " + xTile);
-//        System.out.println("Y Tile: " + yTile);
-
-    }
 	
 	/* Even for reset button */
 	public void event_reset(ActionEvent e) {
@@ -93,10 +73,27 @@ public class Controller implements ActionListener{
 	
 	/** Return Model. */
 	public Model get_model() {
-		
 		return table;
 	}
 	
+	public void action_from_mouse(int x,int y) {
+		int[] pos = getRowandCol(x,y);
+        table.action(pos[0],pos[1]);  // switch x-y couz model table
+        GUI.update();
+	}
+	
+	public int[] getRowandCol(int xPosition, int yPosition){
+        float size_x = GUI.get_sizeX_grid();
+        float size_Y = GUI.get_sizeY_grid();
+        //float cellSz = size_x/table.get_table_size();
+        int CellRow = (int) (xPosition/size_x);
+        int CellCol = (int) (yPosition/size_Y);
+        int[] result = new int[2];
+        result[0] = CellRow;
+        result[1] = CellCol;
+        System.out.println("(row,col):" + "(" + CellRow + "," + CellCol + ")"); //test
+        return result;
+	}
 	
 	public static void main(String[] args) {
 		int size = 4;
@@ -117,6 +114,8 @@ public class Controller implements ActionListener{
 	        int x = (int) location.getX();
 	        int y = (int) location.getY();
 	        System.out.println("Mouse : " + x+","+ y);
+	        control.action_from_mouse(x,y);
+	        
 	    }
 	}
 }
