@@ -1,4 +1,4 @@
 4
-nnnnnooxnnnnnnnn
-x
-3
+oxnnnnnnnnnnnnnn
+o
+2
