@@ -126,7 +126,7 @@ public class Controller implements ActionListener{
 	
 	
 	public static void main(String[] args) {		
-		int size = 4;  // Change table size here
+		int size = 5;  // Change table size here
 		Controller control = new Controller(size);		
 	}
 	

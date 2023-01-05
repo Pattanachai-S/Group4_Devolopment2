@@ -99,6 +99,29 @@ class Grid extends JPanel{
 		g2.drawRoundRect(x-r/2, y-r/2, r, r, r, r);  // x, y, height, width, round edges, round edges
 		
 	}
+	
+	/** Draw R*/ 
+	public static void paintR(Graphics g,int x,int y, int r) {
+		/* WIP */
+		g.setColor(Color.pink);
+		Graphics2D g2 = (Graphics2D) g;
+		int s = (int) (r*0.1);  // size
+		g2.setStroke(new BasicStroke(s));
+		r = (int) (r*0.7);  // reduse size
+		int ul_x = x-r/2;
+		int ur_x = x+r/2;
+		int dl_x = x-r/2;
+		int dr_x = x+r/2;
+		int ul_y = y-r/2;
+		int ur_y = y-r/2;
+		int dl_y = y+r/2;
+		int dr_y = y+r/2;
+		g2.drawLine(ul_x, ul_y, ur_x, ur_y);	// it is ULtoUR
+		g2.drawLine(ur_x, ur_y, dr_x, dr_y);	// it is URtoDR
+		g2.drawLine(dr_x, dr_y, dl_x, dl_y);	// it is DRtoDL
+		g2.drawLine(dl_x, dl_y, ul_x, ul_y);	// it is DLtoUL
+		
+	}
     
     
     public void update(){
@@ -220,6 +243,8 @@ public class View extends JFrame{
 					paint_grid(i,j,1);
 				}else if(control.get_model().get_data(i, j) ==  2) {
 					paint_grid(i,j,2);
+				}else if(control.get_model().get_data(i, j) ==  3) {
+					paint_grid(i,j,3);
 				}
 			}
 		}
@@ -235,6 +260,8 @@ public class View extends JFrame{
     		grid.paintO(graphics,pointerX,pointerY,size_paint);
     	}else if (player == 2) {
     		grid.paintX(graphics,pointerX,pointerY,size_paint);
+    	}else if (player == 3) {
+    		grid.paintR(graphics,pointerX,pointerY,size_paint);
     	}
     	
     }

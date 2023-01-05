@@ -59,6 +59,8 @@ public class Model {
 			System.out.print("O");
 		}else if(x == 2) {
 			System.out.print("X");
+		}else if(x == 3) {
+			System.out.print("R");
 		}
 	}
 	
@@ -95,6 +97,8 @@ public class Model {
 		if (player_turn == 1) {
 			player_turn = 2;
 		}else if(player_turn == 2) {
+			player_turn = 3;
+		}else if(player_turn == 3) {
 			player_turn = 1;
 		}turn_count++;
 	}
@@ -179,6 +183,8 @@ public class Model {
 			return "O";
 		}else if (winner == 2) {
 			return "X";
+		}else if (winner == 3) {
+			return "R";
 		}else {
 			return "";
 		}
