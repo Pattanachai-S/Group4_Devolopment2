@@ -60,7 +60,6 @@ public class Controller implements ActionListener{
 		GUI.update();  // Update everything to GUI
 	} */
 	
-	
 	/* Event for reset button */
 	public void event_reset(ActionEvent e) {
 		table.reset_table();

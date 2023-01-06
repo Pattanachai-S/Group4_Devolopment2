@@ -240,11 +240,11 @@ public class View extends JFrame{
     	//System.out.println("updated");
     }
     
-    int get_sizeY_grid() {
+    public int get_sizeY_grid() {
     	return grid.getHeight();
     }
     
-    int get_sizeX_grid() {
+    public int get_sizeX_grid() {
     	return grid.getWidth();
     }
     public void show_popUp(String text) {
