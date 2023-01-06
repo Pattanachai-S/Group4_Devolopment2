@@ -65,7 +65,9 @@ class Grid extends JPanel{
         myview.draw(g);  // Call the draw method of the View class
         myview.update(g);
         repaint();  // repeat this method all time
-        /*  // for see console is running.
+        
+        // for see console is running.
+        /*  
         System.out.println("1");
         System.out.println("111");
         System.out.println("11111");
@@ -210,28 +212,27 @@ public class View extends JFrame{
 
     }
     
+    /** Draw everytihng to table*/
     public void draw(Graphics g) {
 		graphics = g;	
 		for(int i=0;i<control.get_model().get_table_size();i++) {
 			for(int j=0;j<control.get_model().get_table_size();j++) {
-				if(control.get_model().get_data(i, j) ==  0) {
-					// do nothing
-				}else if(control.get_model().get_data(i, j) ==  1) {
-					paint_grid(i,j,1);
-				}else if(control.get_model().get_data(i, j) ==  2) {
-					paint_grid(i,j,2);
-				}
+				paint_grid(i,j,(control.get_model().get_data(i, j)));
 			}
 		}
 		
 		
 	}
+    
+    /** paint each cell */
 	public void paint_grid(int x, int y,int player) {
     	int table_size = control.get_model().get_table_size();
     	int pointerX = (int) (((get_sizeX_grid()/table_size)*(x+0.5)));
     	int pointerY = (int) (((get_sizeX_grid()/table_size)*(y+0.5)));
     	int size_paint = get_sizeX_grid()/table_size;
-    	if (player == 1) {
+    	if (player == 0) {
+    		// do nothing
+    	}else if (player == 1) {
     		grid.paintO(graphics,pointerX,pointerY,size_paint);
     	}else if (player == 2) {
     		grid.paintX(graphics,pointerX,pointerY,size_paint);
