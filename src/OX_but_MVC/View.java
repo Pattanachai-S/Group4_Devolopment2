@@ -61,7 +61,7 @@ class Grid extends JPanel{
     
     public void paint(Graphics g) {
     	super.paintComponent(g);  // Call the paintComponent method of the superclass
-        drawGrid(g);  // Draw the grid
+        drawGrid(g);  // Draw the line for table
         myview.draw(g);  // Call the draw method of the View class
         myview.update(g);
         repaint();  // repeat this method all time
@@ -73,10 +73,7 @@ class Grid extends JPanel{
         System.out.println("11111");
         */
         
-    }
-    
-
-    
+    }   
 
     /** Draw X*/
 	public static void paintX(Graphics g,int x,int y, int r) {
@@ -102,14 +99,12 @@ class Grid extends JPanel{
 		
 	}
     
-    
     public void update(){
     	
     }
-
-    
-    
+   
 }
+
 
 public class View extends JFrame{
 
@@ -124,8 +119,7 @@ public class View extends JFrame{
     static Graphics graphics;
     Controller control;
 
-
-    public View(int size, Controller c){
+    View(int size, Controller c){
     	
     	control = c;
     	float tableSize = size;
@@ -212,7 +206,7 @@ public class View extends JFrame{
 
     }
     
-    /** Draw everytihng to table*/
+    /** Draw everything to table*/
     public void draw(Graphics g) {
 		graphics = g;	
 		for(int i=0;i<control.get_model().get_table_size();i++) {
@@ -228,7 +222,7 @@ public class View extends JFrame{
 	public void paint_grid(int x, int y,int player) {
     	int table_size = control.get_model().get_table_size();
     	int pointerX = (int) (((get_sizeX_grid()/table_size)*(x+0.5)));
-    	int pointerY = (int) (((get_sizeX_grid()/table_size)*(y+0.5)));
+    	int pointerY = (int) (((get_sizeY_grid()/table_size)*(y+0.5)));
     	int size_paint = get_sizeX_grid()/table_size;
     	if (player == 0) {
     		// do nothing
@@ -246,11 +240,11 @@ public class View extends JFrame{
     	//System.out.println("updated");
     }
     
-    public int get_sizeY_grid() {
+    int get_sizeY_grid() {
     	return grid.getHeight();
     }
     
-    public int get_sizeX_grid() {
+    int get_sizeX_grid() {
     	return grid.getWidth();
     }
     public void show_popUp(String text) {

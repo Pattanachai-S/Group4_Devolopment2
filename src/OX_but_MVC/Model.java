@@ -39,7 +39,7 @@ public class Model {
 		winner = 0;
 	}
 	
-	void show_table() {
+	private void show_table() {
 		// print the table
 		for (int i = 0; i < table_size; i++) {
 			System.out.print("\n");    // new line
@@ -52,7 +52,7 @@ public class Model {
 		System.out.print("\n");    // Space
 	}
 	
-	void show_sym(int x) {
+	private void show_sym(int x) {
 		if (x == 0){
 			System.out.print("_");
 		}else if(x == 1) {
@@ -67,7 +67,7 @@ public class Model {
 
 	}
 
-	boolean check_action(int x,int y) {
+	private boolean check_action(int x,int y) {
 		// checking this action can do or not
 		boolean ac = false;
 		int n = table[y][x];
@@ -91,7 +91,7 @@ public class Model {
 		return ac;
 	}
 	
-	void change_turn() {
+	private void change_turn() {
 		if (player_turn == 1) {
 			player_turn = 2;
 		}else if(player_turn == 2) {
@@ -99,7 +99,7 @@ public class Model {
 		}turn_count++;
 	}
 	
-	void check_win() {
+	private void check_win() {
 		int d1 =0; // diagonal_win ULtoDR counter
 		int d2 =0; // diagonal_win URtoDL counter
 		for(int i=0;i<table_size;i++) {
@@ -128,7 +128,7 @@ public class Model {
 		
 	}
 	
-	void check_draw() {
+	private void check_draw() {
 		int n = table_size*table_size;
 		if ((turn_count == n) && (game_end == false)) {
 			game_end = true;
@@ -143,13 +143,13 @@ public class Model {
 		control.event_draw(null);
 	}
 
-	void show_winner() {
+	private void show_winner() {
 	    show_table();
 		System.out.println("Player " + String.valueOf(winner) + " Win!");
 		control.event_winner(null);
 	}
 	
-	void change_table_size(int n) {
+	public void change_table_size(int n) {
 		table_size = n;
 		table = new int[table_size][table_size]; 
 		turn_count = 1;

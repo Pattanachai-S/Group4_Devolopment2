@@ -4,9 +4,34 @@ import java.awt.event.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 
-// Run project on this class
+// Run project on this file
+
+class MouseListener extends MouseAdapter{
+	Controller control;
+	PointerInfo info;
+//	Point location ;  // location will use for mouse location of screen
+	
+	MouseListener(Controller control){
+		this.control = control;
+	}
+	
+    public void mouseClicked(MouseEvent e) 
+    {
+        // Finds the location of the mouse
+    	
+    	info = MouseInfo.getPointerInfo();
+//    	location = info.getLocation();
+//        int x = (int) location.getX();
+//        int y = (int) location.getY();
+    	int x = (int) e.getX();
+    	int y = (int) e.getY();
+        System.out.println("Mouse : " + x+","+ y);
+        control.action_from_mouse(x,y);
+    }
+}
+
 public class Controller implements ActionListener{
-	MouseListener mouse_listener = new MouseListener();
+	MouseListener mouse_listener = new MouseListener(this);
 	Model table;
 	View GUI;
 	Controller control = this;
@@ -21,7 +46,7 @@ public class Controller implements ActionListener{
 		
 	}
 	
-	/* for all event 
+	/* for all event buttons
 	public void actionPerformed(ActionEvent e) {   // This run when having any event in-game  
 		//  loop for checking all buttons in the table
 		for(int i=0;i<table.table_size;i++) {
@@ -77,7 +102,7 @@ public class Controller implements ActionListener{
 		return table;
 	}
 	
-	public void action_from_mouse(int x,int y) {
+	void action_from_mouse(int x,int y) {
 		int[] pos = getRowandCol(x,y);
 		int pos0 = pos[0];
 		int pos1 = pos[1];
@@ -88,7 +113,7 @@ public class Controller implements ActionListener{
         
 	}
 	
-	public int[] getRowandCol(int xPosition, int yPosition){
+	private int[] getRowandCol(int xPosition, int yPosition){
         float size_x = GUI.get_sizeX_grid();
         float size_y = GUI.get_sizeY_grid();
         float cellSzX = size_x/table.get_table_size();
@@ -101,28 +126,6 @@ public class Controller implements ActionListener{
         System.out.println("(row,col):" + "(" + CellRow + "," + CellCol + ")"); //test
         return result;
 	}
-	
-	private class MouseListener extends MouseAdapter 
-	{
-		PointerInfo info;
-		Point location ;
-		
-	    public void mouseClicked(MouseEvent e) 
-	    {
-	        // Finds the location of the mouse
-	    	
-	    	info = MouseInfo.getPointerInfo();
-	    	location = info.getLocation();
-//	        int x = (int) location.getX();
-//	        int y = (int) location.getY();
-	    	int x = (int) e.getX();
-	    	int y = (int) e.getY();
-	        System.out.println("Mouse : " + x+","+ y);
-	        control.action_from_mouse(x,y);
-	    }
-	}
-	
-	
 	
 	
 	public static void main(String[] args) {		
