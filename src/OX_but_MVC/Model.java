@@ -14,9 +14,9 @@ public class Model {
 	int turn_count = 1;
 	int player_turn = 1;
 	
-	Controller control;
+	Object control;
 	
-	Model(Controller c){
+	Model(Object c){
 		control = c;
 		reset_table();
 	}
@@ -39,29 +39,6 @@ public class Model {
 		winner = 0;
 	}
 	
-	private void show_table() {
-		// print the table
-		for (int i = 0; i < table_size; i++) {
-			System.out.print("\n");    // new line
-			for (int j = 0; j < table_size; j++) {
-				show_sym(table[j][i]);    // show symbol
-				System.out.print(" ");    // space
-			}
-		}
-		System.out.print("\n");    // new line
-		System.out.print("\n");    // Space
-	}
-	
-	private void show_sym(int x) {
-		if (x == 0){
-			System.out.print("_");
-		}else if(x == 1) {
-			System.out.print("O");
-		}else if(x == 2) {
-			System.out.print("X");
-		}
-	}
-	
 	public boolean action(int x, int y) {	
 		return this.check_action(x, y);
 
@@ -80,13 +57,9 @@ public class Model {
 				check_draw();
 				// change turn and add turn counter
 				change_turn();
-	
 			}else {
-				System.out.println("You can not action this cell.");
+				
 			}
-			show_table();
-		}else {  // If game is ended
-			System.out.println("Game are Ended.");
 		}
 		return ac;
 	}
@@ -114,7 +87,6 @@ public class Model {
 			}if(h == table_size || v == table_size) { // If someone win the game on horizon or vertical
 				game_end = true;
 				winner = player_turn;
-				show_winner();
 			}if(table[i][i] == player_turn) {  // diagonal_win ULtoDR
 				d1++;
 			}if(table[i][table_size-1-i] == player_turn) {  // diagonal_win URtoDL
@@ -123,7 +95,6 @@ public class Model {
 		}if(d1 == table_size || d2 == table_size) { // If someone win the game on diagonal
 			game_end = true;
 			winner = player_turn;
-			show_winner();
 		}
 		
 	}
@@ -133,29 +104,15 @@ public class Model {
 		if ((turn_count == n) && (game_end == false)) {
 			game_end = true;
 			winner = 3;  // It is a tie.
-			show_draw();
 		}
 	}
-	
-	private void show_draw() {
-		show_table();
-		System.out.println("Draw!");
-		control.event_draw(null);
-	}
-
-	private void show_winner() {
-	    show_table();
-		System.out.println("Player " + String.valueOf(winner) + " Win!");
-		control.event_winner(null);
-	}
-	
+		
 	public void change_table_size(int n) {
 		table_size = n;
 		table = new int[table_size][table_size]; 
 		turn_count = 1;
 		player_turn = 1;
 		reset_table();
-		show_table();
 	}
 	
 	public int get_data(int x, int y) {
@@ -172,6 +129,14 @@ public class Model {
 	
 	public int get_winner() {
 		return winner;
+	}
+	
+	public boolean get_game_end() {
+		return game_end;
+	}
+	
+	public void set_game_end(){
+		game_end = true;
 	}
 	
 	public String get_winner_on_text() {
@@ -267,7 +232,6 @@ public class Model {
 		      game_end = false;
 		      turn_count = turn+1;
 		      winner = 0;
-		      control.GUI_update(); // Update GUI
 		} 
 		catch (FileNotFoundException e) {
 		      System.out.println("An error occurred.");
@@ -364,12 +328,10 @@ public class Model {
 		    		  System.out.println(load[i][j]);
 		    	  }
 		      }
-		      show_table();
 		      
 		      // Up date other data
 		      game_end = false;
 		      winner = 0;
-		      control.GUI_update(); // Update GUI
 		} 
 		catch (FileNotFoundException e) {
 		      System.out.println("An error occurred.");

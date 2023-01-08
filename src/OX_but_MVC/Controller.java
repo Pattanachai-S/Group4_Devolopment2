@@ -112,6 +112,8 @@ public class Controller implements ActionListener{
         
 	}
 	
+	
+	
 	private int[] getRowandCol(int xPosition, int yPosition){
         float size_x = GUI.get_sizeX_grid();
         float size_y = GUI.get_sizeY_grid();
