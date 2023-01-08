@@ -59,7 +59,7 @@ public class Controller_text {
 				UI.show_draw();
 			}else {
 			// If got a winner
-			UI.show_winner((winner));
+				UI.show_winner((winner));
 			}
 		}
 	}

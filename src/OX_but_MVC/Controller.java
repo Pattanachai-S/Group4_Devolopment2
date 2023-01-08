@@ -108,11 +108,23 @@ public class Controller implements ActionListener{
         if(table.action(pos1,pos0)) {  // switch x-y couz model table
         	GUI.paint_grid(pos0,pos1,table.get_turn());
             GUI.update();
+            check_game();
         }
         
 	}
 	
-	
+	private void check_game() {
+		int winner = table.get_winner();
+		if(winner != 0) {
+			if (winner == 3) {
+				// If game is draw.
+				GUI.show_popUp("The game is tied!");
+			}else {
+			// If got a winner
+				GUI.show_popUp(table.get_winner_on_text() + " is Winner!");
+			}
+		}
+	}
 	
 	private int[] getRowandCol(int xPosition, int yPosition){
         float size_x = GUI.get_sizeX_grid();
