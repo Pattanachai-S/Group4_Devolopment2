@@ -14,10 +14,7 @@ public class Model {
 	int turn_count = 1;
 	int player_turn = 1;
 	
-	Object control;
-	
-	Model(Object c){
-		control = c;
+	Model(){
 		reset_table();
 	}
 	

@@ -38,7 +38,7 @@ public class Controller implements ActionListener{
 	
 	Controller(int size){
 		// Create Model
-		table = new Model(this);
+		table = new Model();
 		table.change_table_size(size);
 		// Create GUI
 		GUI = new View(size, this);  // test
@@ -142,7 +142,7 @@ public class Controller implements ActionListener{
 	
 	
 	public static void main(String[] args) {		
-		int size = 4;  // Change table size here
+		int size = 5;  // Change table size here
 		Controller control = new Controller(size);		
 	}
 	

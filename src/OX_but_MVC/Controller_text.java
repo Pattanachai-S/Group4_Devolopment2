@@ -14,7 +14,7 @@ public class Controller_text {
 	
 	Controller_text(int size){
 		// Create Model
-		table = new Model(this);
+		table = new Model();
 		table.change_table_size(size);
 		// Create GUI
 		UI = new View_text(size, this);  // test
@@ -103,7 +103,7 @@ public class Controller_text {
 	}
 	
 	public static void main(String[] args) {		
-		int size = 2;  // Change table size here
+		int size = 3;  // Change table size here
 		Controller_text control = new Controller_text(size);
 		
 	}
