@@ -45,13 +45,13 @@ public class Controller_text {
 			if (s.equals("e")) {  // If input is e, game will end
 				System.out.print("Exit.");
 				model.set_game_end();
-			}else if (s.equals("save")) {  // If input is e, game will end				
+			}else if (s.equals("save")) {  // If input is save, game will end				
 				model.save_file_on_form();
 				System.out.print("Game saved.");
-			}else if (s.equals("load")) {  // If input is e, game will end				
+			}else if (s.equals("load")) {  // If input is load, game will end				
 				model.load_file_on_form();
 				System.out.print("Game loaded.");
-			}else if (s.equals("reset")) {  // If input is e, game will end				
+			}else if (s.equals("reset")) {  // If input is reset, game will end				
 				model.reset_table();
 				System.out.print("Reset game.");
 			}else 
