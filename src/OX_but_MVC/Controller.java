@@ -105,7 +105,7 @@ public class Controller implements ActionListener{
 		int[] pos = getRowandCol(x,y);
 		int pos0 = pos[0];
 		int pos1 = pos[1];
-        if(model.action(pos1,pos0)) {  // switch x-y couz model table
+        if(model.fill_table(pos1,pos0)) {  // switch x-y couz model table
         	GUI.paint_grid(pos0,pos1,model.get_turn());
             GUI.update();
             check_game();

@@ -11,6 +11,7 @@ public class Controller_text {
 	View_text UI;
 	Controller_text control = this;
 	Scanner input = new Scanner(System.in);  // For in put
+	boolean stop_loop = false;  // Boolean of stop main loop
 	
 	Controller_text(int size){
 		// Create Model
@@ -24,7 +25,7 @@ public class Controller_text {
 	}
 	
 	public void main_loop() {
-		while(!model.get_game_end()) {
+		while(!stop_loop) {
 			UI.show_table();
 			get_input();
 			check_game();
@@ -33,29 +34,47 @@ public class Controller_text {
 	
 	
 	private void get_input() {
-		UI.show_player_turn();
+		if (!model.get_game_end()) {
+			// If game still playing
+			UI.show_player_turn();
+		}else {
+			// If game is already end
+			UI.show_winner((model.get_winner()));
+		}
+		
+		UI.show_get_input();  // show input command :
 		String s = input.nextLine();
 		try {
 			// Convert string to int 
 			String[] a = s.split(" ");
 			int[] n = {Integer.valueOf(a[0]),Integer.valueOf(a[1])};
-			model.action(n[1]-1,n[0]-1);  // swap index because on table it's a (y,x)
+			model.fill_table(n[1]-1,n[0]-1);  // swap index because on table it's a (y,x)
 			}
 		catch(Exception e) {
-			if (s.equals("e")) {  // If input is e, game will end
-				System.out.print("Exit.");
+			if (s.equals("e") || s.equals("exit")) {  
+				// If input is e, game will end
 				model.set_game_end();
-			}else if (s.equals("save")) {  // If input is e, game will end				
+				System.out.print("Exited.");
+				stop_loop = true;
+				
+			}else if (s.equals("s") || s.equals("save")) {
+				// If input is s, game will save	
 				model.save_file_on_form();
 				System.out.print("Game saved.");
-			}else if (s.equals("load")) {  // If input is e, game will end				
+				
+			}else if (s.equals("l") || s.equals("load")) { 
+				// If input is l, game will load		
 				model.load_file_on_form();
 				System.out.print("Game loaded.");
-			}else if (s.equals("reset")) {  // If input is e, game will end				
+				
+			}else if (s.equals("r") || s.equals("reset")) {  
+				// If input is r, game will reset		
 				model.reset_table();
 				System.out.print("Reset game.");
+				
 			}else 
-			System.out.println("Try agian.");
+				// If input can not match, it will let user take input again
+				System.out.println("Try agian.");
 		}
 	}
 	

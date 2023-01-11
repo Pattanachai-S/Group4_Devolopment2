@@ -28,9 +28,14 @@ public class View_text {
 		System.out.println("Draw!");
 	}
 
-	public void show_winner(int winner) {
-	    show_table();
-		System.out.println("Player " + player_to_text(winner) + " Win!");
+	public void show_winner(int winner) {  
+	    if (winner == 3) {  // if game is tie	
+	    	show_draw();
+	    }else {  // if have a winner
+	    	show_table();
+	    	System.out.println("Player " + player_to_text(winner) + " Win!");
+	    }
+		
 	}
 	
 	private String player_to_text(int p) {
@@ -48,9 +53,10 @@ public class View_text {
 	}
 
 	public void show_player_turn() {
-		System.out.println("Turn player "+String.valueOf(control.get_model().get_turn()));
-		System.out.print("Input(: col row): ");
+		System.out.println("Turn player "+String.valueOf(control.get_model().get_turn()));		
 	}
 	
-
+	public void show_get_input() {
+		System.out.print("(col row,save,load,reset)Input: ");
+	}
 }

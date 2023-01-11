@@ -36,7 +36,7 @@ public class Model {
 		winner = 0;
 	}
 	
-	public boolean action(int x,int y) {
+	public boolean fill_table(int x,int y) {
 		// checking this action can do or not
 		boolean ac = false;
 		int n = table[y][x];
