@@ -15,7 +15,7 @@ public class View_text {
 		for (int i = 0; i < table_size; i++) {
 			System.out.print("\n");    // new line
 			for (int j = 0; j < table_size; j++) {
-				System.out.print(player_to_text(control.get_model().get_data(j, i)));    // show symbol
+				System.out.print(player_to_text(control.get_model().get_data(i, j)));    // show symbol
 				System.out.print(" ");    // space
 			}
 		}
@@ -49,7 +49,7 @@ public class View_text {
 
 	public void show_player_turn() {
 		System.out.println("Turn player "+String.valueOf(control.get_model().get_turn()));
-		System.out.print("Input(: col row): ");
+		System.out.print("Input(: roe col): ");
 	}
 	
 
