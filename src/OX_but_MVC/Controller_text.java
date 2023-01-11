@@ -7,15 +7,15 @@ import java.util.Scanner;
 
 public class Controller_text {
 	
-	Model table;
+	Model model;
 	View_text UI;
 	Controller_text control = this;
 	Scanner input = new Scanner(System.in);  // For in put
 	
 	Controller_text(int size){
 		// Create Model
-		table = new Model();
-		table.change_table_size(size);
+		model = new Model();
+		model.change_table_size(size);
 		// Create GUI
 		UI = new View_text(size, this);  // test
 		main_loop();
@@ -24,35 +24,34 @@ public class Controller_text {
 	}
 	
 	public void main_loop() {
-		UI.show_table();
-		while(!table.get_game_end()) {
+		while(!model.get_game_end()) {
 			UI.show_table();
-			wait_action();
+			get_input();
 			check_game();
 		}
 	}
 	
 	
-	private void wait_action() {
+	private void get_input() {
 		UI.show_player_turn();
 		String s = input.nextLine();
 		try {
 			// Convert string to int 
 			String[] a = s.split(" ");
 			int[] n = {Integer.valueOf(a[0]),Integer.valueOf(a[1])};
-			table.action(n[1]-1,n[0]-1);  // swap index because on table it's a (y,x)
+			model.action(n[1]-1,n[0]-1);  // swap index because on table it's a (y,x)
 			}
 		catch(Exception e) {
 			if (s.equals("e")) {  // If input is e, game will end
 				System.out.print("Exit.");
-				table.set_game_end();
+				model.set_game_end();
 			}else
 			System.out.println("Try agian.");
 		}
 	}
 	
 	private void check_game() {
-		int winner = table.get_winner();
+		int winner = model.get_winner();
 		if(winner != 0) {
 			if (winner == 3) {
 				// If game is draw.
@@ -67,33 +66,33 @@ public class Controller_text {
 	
 	/** Return Model. */
 	public Model get_model() {
-		return table;
+		return model;
 	}
 	
 	/* Event for reset button */
 	public void event_reset(ActionEvent e) {
-		table.reset_table();
+		model.reset_table();
 		UI.update();	
 		System.out.println("Reset.");
 	}
 	
 	/* Event for save button */
 	public void event_save(ActionEvent e) {
-		table.save_file_on_form();
+		model.save_file_on_form();
 		UI.update();
 		System.out.println("Save.");
 	}
 	
 	/** Event for load button */
 	public void event_load(ActionEvent e) {
-		table.load_file_on_form();
+		model.load_file_on_form();
 		UI.update();
 		System.out.println("Load.");
 	}
 	
 	/** Event for show winner */
 	public void event_winner(ActionEvent e) {
-		int winner = table.get_winner();
+		int winner = model.get_winner();
 		UI.show_winner(winner);
 	}
 	

@@ -32,14 +32,14 @@ class MouseListener extends MouseAdapter{
 
 public class Controller implements ActionListener{
 	MouseListener mouse_listener = new MouseListener(this);
-	Model table;
+	Model model;
 	View GUI;
 	Controller control = this;
 	
 	Controller(int size){
 		// Create Model
-		table = new Model();
-		table.change_table_size(size);
+		model = new Model();
+		model.change_table_size(size);
 		// Create GUI
 		GUI = new View(size, this);  // test
 
@@ -62,28 +62,28 @@ public class Controller implements ActionListener{
 	
 	/* Event for reset button */
 	public void event_reset(ActionEvent e) {
-		table.reset_table();
+		model.reset_table();
 		GUI.update();	
 		System.out.println("Reset.");
 	}
 	
 	/* Event for save button */
 	public void event_save(ActionEvent e) {
-		table.save_file_on_form();
+		model.save_file_on_form();
 		GUI.update();
 		System.out.println("Save.");
 	}
 	
 	/** Event for load button */
 	public void event_load(ActionEvent e) {
-		table.load_file_on_form();
+		model.load_file_on_form();
 		GUI.update();
 		System.out.println("Load.");
 	}
 	
 	/** Event for show winner */
 	public void event_winner(ActionEvent e) {
-		String winner = table.get_winner_on_text();
+		String winner = model.get_winner_on_text();
 		GUI.show_popUp(winner + " is Winner!");
 	}
 	
@@ -98,15 +98,15 @@ public class Controller implements ActionListener{
 	
 	/** Return Model. */
 	public Model get_model() {
-		return table;
+		return model;
 	}
 	
 	void action_from_mouse(int x,int y) {
 		int[] pos = getRowandCol(x,y);
 		int pos0 = pos[0];
 		int pos1 = pos[1];
-        if(table.action(pos1,pos0)) {  // switch x-y couz model table
-        	GUI.paint_grid(pos0,pos1,table.get_turn());
+        if(model.action(pos1,pos0)) {  // switch x-y couz model table
+        	GUI.paint_grid(pos0,pos1,model.get_turn());
             GUI.update();
             check_game();
         }
@@ -114,14 +114,14 @@ public class Controller implements ActionListener{
 	}
 	
 	private void check_game() {
-		int winner = table.get_winner();
+		int winner = model.get_winner();
 		if(winner != 0) {
 			if (winner == 3) {
 				// If game is draw.
 				GUI.show_popUp("The game is tied!");
 			}else {
 			// If got a winner
-				GUI.show_popUp(table.get_winner_on_text() + " is Winner!");
+				GUI.show_popUp(model.get_winner_on_text() + " is Winner!");
 			}
 		}
 	}
@@ -129,8 +129,8 @@ public class Controller implements ActionListener{
 	private int[] getRowandCol(int xPosition, int yPosition){
         float size_x = GUI.get_sizeX_grid();
         float size_y = GUI.get_sizeY_grid();
-        float cellSzX = size_x/table.get_table_size();
-        float cellSzY = size_y/table.get_table_size();
+        float cellSzX = size_x/model.get_table_size();
+        float cellSzY = size_y/model.get_table_size();
         int CellRow = (int) (xPosition/cellSzX);
         int CellCol = (int) (yPosition/cellSzY);
         int[] result = new int[2];

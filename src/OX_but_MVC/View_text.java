@@ -8,7 +8,6 @@ public class View_text {
 	View_text(int size, Controller_text c){
 		table_size = size;
 		control = c;
-		show_table();
 	}
 	
 	public void show_table() {
@@ -16,7 +15,7 @@ public class View_text {
 		for (int i = 0; i < table_size; i++) {
 			System.out.print("\n");    // new line
 			for (int j = 0; j < table_size; j++) {
-				show_sym(control.get_model().get_data(j, i));    // show symbol
+				System.out.print(player_to_text(control.get_model().get_data(j, i)));    // show symbol
 				System.out.print(" ");    // space
 			}
 		}
@@ -34,19 +33,9 @@ public class View_text {
 		System.out.println("Player " + player_to_text(winner) + " Win!");
 	}
 	
-	public void show_sym(int x) {
-		if (x == 0){
-			System.out.print("_");
-		}else if(x == 1) {
-			System.out.print("O");
-		}else if(x == 2) {
-			System.out.print("X");
-		}
-	}
-	
 	private String player_to_text(int p) {
 		if (p == 0){
-			return (" ");
+			return ("_");
 		}else if(p == 1) {
 			return("O");
 		}else if(p == 2) {
@@ -60,7 +49,7 @@ public class View_text {
 
 	public void show_player_turn() {
 		System.out.println("Turn player "+String.valueOf(control.get_model().get_turn()));
-		System.out.print("Input(: x y): ");
+		System.out.print("Input(: row col): ");
 	}
 	
 
