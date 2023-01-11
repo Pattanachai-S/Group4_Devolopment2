@@ -36,12 +36,7 @@ public class Model {
 		winner = 0;
 	}
 	
-	public boolean action(int x, int y) {	
-		return this.check_action(x, y);
-
-	}
-
-	private boolean check_action(int x,int y) {
+	public boolean action(int x,int y) {
 		// checking this action can do or not
 		boolean ac = false;
 		int n = table[y][x];
@@ -322,7 +317,6 @@ public class Model {
 		      for(int i=0;i<size;i++) {
 		    	  for(int j=0;j<size;j++) {
 		    		  table[j][i] = load[i][j];  // swap(x,y) coz in table it is (y,x)
-		    		  System.out.println(load[i][j]);
 		    	  }
 		      }
 		      

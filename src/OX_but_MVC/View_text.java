@@ -20,7 +20,7 @@ public class View_text {
 			}
 		}
 		System.out.print("\n");    // new line
-		System.out.print("\n");    // Space
+//		System.out.print("\n");    // Space
 	}
 	
 	public void show_draw() {
@@ -49,7 +49,7 @@ public class View_text {
 
 	public void show_player_turn() {
 		System.out.println("Turn player "+String.valueOf(control.get_model().get_turn()));
-		System.out.print("Input(: row col): ");
+		System.out.print("Input(: col row): ");
 	}
 	
 
