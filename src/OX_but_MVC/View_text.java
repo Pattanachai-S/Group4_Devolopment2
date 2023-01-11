@@ -57,6 +57,6 @@ public class View_text {
 	}
 	
 	public void show_get_input() {
-		System.out.print("(col row,save,load,reset)Input: ");
+		System.out.print("(row col,save,load,reset)Input: ");
 	}
 }
