@@ -48,7 +48,7 @@ public class Controller_text {
 			// Convert string to int 
 			String[] a = s.split(" ");
 			int[] n = {Integer.valueOf(a[0]),Integer.valueOf(a[1])};
-			model.fill_table(n[1]-1,n[0]-1);  // swap index because on table it's a (y,x)
+			model.fill_table(n[0]-1,n[1]-1);  // input is (y, x) and table it's a (y,x)
 			}
 		catch(Exception e) {
 			if (s.equals("e") || s.equals("exit")) {  
