@@ -14,7 +14,7 @@ public class Model {
 	int turn_count = 1;
 	int player_turn = 1;
 	
-	Model(){
+	public Model(){
 		reset_table();
 	}
 	
