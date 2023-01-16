@@ -1,42 +1,110 @@
 package Dice;
-import java.awt.geom.Line2D;
+
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
-
 public class View {
     JFrame frame = new JFrame();
-    JPanel dice_panel = new JPanel();;
+    JPanel head_panel = new JPanel();
+    JPanel button_panel = new JPanel(new GridLayout(1,3));
+    JLabel head_lable = new JLabel();
+    JButton roll_up_Button = new JButton();
+    JButton roll_front_Button = new JButton();
+    JButton roll_right_Button = new JButton();
 
-    static Graphics graphics;
+    DrawDice dice = new DrawDice();
+
     View(){
-        frame.setSize(600, 600);
+
+        frame.setSize(600, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.getContentPane().setBackground(Color.white);
         frame.setResizable(false);
-        //frame.getContentPane().setLayout(null);
+        frame.getContentPane().add(head_panel, BorderLayout.NORTH);
+        frame.getContentPane().add(button_panel, BorderLayout.SOUTH);
         frame.setVisible(true);
-    }
 
-/* 
-    public void paint(Graphics g) {
-    	super.paintComponent(g);  // Call the paintComponent method of the superclass
+        head_lable.setText("Dice");
+        head_lable.setFont(new Font("Tahoma",Font.BOLD,50));
+        head_panel.add(head_lable);
 
-        repaint();  // repeat this method all time
+        frame.getContentPane().add(dice, BorderLayout.CENTER);
 
-        
-    }  */
-    public void draw_point(Graphics g, int n){
-        if(n == 1){
-            g.drawRect(200,200,120,120);
-        }
+        roll_up_Button.setText("Roll Up");
+        roll_up_Button.setFont(new Font("TimesRoman",Font.BOLD,15));
+        roll_up_Button.setFocusable(false);
+
+        roll_front_Button.setText("Roll Front");
+        roll_front_Button.setFont(new Font("TimesRoman",Font.BOLD,15));
+        roll_front_Button.setFocusable(false);
+
+        roll_right_Button.setText("Roll Right");
+        roll_right_Button.setFont(new Font("TimesRoman",Font.BOLD,15));
+        roll_right_Button.setFocusable(false);
+
+        button_panel.add(roll_up_Button);
+        button_panel.add(roll_front_Button);
+        button_panel.add(roll_right_Button);
+
     }
 
     public static void main(String[] args){
         View UI = new View();
-        UI.draw_point(1);
     }
 }
+
+class DrawDice extends JPanel {
+
+    int WIDTH = 200;
+    int HEIGHT = 200;
+    int number = 6; //เปลี่ยนตัวเลขเพื่อทดลอง
+
+    public void paint(Graphics g) {
+      //g.setColor(Color.RED);
+      g.drawRect(200, 50, 200, 200);
+      switch(number) {
+        case 1:
+            drawDot(g, WIDTH / 2, HEIGHT / 2);
+            break;
+        case 2:
+            drawDot(g, WIDTH / 4, HEIGHT / 4);
+            drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
+            break;
+            case 3:
+            drawDot(g, WIDTH / 4, HEIGHT / 4);
+            drawDot(g, WIDTH / 2, HEIGHT / 2);
+            drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
+            break;
+        case 4:
+            drawDot(g, 3 * WIDTH / 4, HEIGHT / 4);
+            drawDot(g, WIDTH / 4, HEIGHT / 4);
+            drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
+            drawDot(g, WIDTH / 4, 3 * HEIGHT / 4);
+            break;
+        case 5:
+            drawDot(g, 3 * WIDTH / 4, HEIGHT / 4);
+            drawDot(g, WIDTH / 4, HEIGHT / 4);
+            drawDot(g, WIDTH / 2, HEIGHT / 2);
+            drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
+            drawDot(g, WIDTH / 4, 3 * HEIGHT / 4);
+            break;
+        case 6:
+            drawDot(g, 3 * WIDTH / 4, HEIGHT / 4);
+            drawDot(g, WIDTH / 4, HEIGHT / 4);
+            drawDot(g, WIDTH / 4, HEIGHT / 2);
+            drawDot(g, 3 * WIDTH / 4, HEIGHT / 2);
+            drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
+            drawDot(g, WIDTH / 4, 3 * HEIGHT / 4);
+            break;
+        }
+    }
+
+    public void drawDot(Graphics g, int x, int y) {
+        g.setColor(Color.black);
+        g.fillOval(x+190, y+40, 20, 20);
+    }
+  }
+
+
+
