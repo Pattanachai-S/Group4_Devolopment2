@@ -5,9 +5,9 @@ public class View_text {
 	int table_size;
 	
 	
-	View_text(int size, Controller_text c){
+	View_text(int size){
 		table_size = size;
-		control = c;
+
 	}
 	
 	public void show_table() {

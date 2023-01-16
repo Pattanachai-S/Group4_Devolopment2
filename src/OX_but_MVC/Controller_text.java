@@ -14,13 +14,6 @@ public class Controller_text {
 	boolean stop_loop = false;  // Boolean of stop main loop
 	
 	Controller_text(int size){
-		// Create Model
-		model = new Model();
-		model.change_table_size(size);
-		// Create GUI
-		UI = new View_text(size, this);  // test
-		main_loop();
-
 		
 	}
 	
@@ -131,7 +124,20 @@ public class Controller_text {
 	
 	public static void main(String[] args) {		
 		int size = 3;  // Change table size here
+		// Create Controller
 		Controller_text control = new Controller_text(size);
+		// Create Model
+		Model model = new Model();
+		model.change_table_size(size);
+		// Create GUI
+		View_text UI = new View_text(size);
+		UI.control = control;
 		
+		// sent model and view to controller
+		control.model = model;
+		control.UI = UI;
+		
+		// start program
+		control.main_loop();
 	}
 }
