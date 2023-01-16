@@ -94,44 +94,45 @@ class DrawDice extends JPanel {
     int number = 6; //เปลี่ยนตัวเลขเพื่อทดลอง
 
     public void paint(Graphics g) {
-      //g.setColor(Color.RED);
-      g.drawRect(200, 50, 200, 200);
-      switch(number) {
-        case 1:
-            drawDot(g, WIDTH / 2, HEIGHT / 2);
-            break;
-        case 2:
-            drawDot(g, WIDTH / 4, HEIGHT / 4);
-            drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
-            break;
-            case 3:
-            drawDot(g, WIDTH / 4, HEIGHT / 4);
-            drawDot(g, WIDTH / 2, HEIGHT / 2);
-            drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
-            break;
-        case 4:
-            drawDot(g, 3 * WIDTH / 4, HEIGHT / 4);
-            drawDot(g, WIDTH / 4, HEIGHT / 4);
-            drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
-            drawDot(g, WIDTH / 4, 3 * HEIGHT / 4);
-            break;
-        case 5:
-            drawDot(g, 3 * WIDTH / 4, HEIGHT / 4);
-            drawDot(g, WIDTH / 4, HEIGHT / 4);
-            drawDot(g, WIDTH / 2, HEIGHT / 2);
-            drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
-            drawDot(g, WIDTH / 4, 3 * HEIGHT / 4);
-            break;
-        case 6:
-            drawDot(g, 3 * WIDTH / 4, HEIGHT / 4);
-            drawDot(g, WIDTH / 4, HEIGHT / 4);
-            drawDot(g, WIDTH / 4, HEIGHT / 2);
-            drawDot(g, 3 * WIDTH / 4, HEIGHT / 2);
-            drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
-            drawDot(g, WIDTH / 4, 3 * HEIGHT / 4);
-            break;
-        }
-        //repaint();
+        super.paintComponent(g);
+        //g.setColor(Color.RED);
+        g.drawRect(200, 50, 200, 200);
+        switch(number) {
+            case 1:
+                drawDot(g, WIDTH / 2, HEIGHT / 2);
+                break;
+            case 2:
+                drawDot(g, WIDTH / 4, HEIGHT / 4);
+                drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
+                break;
+                case 3:
+                drawDot(g, WIDTH / 4, HEIGHT / 4);
+                drawDot(g, WIDTH / 2, HEIGHT / 2);
+                drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
+                break;
+            case 4:
+                drawDot(g, 3 * WIDTH / 4, HEIGHT / 4);
+                drawDot(g, WIDTH / 4, HEIGHT / 4);
+                drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
+                drawDot(g, WIDTH / 4, 3 * HEIGHT / 4);
+                break;
+            case 5:
+                drawDot(g, 3 * WIDTH / 4, HEIGHT / 4);
+                drawDot(g, WIDTH / 4, HEIGHT / 4);
+                drawDot(g, WIDTH / 2, HEIGHT / 2);
+                drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
+                drawDot(g, WIDTH / 4, 3 * HEIGHT / 4);
+                break;
+            case 6:
+                drawDot(g, 3 * WIDTH / 4, HEIGHT / 4);
+                drawDot(g, WIDTH / 4, HEIGHT / 4);
+                drawDot(g, WIDTH / 4, HEIGHT / 2);
+                drawDot(g, 3 * WIDTH / 4, HEIGHT / 2);
+                drawDot(g, 3 * WIDTH / 4, 3 * HEIGHT / 4);
+                drawDot(g, WIDTH / 4, 3 * HEIGHT / 4);
+                break;
+            }
+            repaint();
     }
 
     public void drawDot(Graphics g, int x, int y) {
