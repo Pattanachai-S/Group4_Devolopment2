@@ -91,7 +91,7 @@ class DrawDice extends JPanel {
 
     int WIDTH = 200;
     int HEIGHT = 200;
-    int number = 6; //เปลี่ยนตัวเลขเพื่อทดลอง
+    int number = 2; //เปลี่ยนตัวเลขเพื่อทดลอง
 
     public void paint(Graphics g) {
         super.paintComponent(g);
