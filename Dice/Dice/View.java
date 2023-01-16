@@ -78,6 +78,10 @@ public class View {
         });
     }
 
+    public void update_numer(){
+        dice.number = model.get_front();
+    }
+
     public static void main(String[] args){
         View UI = new View();
     }
@@ -127,6 +131,7 @@ class DrawDice extends JPanel {
             drawDot(g, WIDTH / 4, 3 * HEIGHT / 4);
             break;
         }
+        //repaint();
     }
 
     public void drawDot(Graphics g, int x, int y) {

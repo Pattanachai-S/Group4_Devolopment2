@@ -1,6 +1,6 @@
 package Dice;
 
-public class Model {
+public class Model{
     private int front = 2;
     private int top = 1;
     private int right = 3;
@@ -21,6 +21,10 @@ public class Model {
         int down = 7-top;
         top = front;
         front = down;
+    }
+
+    public int get_front(){
+        return front;
     }
 
     public void show_top(){
