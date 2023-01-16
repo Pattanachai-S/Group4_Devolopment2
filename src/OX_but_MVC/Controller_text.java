@@ -21,7 +21,6 @@ public class Controller_text {
 		while(!stop_loop) {
 			UI.show_table();
 			get_input();
-			check_game();
 		}
 	}
 	
@@ -70,20 +69,6 @@ public class Controller_text {
 				System.out.println("Try agian.");
 		}
 	}
-	
-	private void check_game() {
-		int winner = model.get_winner();
-		if(winner != 0) {
-			if (winner == 3) {
-				// If game is draw.
-				UI.show_draw();
-			}else {
-			// If got a winner
-				UI.show_winner((winner));
-			}
-		}
-	}
-	
 	
 	/** Return Model. */
 	public Model get_model() {
