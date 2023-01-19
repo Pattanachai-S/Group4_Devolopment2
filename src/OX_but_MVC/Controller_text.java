@@ -12,9 +12,12 @@ public class Controller_text {
 	private Scanner input = new Scanner(System.in);  // For in put
 	private boolean stop_loop = false;  // Boolean of stop main loop
 	
-	Controller_text(int size, Model model, View_text UI){
+	Controller_text(Model model, View_text UI){
 		this.model = model;
 		this.UI = UI;
+
+		// start program
+		main_loop();
 	}
 	
 	public void main_loop() {
@@ -105,14 +108,11 @@ public class Controller_text {
 		int size = 3;  // Change table size here
 
 		// Create Model
-		Model model = new Model();
-		model.change_table_size(size);
-		// Create GUI
-		View_text UI = new View_text(size, model);
+		Model model = new Model(size);
+		// Create UI
+		View_text UI = new View_text(model);
 		// Create Controller
-		Controller_text control = new Controller_text(size, model, UI);
+		Controller_text control = new Controller_text(model, UI);
 
-		// start program
-		control.main_loop();
 	}
 }

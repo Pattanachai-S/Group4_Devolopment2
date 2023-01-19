@@ -14,8 +14,8 @@ public class Model {
 	int turn_count = 1;
 	int player_turn = 1;
 	
-	Model(){
-		reset_table();
+	Model(int size){
+		change_table_size(size);
 	}
 	
 	private static char[] type(String s) {

@@ -4,8 +4,8 @@ public class View_text {
 	private int table_size;
 	private Model model;
 	
-	View_text(int size, Model model){
-		table_size = size;
+	View_text(Model model){
+		table_size = model.get_table_size();
 		this.model = model;
 	}
 	
