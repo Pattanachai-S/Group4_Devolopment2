@@ -69,11 +69,6 @@ public class Controller_text {
 		}
 	}
 	
-	/** Return Model. */
-	public Model get_model() {
-		return model;
-	}
-	
 	/* Event for reset button */
 	public void event_reset(ActionEvent e) {
 		model.reset_table();
