@@ -20,7 +20,6 @@ public class View {
     DrawDice dice = new DrawDice();
 
     View(){
-        this.model = model;
         frame.setSize(600, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -83,7 +82,7 @@ public class View {
     }
 
     public static void main(String[] args){
-        View UI = new View();
+        //View UI = new View();  // use for test only GUI of Dice
     }
 }
 
