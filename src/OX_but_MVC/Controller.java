@@ -36,17 +36,13 @@ public class Controller implements ActionListener{
 	View GUI;
 	Controller control = this;
 	
-	Controller(int size){
-		// Create Model
-		model = new Model();
-		model.change_table_size(size);
-		// Create GUI
-		GUI = new View(size, this);  // test
+	Controller(Model model){
+		this.model = model;
 
 		
 	}
 	
-	/* for all event buttons
+	/* for all event buttons  // have not use 
 	public void actionPerformed(ActionEvent e) {   // This run when having any event in-game  
 		//  loop for checking all buttons in the table
 		for(int i=0;i<table.table_size;i++) {
@@ -92,13 +88,12 @@ public class Controller implements ActionListener{
 		GUI.show_popUp("The game is tied!");
 	}
 	
-	public void GUI_update() {
-		GUI.update();
+	public void set_GUI(View GUI) {
+		this.GUI = GUI;
 	}
 	
-	/** Return Model. */
-	public Model get_model() {
-		return model;
+	public void GUI_update() {
+		GUI.update();
 	}
 	
 	void action_from_mouse(int x,int y) {
@@ -143,7 +138,20 @@ public class Controller implements ActionListener{
 	
 	public static void main(String[] args) {		
 		int size = 5;  // Change table size here
-		Controller control = new Controller(size);		
+		
+		// Create model
+		Model model = new Model(size);
+		// Create Controller
+		Controller control = new Controller(model);
+		// Create GUI
+		View GUI = new View(model, control);
+		
+		// Set GUI to Controller
+		control.set_GUI(GUI);
+		
+				
+		
+		
 	}
 	
 }

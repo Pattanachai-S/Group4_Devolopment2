@@ -117,10 +117,12 @@ public class View extends JFrame{
     JButton savebutton = new JButton();
     JButton loadbutton = new JButton();
     static Graphics graphics;
+    Model model;
     Controller control;
 
-    View(int size, Controller c){
-    	
+    View(Model model, Controller c){
+    	this.model = model;
+    	int size = model.get_table_size();
     	control = c;
     	float tableSize = size;
     	grid = new Grid(size,this);
@@ -209,9 +211,9 @@ public class View extends JFrame{
     /** Draw everything to table*/
     public void draw(Graphics g) {
 		graphics = g;	
-		for(int i=0;i<control.get_model().get_table_size();i++) {
-			for(int j=0;j<control.get_model().get_table_size();j++) {
-				paint_grid(i,j,(control.get_model().get_data(i, j)));
+		for(int i=0;i<model.get_table_size();i++) {
+			for(int j=0;j<model.get_table_size();j++) {
+				paint_grid(i,j,(model.get_data(i, j)));
 			}
 		}
 		
@@ -220,7 +222,7 @@ public class View extends JFrame{
     
     /** paint each cell */
 	public void paint_grid(int x, int y,int player) {
-    	int table_size = control.get_model().get_table_size();
+    	int table_size = model.get_table_size();
     	int pointerX = (int) (((get_sizeX_grid()/table_size)*(x+0.5)));
     	int pointerY = (int) (((get_sizeY_grid()/table_size)*(y+0.5)));
     	int size_paint = get_sizeX_grid()/table_size;
@@ -400,11 +402,11 @@ public class View{
 		// Update everything to GUI
 		for(int i=0;i<table_size;i++) {
 			for(int j=0;j<table_size;j++) {
-				if(control.get_model().get_data(i, j) ==  0) {
+				if(model.get_data(i, j) ==  0) {
 					draw_no(i,j);
-				}else if(control.get_model().get_data(i, j) ==  1) {
+				}else if(model.get_data(i, j) ==  1) {
 					draw_O(i,j);
-				}else if(control.get_model().get_data(i, j) ==  2) {
+				}else if(model.get_data(i, j) ==  2) {
 					draw_X(i,j);
 				}
 			}
@@ -434,9 +436,9 @@ public class View{
 	
 	void draw_win() {
 		// Result of game or Show current turn
-		int winner = control.get_model().get_winner();
+		int winner = model.get_winner();
 		if (winner == 0) {
-			textfield.setText("Turn player "+ control.get_model().get_turn());
+			textfield.setText("Turn player "+ model.get_turn());
 		}else if (winner == 1) {
 			textfield.setText("O is Winner!");
 		}else if (winner == 2) {
