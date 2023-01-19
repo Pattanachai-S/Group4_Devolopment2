@@ -23,6 +23,27 @@ public class Model{
         front = down;
     }
 
+    public void roll_back(){
+        // It mean roll front 3 time
+        for(int i=0;i<3;i++){
+            roll_front();
+        }
+    }
+
+    public void roll_left(){
+        // It mean roll right 3 time
+        for(int i=0;i<3;i++){
+            roll_right();
+        }
+    }
+
+    public void roll_down(){
+        // It mean roll up 3 time
+        for(int i=0;i<3;i++){
+            roll_up();
+        }
+    }
+
     public int get_front(){
         return front;
     }
