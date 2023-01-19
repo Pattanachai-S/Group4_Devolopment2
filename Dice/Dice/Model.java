@@ -6,19 +6,19 @@ public class Model{
     private int right = 3;
 
     public void roll_up(){
-        int left = 7-right;
+        int left = get_left();
         right = front;
         front = left;
     }
 
     public void roll_front(){
-        int left = 7-right;
+        int left = get_left();
         right = top;
         top = left;
     }
 
     public void roll_right(){
-        int down = 7-top;
+        int down = get_down();
         top = front;
         front = down;
     }
@@ -27,11 +27,35 @@ public class Model{
         return front;
     }
 
+    public int get_right(){
+        return right;
+    }
+
+    public int get_up(){
+        return top;
+    }
+
+    public int get_back(){
+        return 7-front;
+    }
+
+    public int get_left(){
+        return 7-right;
+    }
+
+    public int get_down(){
+        return 7-top;
+    }
+
+
+
     public void show_top(){
+        // method for test dice
         System.out.println(top);
     }
 
     public static void  main(String[] args){
+        // tester for Dice can work
         Model dice = new Model();
         dice.show_top();
         dice.roll_right();
