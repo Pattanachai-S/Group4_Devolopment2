@@ -229,7 +229,7 @@ public class Model {
 		
 	}
 	
-	private String change_to_form(int d) {
+	private String player_int_to_string(int d) {
 		if (d == 0) {
 			return "n";
 		}else if(d == 1) {
@@ -240,7 +240,7 @@ public class Model {
 		return null;  // return null if wrong arg
 	}
 	
-	private int change_form_to_data(char c) {
+	private int player_char_to_int(char c) {
 		if (c == 'n') {
 			return 0;
 		}else if(c == 'o') {
@@ -259,7 +259,7 @@ public class Model {
 			String save = "";  // Find what in data
 			for (int i = 0; i < table_size; i++) {
 					for (int j = 0; j < table_size; j++) {
-						save += change_to_form(get_data(j , i));    // what in table  swap i,j cuz it (y,x)
+						save += player_int_to_string(get_data(j , i));    // what in table  swap i,j cuz it (y,x)
 					}
 			}
 			
@@ -267,7 +267,7 @@ public class Model {
 			String save_game = "" ;  							// declare String for save
 			save_game += Integer.toString(table_size) + "\n";  	// add table size
 			save_game += save + "\n";							// save table
-			save_game += change_to_form(player_turn) + "\n";		// save player turn
+			save_game += player_int_to_string(player_turn) + "\n";		// save player turn
 			save_game += Integer.toString(turn_count-1);		// save turn_counter (-1 coz it start with 0)
 					
 		myWriter.write(save_game);  // add every thing in String save to file
@@ -295,13 +295,13 @@ public class Model {
 		      int pointer = 0;
 		      for(int i=0;i<size;i++) {
 			    	for(int j=0;j<size;j++) {
-			    			load[i][j] = change_form_to_data(line.charAt(pointer));  // load what in table
+			    			load[i][j] = player_char_to_int(line.charAt(pointer));  // load what in table
 			    			pointer++;
 			    		}	
 			    	}
 		      
 		      line = myReader.nextLine();								// load next line
-		      player_turn = change_form_to_data(line.charAt(0)) ;		// turn of player 
+		      player_turn = player_char_to_int(line.charAt(0)) ;		// turn of player 
 		      System.out.println(player_turn);
 	      
 		      line = myReader.nextLine();								// load next line
