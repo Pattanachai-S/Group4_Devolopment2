@@ -126,10 +126,7 @@ public class Model {
 	public boolean get_game_end() {
 		return game_end;
 	}
-	
-	public void set_game_end(){
-		game_end = true;
-	}
+
 	
 	public String get_winner_on_text() {
 		if (winner == 1) {

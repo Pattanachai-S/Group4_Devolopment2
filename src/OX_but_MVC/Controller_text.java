@@ -45,7 +45,6 @@ public class Controller_text {
 		catch(Exception e) {
 			if (s.equals("e") || s.equals("exit")) {  
 				// If input is e, game will end
-				model.set_game_end();
 				System.out.print("Exited.");
 				stop_loop = true;
 				
