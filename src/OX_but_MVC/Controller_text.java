@@ -112,10 +112,6 @@ public class Controller_text {
 		// Create Controller
 		Controller_text control = new Controller_text(size, model, UI);
 
-		// sent model and view to controller
-		control.model = model;
-		control.UI = UI;
-		
 		// start program
 		control.main_loop();
 	}
