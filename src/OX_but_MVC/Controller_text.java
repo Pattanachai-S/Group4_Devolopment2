@@ -7,14 +7,14 @@ import java.util.Scanner;
 
 public class Controller_text {
 	
-	Model model;
-	View_text UI;
-	Controller_text control = this;
-	Scanner input = new Scanner(System.in);  // For in put
-	boolean stop_loop = false;  // Boolean of stop main loop
+	private Model model;
+	private View_text UI;
+	private Scanner input = new Scanner(System.in);  // For in put
+	private boolean stop_loop = false;  // Boolean of stop main loop
 	
-	Controller_text(int size){
-		
+	Controller_text(int size, Model model, View_text UI){
+		this.model = model;
+		this.UI = UI;
 	}
 	
 	public void main_loop() {
@@ -109,15 +109,15 @@ public class Controller_text {
 	
 	public static void main(String[] args) {		
 		int size = 3;  // Change table size here
-		// Create Controller
-		Controller_text control = new Controller_text(size);
+
 		// Create Model
 		Model model = new Model();
 		model.change_table_size(size);
 		// Create GUI
-		View_text UI = new View_text(size);
-		UI.control = control;
-		
+		View_text UI = new View_text(size, model);
+		// Create Controller
+		Controller_text control = new Controller_text(size, model, UI);
+
 		// sent model and view to controller
 		control.model = model;
 		control.UI = UI;

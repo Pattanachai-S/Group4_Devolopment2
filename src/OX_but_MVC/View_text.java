@@ -1,13 +1,12 @@
 package OX_but_MVC;
 
 public class View_text {
-	Controller_text control;
-	int table_size;
+	private int table_size;
+	private Model model;
 	
-	
-	View_text(int size){
+	View_text(int size, Model model){
 		table_size = size;
-
+		this.model = model;
 	}
 	
 	public void show_table() {
@@ -15,7 +14,7 @@ public class View_text {
 		for (int i = 0; i < table_size; i++) {
 			System.out.print("\n");    // new line
 			for (int j = 0; j < table_size; j++) {
-				System.out.print(player_to_text(control.get_model().get_data(j, i)));    // show symbol
+				System.out.print(player_to_text(model.get_data(j, i)));    // show symbol
 				System.out.print(" ");    // space
 			}
 		}
@@ -53,7 +52,7 @@ public class View_text {
 	}
 
 	public void show_player_turn() {
-		System.out.println("Turn player "+String.valueOf(control.get_model().get_turn()));		
+		System.out.println("Turn player "+String.valueOf(model.get_turn()));		
 	}
 	
 	public void show_get_input() {
