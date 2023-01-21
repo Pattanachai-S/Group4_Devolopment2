@@ -5,6 +5,7 @@ public class Model {
     // Our 3D array is [x][y][z] so x=front, y=right, z=top
     private Dice.Model[][][] dices;  // 
         // In View we will map 1-6 to 6 colors and 0 = no color
+        // methid for roll right is roll_R(y)
 
     private int rubik_size = 3;  // Set size = 3 for default
 
@@ -42,13 +43,184 @@ public class Model {
         return 0;  // For error cases
     }
 
-    public void roll_R(){
-
+    public void roll_R(int y){
+        int[][] series = get_series_for_roll_R(rubik_size,y);
+        shift_in_series(series,"right");
     }
 
-    private void get_series_for_roll_R(){
-        // Find array of Dices size = rubik_size^2 - (rubik_size-2)^2
+    public void roll_F(int x){
+        int[][] series = get_series_for_roll_R(rubik_size,x);
+        shift_in_series(series,"front");
+    }
+
+    public void roll_U(int z){
+        int[][] series = get_series_for_roll_R(rubik_size,z);
+        shift_in_series(series,"up");
+    }
+
+    private int cal_series_size(int s){
+        // Find series size to shift
+        int border = s*s;
+        int in;
+        if (s>2){  // Find in side size of border
+            // if rubik size > 2
+            in = s-2;
+        }else{
+            // if rubik size <= 2, it will no inside
+            in = 0;
+        }
+
+        int in_side = in*in;
+        return border - in_side; // return in side - out side
+    }
+
+    
+    private void set_xyz_series_(int[][] s,int p,int x, int y, int z){
+        // {x,y,z}
+        s[p][0] = x; 
+        s[p][1] = y; 
+        s[p][2] = z;
+    }
+
+    private int[][] get_series_for_roll_R(int s,int y){
+        // Find array of locantion Dices size = rubik_size^2 - (rubik_size-2)^2
+        int series_size = cal_series_size(s);
+        int[][] series = new int[series_size][3];
         // series is [(x,y,z),(x,y,z)] in dices[x][y][z]
+
+
+        int x=0,z=0;
+        int series_p = 0;
+        while(x < s){      
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            x++;
+            series_p++;
+        }
+
+        x = s-1; // reduces to last index
+        z = z+1; // 1st dice get by last loop
+        while(z < s){          
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            z++;
+            series_p++;
+        }
+
+        z = s-1; // reduces to last index
+        x = x-1; // 1st dice get by last loop
+        while(x >= 0){       
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            x--;
+            series_p++;
+        }
+
+        x = x+1; // back to 1st index
+        z = z-1; // 1st dice get by last loop
+        // last dice get by 1st loop
+        while(z > 0){       
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            z--;
+            series_p++;
+        }
+
+        return series;
+    }
+
+    private int[][] get_series_for_roll_F(int s,int x){
+        // Find array of locantion Dices size = rubik_size^2 - (rubik_size-2)^2
+        int series_size = cal_series_size(s);
+        int[][] series = new int[series_size][3];
+        // series is [(x,y,z),(x,y,z)] in dices[x][y][z]
+
+
+        int y=0,z=0;
+        int series_p = 0;
+        while(z < s){      
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            z++;
+            series_p++;
+        }
+
+        z = s-1; // reduces to last index
+        y = y+1; // 1st dice get by last loop
+        while(y < s){          
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            y++;
+            series_p++;
+        }
+
+        y = s-1; // reduces to last index
+        z = z-1; // 1st dice get by last loop
+        while(z >= 0){       
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            z--;
+            series_p++;
+        }
+
+        z = z+1; // back to 1st index
+        y = y-1; // 1st dice get by last loop
+        // last dice get by 1st loop
+        while(y > 0){       
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            y--;
+            series_p++;
+        }
+
+        return series;
+    }
+
+    private int[][] get_series_for_roll_U(int s,int z){
+        // Find array of locantion Dices size = rubik_size^2 - (rubik_size-2)^2
+        int series_size = cal_series_size(s);
+        int[][] series = new int[series_size][3];
+        // series is [(x,y,z),(x,y,z)] in dices[x][y][z]
+
+
+        int x=0,y=0;
+        int series_p = 0;
+        while(y < s){      
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            y++;
+            series_p++;
+        }
+
+        y = s-1; // reduces to last index
+        x = x+1; // 1st dice get by last loop
+        while(x < s){          
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            x++;
+            series_p++;
+        }
+
+        x = s-1; // reduces to last index
+        y = y-1; // 1st dice get by last loop
+        while(y >= 0){       
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            y--;
+            series_p++;
+        }
+
+        y = y+1; // back to 1st index
+        x = x-1; // 1st dice get by last loop
+        // last dice get by 1st loop
+        while(x > 0){       
+            // {x,y,z}
+            set_xyz_series_(series,series_p, x,y,z);
+            x--;
+            series_p++;
+        }
+
+        return series;
     }
 
     private void shift_in_series(int[][] series, String roll){
@@ -64,7 +236,7 @@ public class Model {
 
         // Shift dice in series
         // Now pointer_dice is pointer of dice to shift      
-        int series_size = (rubik_size * rubik_size)-1;  // find size of rubik_series for shift
+        int series_size = series.length;  // find size of rubik_series for shift
         int destination = 0;
         while(pointer_dice < series_size){
             // shift dice in series 
