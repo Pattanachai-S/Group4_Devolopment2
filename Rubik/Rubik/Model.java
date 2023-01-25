@@ -58,6 +58,27 @@ public class Model {
         shift_in_series(series,"up");
     }
 
+    public void roll_L(int y){
+        for (int i=0;i<3;i++){
+            int[][] series = get_series_for_roll_R(rubik_size,y);
+            shift_in_series(series,"right");
+        }    
+    }
+
+    public void roll_B(int x){
+        for (int i=0;i<3;i++){
+            int[][] series = get_series_for_roll_R(rubik_size,x);
+            shift_in_series(series,"front");
+        }
+    }
+
+    public void roll_D(int z){
+        for (int i=0;i<3;i++){
+            int[][] series = get_series_for_roll_R(rubik_size,z);
+            shift_in_series(series,"up");
+        }
+    }
+
     private int cal_series_size(int s){
         // Find series size to shift
         int border = s*s;
@@ -276,6 +297,10 @@ public class Model {
         } else if (roll == "bottom") {
             dice.roll_down();
         }
+    }
+
+    public int get_size(){
+        return rubik_size;
     }
 
     public static void main(String[] args) {
