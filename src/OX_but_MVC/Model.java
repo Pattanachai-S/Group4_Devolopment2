@@ -56,7 +56,7 @@ public class Model {
 		return ac;
 	}
 	
-	private void change_turn() {
+	public void change_turn() {
 		if (player_turn == 1) {
 			player_turn = 2;
 		}else if(player_turn == 2) {
@@ -115,7 +115,7 @@ public class Model {
 		return table_size;
 	}
 	
-	public int get_turn() {
+	public int get_player_turn() {
 		return player_turn;
 	}
 	
@@ -250,6 +250,19 @@ public class Model {
 		}
 		return 0;  // return 0 if wrong arg
 	}
+
+	private int player_string_to_int(String s){
+		s = s.toLowerCase();
+		if (s == "n") {
+			return 0;
+		}else if(s == "o") {
+			return 1;
+		}else if(s == "x") {
+			return 2;
+		}
+		return 0;  // return 0 if wrong arg
+	}
+	}
 	
 	public void save_file_on_form() {
 		// Convert data in the table to String then save to file
@@ -327,6 +340,41 @@ public class Model {
 	    }
 		
 	}
+
+	// After this it for co-OXGame
+
+	public int get_turn(){
+		return turn_count-1; // -1 becouse other group need, how many turn pass.
+	}
+
+	public String get_player(){
+		return player_int_to_string(get_player_turn()).toUpperCase();
+	}
+
+	public String get_valueOFboard(int row,int col){
+		return player_int_to_string(get_data(row,col)).toUpperCase();
+	}
+
+	public void change_valueOFboard(int row, int col, String value){
+		table[row][col] = player_string_to_int(value);
+	}
+
+	public int get_size(){
+		return get_table_size();
+	}
+
+	// IDK what get board lenght do?
+
+	// change_turn() already have
+
+	public void new_game(){
+		reset_table();
+	}
+
+	public void Action(int row, int col){
+		fill_table(row,col);
+	}
+	
 	
 	public static void main(String[] args) {
 
