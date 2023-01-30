@@ -17,12 +17,12 @@ public class Controller {
 
 	public void event_roll_F(ActionEvent e) {
 		model.roll_F(model.get_size()-1);
-        System.out.println("Roll R");
+        System.out.println("Roll F");
 	}
 
 	public void event_roll_U(ActionEvent e) {
 		model.roll_U(model.get_size()-1);
-        System.out.println("Roll R");
+        System.out.println("Roll U");
 	}
 
     public void event_roll_L(ActionEvent e) {

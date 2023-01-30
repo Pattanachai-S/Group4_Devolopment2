@@ -304,6 +304,8 @@ public class Model {
 
     public static void main(String[] args) {
         Model model = new Model(3);
+        System.out.println(model.get_point(0,0,0,"front"));
         model.roll_D(0);
+        System.out.println(model.get_point(0,0,0,"front"));
     }
 }

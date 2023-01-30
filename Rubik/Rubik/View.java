@@ -6,14 +6,21 @@ import java.awt.event.*;
 
 class RubikCube extends JPanel{
 
+    private View myview ;
+
     int originX = 150; //ตำแหน่ง x ที่เริ่มวาด
     int originY = 50; //ตำแหน่ง y ที่เริ่มวาด
     int squareSize = 100; //ขนาดของสี่เหลี่ยม
 
+    RubikCube(View view) {
+    	this.myview = view;
+    }
+
     public void paint(Graphics g) {
         super.paintComponent(g);
-        drawRubik(g);
-        //repaint();
+        //drawRubik(g);
+        myview.paint_rubik(g);
+        repaint();
     }
 
     //ใช้วาดรูบิค
@@ -91,7 +98,7 @@ public class View {
     JButton flip_U = new JButton();
     JButton flip_D = new JButton();
 
-    RubikCube rubik = new RubikCube();
+    RubikCube rubik = new RubikCube(this);
 
     View(Model model, Controller control){
 
@@ -224,6 +231,18 @@ public class View {
         flip_panel.add(flip_L);
         flip_panel.add(flip_D);
         frame.setVisible(true);
+    }
+
+    public void paint_rubik(Graphics g){
+        // sent color from model to rubik
+        int size = model.get_size();
+        int x = size-1;  // x is front of rubik
+        for(int y =0; y<size; y++){
+            for(int z =0; z<size; z++){
+                int point = model.get_point(x, y, z, "front");
+                rubik.drawSquare(g, y, z, point);
+            }        
+        }
     }
 
 
