@@ -109,7 +109,6 @@ public class Model {
         int[][] series = new int[series_size][3];
         // series is [(x,y,z),(x,y,z)] in dices[x][y][z]
 
-
         int x=0,z=0;
         int series_p = 0;
         while(x < s){      
@@ -118,7 +117,6 @@ public class Model {
             x++;
             series_p++;
         }
-
         x = s-1; // reduces to last index
         z = z+1; // 1st dice get by last loop
         while(z < s){          
@@ -146,7 +144,6 @@ public class Model {
             z--;
             series_p++;
         }
-
         return series;
     }
 
@@ -272,7 +269,6 @@ public class Model {
             pointer_dice++;
             destination++;
         }
-
         // Take dices form keeper to last of series
         // Now pointer_dice is point to keep    
         pointer_dice = 0; // Dice.Model[] keeper = new Dice.Model[keeper_size];
@@ -280,6 +276,9 @@ public class Model {
             Dice.Model dice_des = dices[series[destination][0]][series[destination][1]][series[destination][2]];
             Dice.Model dice_from = keeper[pointer_dice];
             dice_des = dice_from; 
+
+            pointer_dice++;
+            destination++;
         }
     }
 
@@ -304,5 +303,7 @@ public class Model {
     }
 
     public static void main(String[] args) {
+        Model model = new Model(3);
+        model.roll_D(0);
     }
 }

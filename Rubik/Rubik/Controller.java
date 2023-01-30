@@ -5,9 +5,9 @@ public class Controller {
     Model model;
 	View view;
 
-    Controller(Model model,View view){
+    Controller(Model model){
         this.model = model;
-        this.view = view;
+        //this.view = view;
     }
 
 	public void event_roll_R(ActionEvent e) {
@@ -46,40 +46,42 @@ public class Controller {
         System.out.println("Roll D");
 	}
 
-    public void flip_R(){
+    public void event_flip_R(ActionEvent e){
         // Use for flip rubik right
         for (int i=0;i<model.get_size();i++){
             model.roll_D(i);
         }
+        System.out.println("Flip R");
     }
 
-    public void flip_L(){
+    public void event_flip_L(ActionEvent e){
         // Use for flip rubik left
         for (int i=0;i<model.get_size();i++){
             model.roll_L(i);
         }
+        System.out.println("Flip L");
     }
     
-    public void flip_U(){
+    public void event_flip_U(ActionEvent e){
         // Use for flip rubik up
         for (int i=0;i<model.get_size();i++){
             model.roll_R(i);
         }
+        System.out.println("Flip U");
     }
 
-    public void flip_D(){
+    public void event_flip_D(ActionEvent e){
         // Use for flip rubik down
         for (int i=0;i<model.get_size();i++){
             model.roll_L(i);
         }
+        System.out.println("Flip D");
     }
 
     public static void  main(String[] args){
         int size = 3;
         Model model = new Model(size);
-        View view = new View(model);
-        Controller control = new Controller(model, view);
-        view.set_controller(control);
-        // view.add_event_buttons();
+        Controller control = new Controller(model);
+        View view = new View(model, control);
     }
 }
