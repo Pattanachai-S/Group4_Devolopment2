@@ -50,10 +50,10 @@ class RubikCube extends JPanel{
             case 3:
                 color = Color.blue;
                 break;
-            case 4:
+            case 5:
                 color = Color.orange;
                 break;
-            case 5:
+            case 4:
                 color = Color.green;
                 break;
             case 6:
@@ -239,7 +239,7 @@ public class View {
         int x = size-1;  // x is front of rubik
         for(int y =0; y<size; y++){
             for(int z =0; z<size; z++){
-                int point = model.get_point(x, y, z, "front");
+                int point = model.get_point(x, y, x-z, "front");
                 rubik.drawSquare(g, y, z, point);
             }        
         }

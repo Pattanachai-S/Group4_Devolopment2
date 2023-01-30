@@ -6,9 +6,9 @@ public class Model{
     private int right = 3;
 
     public void roll_up(){
-        int left = get_left();
-        right = front;
-        front = left;
+        int back = get_back();
+        front = right;
+        right = back;
     }
 
     public void roll_front(){
@@ -79,7 +79,7 @@ public class Model{
         // tester for Dice can work
         Model dice = new Model();
         dice.show_top();
-        dice.roll_right();
+        dice.roll_front();
         dice.show_top();
         dice.roll_right();
         dice.show_top();

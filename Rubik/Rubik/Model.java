@@ -49,12 +49,12 @@ public class Model {
     }
 
     public void roll_F(int x){
-        int[][] series = get_series_for_roll_R(rubik_size,x);
+        int[][] series = get_series_for_roll_F(rubik_size,x);
         shift_in_series(series,"front");
     }
 
     public void roll_U(int z){
-        int[][] series = get_series_for_roll_R(rubik_size,z);
+        int[][] series = get_series_for_roll_U(rubik_size,z);
         shift_in_series(series,"up");
     }
 
@@ -67,14 +67,14 @@ public class Model {
 
     public void roll_B(int x){
         for (int i=0;i<3;i++){
-            int[][] series = get_series_for_roll_R(rubik_size,x);
+            int[][] series = get_series_for_roll_F(rubik_size,x);
             shift_in_series(series,"front");
         }
     }
 
     public void roll_D(int z){
         for (int i=0;i<3;i++){
-            int[][] series = get_series_for_roll_R(rubik_size,z);
+            int[][] series = get_series_for_roll_U(rubik_size,z);
             shift_in_series(series,"up");
         }
     }
@@ -262,7 +262,6 @@ public class Model {
             Dice.Model dice_des = dices[series[destination][0]][series[destination][1]][series[destination][2]];
             Dice.Model dice_from = dices[series[pointer_dice][0]][series[pointer_dice][1]][series[pointer_dice][2]];
             dice_des = dice_from; 
-
             // roll dice after shift
             roll_dices_series(dice_des, roll);
 
@@ -276,6 +275,8 @@ public class Model {
             Dice.Model dice_des = dices[series[destination][0]][series[destination][1]][series[destination][2]];
             Dice.Model dice_from = keeper[pointer_dice];
             dice_des = dice_from; 
+            // roll dice after shift
+            roll_dices_series(dice_des, roll);
 
             pointer_dice++;
             destination++;
@@ -305,7 +306,7 @@ public class Model {
     public static void main(String[] args) {
         Model model = new Model(3);
         System.out.println(model.get_point(0,0,0,"front"));
-        model.roll_D(0);
+        model.roll_F(0);
         System.out.println(model.get_point(0,0,0,"front"));
     }
 }

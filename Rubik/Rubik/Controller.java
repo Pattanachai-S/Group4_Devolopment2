@@ -26,23 +26,17 @@ public class Controller {
 	}
 
     public void event_roll_L(ActionEvent e) {
-        for (int i=0;i<3;i++){
-            model.roll_R(0);
-        }
+        model.roll_L(0);
         System.out.println("Roll L");
 	}
 
 	public void event_roll_B(ActionEvent e) {
-        for (int i=0;i<3;i++){
-            model.roll_F(0);
-        }
+        model.roll_B(0);
         System.out.println("Roll B");
 	}
 
 	public void event_roll_D(ActionEvent e) {
-        for (int i=0;i<3;i++){
-            model.roll_U(0);
-        }
+        model.roll_D(0);
         System.out.println("Roll D");
 	}
 
