@@ -248,7 +248,7 @@ public class Model {
     }
 
     private void shift_in_series(int[][] series, String roll){
-
+        // It dont work
         // Keep dices for shift
         int keeper_size = rubik_size-1;
         Dice.Model[] keeper = new Dice.Model[keeper_size];
