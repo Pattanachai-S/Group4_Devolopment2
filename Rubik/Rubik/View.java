@@ -85,7 +85,7 @@ public class View {
     JPanel head_panel = new JPanel();
     JPanel button_panel = new JPanel();
     JPanel roll_panel = new JPanel(new GridLayout(1,6));
-    JPanel flip_panel = new JPanel(new GridLayout(4,1));
+    JPanel flip_panel = new JPanel(new GridLayout(5,1));
     JLabel head_lable = new JLabel();
     JButton roll_R = new JButton();
     JButton roll_F = new JButton();
@@ -93,6 +93,7 @@ public class View {
     JButton roll_L = new JButton();
     JButton roll_B = new JButton();
     JButton roll_D = new JButton();
+    JButton reset = new JButton();
     JButton flip_R = new JButton();
     JButton flip_L = new JButton();
     JButton flip_U = new JButton();
@@ -186,6 +187,16 @@ public class View {
         roll_panel.add(roll_B);
         roll_panel.add(roll_D);
 
+        reset.setText("Reset");
+        reset.setFont(new Font("TimesRoman",Font.BOLD,15));
+        reset.setFocusable(false);
+        reset.addActionListener(new ActionListener() {  
+			// when action to the button
+			public void actionPerformed(ActionEvent e) {
+				control.event_reset(e);
+			}
+		});
+
         flip_R.setText("Flip R");
         flip_R.setFont(new Font("TimesRoman",Font.BOLD,15));
         flip_R.setFocusable(false);
@@ -226,6 +237,7 @@ public class View {
 			}
 		});
 
+        flip_panel.add(reset);
         flip_panel.add(flip_R);
         flip_panel.add(flip_U);
         flip_panel.add(flip_L);

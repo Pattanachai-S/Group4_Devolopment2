@@ -12,6 +12,11 @@ public class Model {
 
     Model(int size){
         this.rubik_size = size;  // Change rubik size
+        reset();
+    }
+
+    public void reset(){
+        int size = rubik_size;
         dices = new Dice.Model[size][size][size];  // Create 3D array for Dices
 
         // Create rubik from dice by n*n*n
@@ -23,7 +28,7 @@ public class Model {
                 }
             }
         }
-    }
+    } 
 
     public int get_point(int x, int y,int z, String side){
         // Get point from sice of dice

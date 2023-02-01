@@ -10,6 +10,11 @@ public class Controller {
         //this.view = view;
     }
 
+    public void event_reset(ActionEvent e) {
+		model.reset();
+        System.out.println("Reset Rubik.");
+	}
+
 	public void event_roll_R(ActionEvent e) {
 		model.roll_R(model.get_size()-1);
         System.out.println("Roll R");
