@@ -101,6 +101,7 @@ public class Model {
         s[p][0] = x; 
         s[p][1] = y; 
         s[p][2] = z;
+        System.out.println(x+" "+y+" "+z);
     }
 
     private int[][] get_series_for_roll_R(int s,int y){
@@ -255,13 +256,15 @@ public class Model {
         // Shift dice in series
         // Now pointer_dice is pointer of dice to shift      
         int series_size = series.length;  // find size of rubik_series for shift
+        System.out.println("series_size  " + series_size);
         int destination = 0;
         while(pointer_dice < series_size){
             // shift dice in series 
             // that look like dices[x][y][z] = dices[x][y][z+1]
             Dice.Model dice_des = dices[series[destination][0]][series[destination][1]][series[destination][2]];
             Dice.Model dice_from = dices[series[pointer_dice][0]][series[pointer_dice][1]][series[pointer_dice][2]];
-            dice_des = dice_from; 
+            dice_des = dice_from;
+            
             // roll dice after shift
             roll_dices_series(dice_des, roll);
 
@@ -275,6 +278,7 @@ public class Model {
             Dice.Model dice_des = dices[series[destination][0]][series[destination][1]][series[destination][2]];
             Dice.Model dice_from = keeper[pointer_dice];
             dice_des = dice_from; 
+
             // roll dice after shift
             roll_dices_series(dice_des, roll);
 

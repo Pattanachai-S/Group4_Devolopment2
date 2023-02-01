@@ -51,7 +51,7 @@ public class Controller {
     public void event_flip_L(ActionEvent e){
         // Use for flip rubik left
         for (int i=0;i<model.get_size();i++){
-            model.roll_L(i);
+            model.roll_U(i);
         }
         System.out.println("Flip L");
     }

@@ -239,7 +239,7 @@ public class View {
         int x = size-1;  // x is front of rubik
         for(int y =0; y<size; y++){
             for(int z =0; z<size; z++){
-                int point = model.get_point(x, y, x-z, "front");
+                int point = model.get_point(x, y, size-1-z, "front");
                 rubik.drawSquare(g, y, z, point);
             }        
         }
