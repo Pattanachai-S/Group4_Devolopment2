@@ -109,6 +109,11 @@ public class Model {
         System.out.println(x+" "+y+" "+z);
     }
 
+    private void alther_dice(Dice.Model des, Dice.Model from){
+        int[] value = from.get_tfr();
+        des.set_dice(value[0], value[1], value[2]);
+    }
+
     private int[][] get_series_for_roll_R(int s,int y){
         // Find array of locantion Dices size = rubik_size^2 - (rubik_size-2)^2
         int series_size = cal_series_size(s);
@@ -254,7 +259,9 @@ public class Model {
         Dice.Model[] keeper = new Dice.Model[keeper_size];
         int pointer_dice = 0;
         for(int i =0;i<keeper_size;i++){
-            keeper[i] = dices[series[i][0]][series[i][1]][series[i][2]];  // move some dice in rubik to keep
+            // keeper[i] = dices[series[i][0]][series[i][1]][series[i][2]];  // move some dice in rubik to keep
+            keeper[i] = new Dice.Model();  // Create new dice for keep some dice
+            alther_dice(keeper[i],dices[series[i][0]][series[i][1]][series[i][2]]);  // move some dice in rubik to keep
             pointer_dice++;
         }
 
@@ -268,7 +275,10 @@ public class Model {
             // that look like dices[x][y][z] = dices[x][y][z+1]
             Dice.Model dice_des = dices[series[destination][0]][series[destination][1]][series[destination][2]];
             Dice.Model dice_from = dices[series[pointer_dice][0]][series[pointer_dice][1]][series[pointer_dice][2]];
-            dice_des = dice_from;
+            System.out.println("from "+dice_from.get_front());
+            alther_dice(dice_des,dice_from);  // Change dot of dice
+            
+            System.out.println("des "+dice_des.get_front());
             
             // roll dice after shift
             roll_dices_series(dice_des, roll);
@@ -282,7 +292,7 @@ public class Model {
         while(destination < series_size){
             Dice.Model dice_des = dices[series[destination][0]][series[destination][1]][series[destination][2]];
             Dice.Model dice_from = keeper[pointer_dice];
-            dice_des = dice_from; 
+            alther_dice(dice_des,dice_from);  // Change dot of dice
 
             // roll dice after shift
             roll_dices_series(dice_des, roll);

@@ -68,6 +68,19 @@ public class Model{
         return 7-top;
     }
 
+    /** modify dice by top, front, right */
+    public void set_dice(int t, int f, int r){
+        front = f;
+        top = t;
+        right = r;
+    }
+
+    /** Return {top, front, right} */
+    public int[] get_tfr(){
+        int[] result = {top, front, right};
+        return result;
+    }
+
 
 
     public void show_top(){
