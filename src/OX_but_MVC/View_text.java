@@ -5,7 +5,7 @@ public class View_text {
 	private Model model;
 	
 	View_text(Model model){
-		table_size = model.get_table_size();
+		table_size = model.get_size();
 		this.model = model;
 	}
 	
@@ -14,13 +14,23 @@ public class View_text {
 		for (int i = 0; i < table_size; i++) {
 			System.out.print("\n");    // new line
 			for (int j = 0; j < table_size; j++) {
-				System.out.print(player_to_text(model.get_data(j, i)));    // show symbol
+				System.out.print(player_text_to_print(model.get_valueOFboard(j, i)));    // show symbol
 				System.out.print(" ");    // space
 			}
 		}
 		System.out.print("\n");    // new line
 //		System.out.print("\n");    // Space
 	}
+
+	private String player_text_to_print(String p){
+		if (p.equals("N")){
+			return "_";
+
+		}else{
+			return p;
+		}
+	}
+	
 	
 	public void show_draw() {
 		show_table();
@@ -52,7 +62,7 @@ public class View_text {
 	}
 
 	public void show_player_turn() {
-		System.out.println("Turn player "+String.valueOf(model.get_turn()));		
+		System.out.println("Turn player "+String.valueOf(model.get_player()));		
 	}
 	
 	public void show_get_input() {
