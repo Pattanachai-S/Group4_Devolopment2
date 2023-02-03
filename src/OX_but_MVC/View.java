@@ -222,7 +222,7 @@ public class View extends JFrame{
     
     /** paint each cell */
 	public void paint_grid(int x, int y,int player) {
-    	int table_size = model.get_table_size();
+    	int table_size = model.get_size();
     	int pointerX = (int) (((get_sizeX_grid()/table_size)*(x+0.5)));
     	int pointerY = (int) (((get_sizeY_grid()/table_size)*(y+0.5)));
     	int size_paint = get_sizeX_grid()/table_size;
@@ -263,7 +263,7 @@ public class View extends JFrame{
 
 
 
-/****
+/**** Old code
 public class View{
 	
 	

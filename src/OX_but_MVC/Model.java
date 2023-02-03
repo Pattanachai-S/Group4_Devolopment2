@@ -119,7 +119,7 @@ public class Model {
 		return player_turn;
 	}
 	
-	public int get_winner() {
+	public int get_winner_on_int() {
 		return winner;
 	}
 	
@@ -128,12 +128,14 @@ public class Model {
 	}
 
 	
-	public String get_winner_on_text() {
+	public String get_winner() {
 		if (winner == 1) {
 			return "O";
 		}else if (winner == 2) {
 			return "X";
-		}else {
+		}else if (winner == 3) {
+			return "TIE";
+		}else{
 			return "";
 		}
 	}
@@ -262,9 +264,9 @@ public class Model {
 		}
 		return 0;  // return 0 if wrong arg
 	}
-	}
 	
-	public void save_file_on_form() {
+	
+	public void save() {
 		// Convert data in the table to String then save to file
 		try {  
 			// try to run the code (It's trying if have any errors will skip to catch())
@@ -294,7 +296,7 @@ public class Model {
 	    }
 	}
 	
-	public void load_file_on_form() {
+	public void load() {
 		// Convert data in the file to the table
 		try {
 		      File save = new File("save.txt");  		// open file

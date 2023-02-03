@@ -58,28 +58,28 @@ public class Controller implements ActionListener{
 	
 	/* Event for reset button */
 	public void event_reset(ActionEvent e) {
-		model.reset_table();
+		model.new_game();
 		GUI.update();	
 		System.out.println("Reset.");
 	}
 	
 	/* Event for save button */
 	public void event_save(ActionEvent e) {
-		model.save_file_on_form();
+		model.save();
 		GUI.update();
 		System.out.println("Save.");
 	}
 	
 	/** Event for load button */
 	public void event_load(ActionEvent e) {
-		model.load_file_on_form();
+		model.load();
 		GUI.update();
 		System.out.println("Load.");
 	}
 	
 	/** Event for show winner */
 	public void event_winner(ActionEvent e) {
-		String winner = model.get_winner_on_text();
+		String winner = model.get_winner();
 		GUI.show_popUp(winner + " is Winner!");
 	}
 	
@@ -100,23 +100,30 @@ public class Controller implements ActionListener{
 		int[] pos = getRowandCol(x,y);
 		int pos0 = pos[0];
 		int pos1 = pos[1];
-        if(model.fill_table(pos1,pos0)) {  // switch x-y couz model table
-        	GUI.paint_grid(pos0,pos1,model.get_turn());
+
+		model.Action(pos1, pos0);  // If that cell have fill it will not doing
+		GUI.update();
+		check_game();
+        
+
+		/* Old Code 
+		if(model.fill_table(pos1,pos0)) {  // switch x-y couz model table
             GUI.update();
             check_game();
         }
+		*/
         
 	}
 	
 	private void check_game() {
-		int winner = model.get_winner();
-		if(winner != 0) {
-			if (winner == 3) {
+		String winner = model.get_winner();
+		if(winner != "") {
+			if (winner == "TIE") {
 				// If game is draw.
 				GUI.show_popUp("The game is tied!");
 			}else {
 			// If got a winner
-				GUI.show_popUp(model.get_winner_on_text() + " is Winner!");
+				GUI.show_popUp(model.get_winner() + " is Winner!");
 			}
 		}
 	}
@@ -124,8 +131,8 @@ public class Controller implements ActionListener{
 	private int[] getRowandCol(int xPosition, int yPosition){
         float size_x = GUI.get_sizeX_grid();
         float size_y = GUI.get_sizeY_grid();
-        float cellSzX = size_x/model.get_table_size();
-        float cellSzY = size_y/model.get_table_size();
+        float cellSzX = size_x/model.get_size();
+        float cellSzY = size_y/model.get_size();
         int CellRow = (int) (xPosition/cellSzX);
         int CellCol = (int) (yPosition/cellSzY);
         int[] result = new int[2];
