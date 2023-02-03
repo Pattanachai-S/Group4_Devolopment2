@@ -122,7 +122,7 @@ public class View extends JFrame{
 
     View(Model model, Controller c){
     	this.model = model;
-    	int size = model.get_table_size();
+    	int size = model.get_size();
     	control = c;
     	float tableSize = size;
     	grid = new Grid(size,this);
@@ -211,13 +211,26 @@ public class View extends JFrame{
     /** Draw everything to table*/
     public void draw(Graphics g) {
 		graphics = g;	
-		for(int i=0;i<model.get_table_size();i++) {
-			for(int j=0;j<model.get_table_size();j++) {
-				paint_grid(i,j,(model.get_data(i, j)));
+		for(int i=0;i<model.get_size();i++) {
+			for(int j=0;j<model.get_size();j++) {
+				int value =  player_string_to_int(model.get_valueOFboard(i, j));
+				paint_grid(i,j,(value));
 			}
 		}
 		
 		
+	}
+
+	private int player_string_to_int(String p){
+		if (p.equals("O")){
+			return 1;
+		}else if (p.equals("X")){
+			return 2;
+		}else if (p.equals("N")){
+			return 0;
+		}else{
+			return 0;
+		}
 	}
     
     /** paint each cell */
