@@ -29,12 +29,12 @@ public class Controller_text {
 	
 	
 	private void get_input() {
-		if (!model.get_game_end()) {
+		if (model.get_winner().equals("")) {
 			// If game still playing
 			UI.show_player_turn();
 		}else {
 			// If game is already end
-			UI.show_winner((model.get_winner()));
+			UI.show_winner((player_string_to_int(model.get_winner())));
 		}
 		
 		UI.show_get_input();  // show input command :
@@ -43,7 +43,7 @@ public class Controller_text {
 			// Convert string to int 
 			String[] a = s.split(" ");
 			int[] n = {Integer.valueOf(a[0]),Integer.valueOf(a[1])};
-			model.fill_table(n[0]-1,n[1]-1);  // input is (y, x) and table it's a (y,x)
+			model.Action(n[0]-1,n[1]-1);  // input is (y, x) and table it's a (y,x)
 			}
 		catch(Exception e) {
 			if (s.equals("e") || s.equals("exit")) {  
@@ -53,17 +53,17 @@ public class Controller_text {
 				
 			}else if (s.equals("s") || s.equals("save")) {
 				// If input is s, game will save	
-				model.save_file_on_form();
+				model.save();
 				System.out.print("Game saved.");
 				
 			}else if (s.equals("l") || s.equals("load")) { 
 				// If input is l, game will load		
-				model.load_file_on_form();
+				model.load();
 				System.out.print("Game loaded.");
 				
 			}else if (s.equals("r") || s.equals("reset")) {  
 				// If input is r, game will reset		
-				model.reset_table();
+				model.new_game();
 				System.out.print("Reset game.");
 				
 			}else 
@@ -74,34 +74,46 @@ public class Controller_text {
 	
 	/* Event for reset button */
 	public void event_reset(ActionEvent e) {
-		model.reset_table();
+		model.new_game();
 		UI.update();	
 		System.out.println("Reset.");
 	}
 	
 	/* Event for save button */
 	public void event_save(ActionEvent e) {
-		model.save_file_on_form();
+		model.save();
 		UI.update();
 		System.out.println("Save.");
 	}
 	
 	/** Event for load button */
 	public void event_load(ActionEvent e) {
-		model.load_file_on_form();
+		model.load();
 		UI.update();
 		System.out.println("Load.");
 	}
 	
 	/** Event for show winner */
 	public void event_winner(ActionEvent e) {
-		int winner = model.get_winner();
+		int winner = player_string_to_int(model.get_winner());
 		UI.show_winner(winner);
 	}
 	
 	/** Event for show winner */
 	public void event_draw(ActionEvent e) {
 		UI.show_draw();
+	}
+
+	private int player_string_to_int(String p){
+		if (p.equals("O")){
+			return 1;
+		}else if (p.equals("X")){
+			return 2;
+		}else if (p.equals("N")){
+			return 0;
+		}else{
+			return 0;
+		}
 	}
 	
 	public static void main(String[] args) {		
